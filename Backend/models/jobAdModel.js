@@ -1,0 +1,31 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+
+const jobAdSchema = new Schema({
+    companyID:{
+        type:String,
+        required:true
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
+    dueDate:{
+        type:Date,
+        required:true
+    },
+    tags:{
+        type:Array
+    }
+}, {timestamps:{createdAt:true, updatedAt:false}})
+
+
+const JobAd =mongoose.model('JobAd', jobAdSchema)
+
+module.exports = {
+    JobAd
+}
