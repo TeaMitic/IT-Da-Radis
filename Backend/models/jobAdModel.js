@@ -19,7 +19,10 @@ const jobAdSchema = new Schema({
         required:true
     },
     tags:{
-        type:Array
+        type:Array,
+        items: {
+            type: String
+          }
     }
 }, {timestamps:{createdAt:true, updatedAt:false}})
 

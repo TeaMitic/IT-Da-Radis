@@ -24,9 +24,9 @@ const userSchema = new Schema({
     },
     jobAds:{
         type:Array,
-        // items: {
-        //     type: Object
-        // }
+        items: {
+            type: String
+          }
     }
     })
 

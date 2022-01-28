@@ -31,10 +31,16 @@ const companySchema = new Schema({
         required:true
     },
     jobAds:{
-        type:Array
+        type:Array,
+        items: {
+            type: String
+          }
     },
     categories:{
-        type:Array
+        type:Array,
+        items: {
+            type: String
+          }
     },
     socialMedia:{
         instagramLink:{
