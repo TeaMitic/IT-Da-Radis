@@ -1,11 +1,12 @@
-const M = require('minimatch');
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt')
 
 const companySchema = new Schema({
     username:{
         type:String,
-        required: true
+        required: true,
+        unique:true
     },
     password:{
         type:String,
@@ -26,7 +27,7 @@ const companySchema = new Schema({
     contactTel:{
         type:String
     },
-    contactEmail:{
+    email:{
         type:String,
         required:true
     },
@@ -58,8 +59,16 @@ const companySchema = new Schema({
     }
   });
 
-  const Company = mongoose.model('Company', companySchema);
+  companySchema.pre('save', async function(next){
+    const salt = 10
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+})
 
-  module.exports = {
+
+
+const Company = mongoose.model('Company', companySchema);
+
+module.exports = {
       Company
-  }
+}

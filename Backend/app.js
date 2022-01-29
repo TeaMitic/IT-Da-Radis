@@ -1,13 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { userInfo } = require('os');
-const Company = require('./models/companyModel')
-const {User} = require('./models/userModel')
+// const Company = require('./models/companyModel')
+// const {User} = require('./models/userModel')
+
+const user = require('./routes/userRoutes')
+const company = require('./routes/companyRoutes')
+const jobAd = require('./routes/jobAdRoutes')
+const auth = require('./routes/authRoutes')
+
+
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+
+app.use('/api/user', user);
+app.use('/api/company', company);
+app.use('/api/jobAd', jobAd);
+app.use('/api/auth', auth);
 
 
  const dbURI = 'mongodb+srv://itdaradisuser:itdaradis99@itdaradis.qszzm.mongodb.net/itDB?retryWrites=true&w=majority';
