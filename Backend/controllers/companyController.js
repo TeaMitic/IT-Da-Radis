@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {Company} = require('../models/companyModel');
 const jwt = require('../token')
+const bcrypt = require('bcrypt')
 
 const CreateCompany = async (req, res)=>{
     try{
@@ -33,8 +34,40 @@ const CreateCompany = async (req, res)=>{
     }
 }
 
+const LoginCompany = async (req, res) =>{
+    try{
+        const {username, password} = req.body
+        const company = await Company.findOne({ username });
+        if(company){
+            const auth = await bcrypt.compare(password, company.password);
+            if (auth){
+                let token = jwt.createToken(company._id)
+                let sendInfo = {
+                    id: company._id,
+                    username: company.username, 
+                    token:token,
+                    tip:'C'
+                }
+                res.status(200).send(sendInfo)
+            }
+            else{
+                res.status(401).send('Pogresna sifra!')
+            }
+        }
+        else{
+            res.status(404).send('Kompanija sa tim username-om ne postoji!')
+        }
+    }
+    catch(err){
+        res.status(500), send(err.message)
+    }
+}
+
+
+
 module.exports = {
-    CreateCompany
+    CreateCompany,
+    LoginCompany
 }
 
 //1. opcija
