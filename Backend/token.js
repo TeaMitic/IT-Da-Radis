@@ -8,7 +8,6 @@ const createToken = (id)=>{
     })
 }
 
-
 module.exports = {
     createToken
 }

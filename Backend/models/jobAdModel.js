@@ -10,11 +10,15 @@ const jobAdSchema = new Schema({
         type:String,
         required:true
     },
+    description:{
+        type:String,
+        required:true
+    },
     city:{
         type:String,
         required:true
     },
-    dueDate:{
+    expireAt:{
         type:Date,
         required:true
     },
@@ -27,7 +31,7 @@ const jobAdSchema = new Schema({
 }, {timestamps:{createdAt:true, updatedAt:false}})
 
 
-const JobAd =mongoose.model('JobAd', jobAdSchema)
+const JobAd = mongoose.model('JobAd', jobAdSchema)
 
 module.exports = {
     JobAd

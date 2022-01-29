@@ -31,12 +31,6 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
-    jobAds:{
-        type:Array,
-        items: {
-            type: String
-          }
-    },
     categories:{
         type:Array,
         items: {
