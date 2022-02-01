@@ -59,25 +59,123 @@ const LoginCompany = async (req, res) =>{
         }
     }
     catch(err){
-        res.status(500), send(err.message)
+        res.status(500).send(err.message)
     }
 }
 
 //get api
 const GetAllCompanies = async (req, res) =>{
     try{
+        await Company.find().then( result =>{
+            res.status(200).send(result)
+        })
 
     }
     catch(err){
-        res.status(500), send(err.message)
+        res.status(500).send(err.message)
+    }
+}
+const GetCompany = async (req, res) =>{
+    try{
+        const id= req.params.id
+        await Company.findById(id).then( result =>{
+            res.status(200).send(result)
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+const GetCategories = async (req,res) => {
+    try{
+        await Company.findById(req.params.id).then(result=>{
+            res.status(200).send(result.categories)
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+//update company
+const UpdateCompany = async (req, res)=>{
+    try{
+        await Company.findById(req.params.id).then(result=>{
+            const company = req.body
+            result.username = company.username
+            result.password= company.password
+            result.name= company.name
+            result.description=company.description
+            result.address= company.address
+            result.email= company.email
+            //result.categories = company.categories - ima posebna fja za to, da se doda 
+            result.socialMedia.instagramLink = company.socialMedia.instagramLink
+            result.socialMedia.facebookLink= company.socialMedia.facebookLink
+            result.socialMedia.twitterLink=company.socialMedia.twitterLink
+
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+        })
+       
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const AddCategory = async (req, res) => {
+    try{
+        await Company.findById(req.params.id).then(result=>{
+            const found = result.categories.includes(req.body.name)
+            if(!found){
+                result.categories.push(req.body.name)
+                result.save().then(()=>{
+                    res.status(200).send('Uspesno izmenjeno')
+                })
+            }
+            else{
+                res.status(400).send('Vec postoji kategorija sa ovim nazivom')
+            }
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+//delete api
+const DeleteCategory = async (req, res)=>{
+    try{
+        await Company.findById(req.params.id).then(result=>{
+            result.categories = result.categories.filter((value)=>{
+                return value != req.body.name
+            })
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
     }
 }
 
 
 
+
 module.exports = {
     CreateCompany,
-    LoginCompany
+    LoginCompany,
+    GetAllCompanies,
+    GetCompany, 
+    UpdateCompany,
+    AddCategory,
+    GetCategories,
+    DeleteCategory
 }
 
 //1. opcija
