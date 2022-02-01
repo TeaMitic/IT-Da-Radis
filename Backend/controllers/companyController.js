@@ -63,6 +63,16 @@ const LoginCompany = async (req, res) =>{
     }
 }
 
+//get api
+const GetAllCompanies = async (req, res) =>{
+    try{
+
+    }
+    catch(err){
+        res.status(500), send(err.message)
+    }
+}
+
 
 
 module.exports = {
