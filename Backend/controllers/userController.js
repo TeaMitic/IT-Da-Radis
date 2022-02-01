@@ -55,10 +55,40 @@ const LoginUser = async (req, res) =>{
     }
 }
 
+const GetUserByID= async (req, res)=>{
+    try{
+        await User.findById(req.params.id).then(result =>{
+            res.status(200).send(result)
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+const UpdateUser = async (req, res)=>{
+    try{
+        await User.findById(req.params.id).then(result=>{
+            const user = req.body
+            result.username= user.username
+            result.password= user.password
+            result.name= user.name
+            result.surname= user.surname
+            result.email= user.email
 
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 
 module.exports = {
     CreateUser,
-    LoginUser
+    LoginUser,
+    GetUserByID,
+    UpdateUser
 }
