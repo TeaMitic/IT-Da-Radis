@@ -33,7 +33,103 @@ const DeleteJobAd = async (req, res)=>{
     })
 }
 
+const GetAllJobAds = async (req, res)=>{
+    try{
+        let allJobAds = await JobAd.find()
+        res.status(200).send(allJobAds)
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const GetCompaniesJobAds = async (req, res)=>{
+    try{
+        const companyID = req.params.companyID
+        let companiesJobAds = await JobAd.find({ companyID })
+        res.status(200).send(companiesJobAds)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const GetJobAdByID = async (req, res)=>{
+    try{
+        const jobAdID = req.params.jobAdID
+        let jobAd = await JobAd.findOne({ _id: jobAdID })
+        res.status(200).send(jobAd)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const UpdateJobAd = async (req, res)=>{
+    try{
+        const jobAdID = req.params.jobAdID
+        let jobAd = await JobAd.findOne({ _id: jobAdID })
+        jobAd.name = req.body.name
+        jobAd.description = req.body.desc
+        jobAd.city = req.body.city
+        jobAd.expireAt = new Date(req.body.expireAt)
+        jobAd.save().then((result)=>{
+            res.status(200).send(result)
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const AddTagToJobAd = async (req, res)=>{
+    try{
+        const jobAdID = req.params.jobAdID
+        let jobAd = await JobAd.findOne({ _id: jobAdID })
+        if(jobAd.tags.includes(req.body.newTag)){
+            res.status(400).send('Vec postoji trazeni tag za ovaj oglas')
+        }
+        else{
+            jobAd.tags.push(req.body.newTag)
+            jobAd.save().then((result)=>{
+                res.status(200).send(result)
+            })
+        }
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const DeleteTagToJobAd = async (req, res)=>{
+    try{
+        const jobAdID = req.params.jobAdID
+        let jobAd = await JobAd.findOne({ _id: jobAdID })
+        if(!jobAd.tags.includes(req.body.tag)){
+            res.status(400).send('Ne postoji trazeni tag za ovaj oglas')
+        }
+        else{
+            jobAd.tags = jobAd.tags.filter(function(value){ 
+                 return value !== req.body.tag;
+            });
+            jobAd.save().then((result)=>{
+                res.status(200).send(result)
+            })
+        }
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 module.exports = {
     CreateJobAd,
-    DeleteJobAd
+    DeleteJobAd,
+    GetAllJobAds,
+    GetCompaniesJobAds,
+    GetJobAdByID,
+    UpdateJobAd,
+    AddTagToJobAd,
+    DeleteTagToJobAd
 }

@@ -22,7 +22,6 @@ const jobUserRelSchema = new Schema({
         type:String, 
         required:true 
     }
-    
 });
 
 const JobUserRel = mongoose.model('JobUserRel', jobUserRelSchema);
