@@ -22,11 +22,11 @@
             <li class="nav-item active">
               <a class=" nav-link px-lg-3 py-3 py-lg-3 text-white slova rounded dropdown-item " href="#!" >Sve komapnije</a>
             </li></router-link>
-          <router-link :to="{ name: 'Homepage' }">
+          <router-link :to="{ name: 'Login' }">
             <li class="nav-item active">
               <a class=" nav-link px-lg-3 py-3 py-lg-3 text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
             </li></router-link>
-          <router-link :to="{ name: 'Homepage' }">
+          <router-link :to="{ name: 'Register' }">
             <li class="nav-item active">
               <a class=" nav-link px-lg-3 py-3 py-lg-3 text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
             </li></router-link>
@@ -68,15 +68,21 @@ export default {
   letter-spacing: 0.0625em;
   text-transform: uppercase;
 }
-.menuBtn,
-.scrollBtn {
+.navbar-toggler { 
+  transition: box-shadow 0.15s ease-in-out;
+}
+.menuBtn,.scrollBtn {
   background-color: #00b1a8;
 }
 .nav-link:hover, .nav-link:focus {
-    color: #78e7ff  !important;
+  color: #78e7ff  !important;
 }
 .dropdown-item:hover { 
   background-color: #e6e7ea82;
+}
+.menuBtn:hover { 
+  background-color: hsl(177, 100%, 20%);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 </style>
