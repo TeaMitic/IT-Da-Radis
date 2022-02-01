@@ -75,7 +75,7 @@ const GetAllCompanies = async (req, res) =>{
         res.status(500).send(err.message)
     }
 }
-const GetCompany = async (req, res) =>{
+const GetCompanyByID = async (req, res) =>{
     try{
         const id= req.params.id
         await Company.findById(id).then( result =>{
@@ -171,7 +171,7 @@ module.exports = {
     CreateCompany,
     LoginCompany,
     GetAllCompanies,
-    GetCompany, 
+    GetCompanyByID, 
     UpdateCompany,
     AddCategory,
     GetCategories,

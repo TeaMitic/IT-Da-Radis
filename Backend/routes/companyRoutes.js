@@ -5,7 +5,7 @@ const router = express.Router();
 
 const{
     GetAllCompanies,
-    GetCompany,
+    GetCompanyByID,
     UpdateCompany,
     AddCategory,
     GetCategories,
@@ -13,7 +13,7 @@ const{
 } = require('../controllers/companyController');
 
 router.get('/getAllCompanies', GetAllCompanies)
-router.get('/getCompany/:id', GetCompany)
+router.get('/getCompany/:id', GetCompanyByID)
 router.get('/getCategories/:id', GetCategories)
 router.put('/updateCompany/:id', UpdateCompany)
 router.put('/addCategory/:id', AddCategory)

@@ -7,7 +7,7 @@ const user = require('./routes/userRoutes')
 const company = require('./routes/companyRoutes')
 const jobAd = require('./routes/jobAdRoutes')
 const auth = require('./routes/authRoutes')
-
+const jobUserRel= require('./routes/jobUserRelRoutes')
 
 
 const app = express();
@@ -19,6 +19,7 @@ app.use('/api/user', user);
 app.use('/api/company', company);
 app.use('/api/jobAd', jobAd);
 app.use('/api/auth', auth);
+app.use('/api/jobUserRel', jobUserRel);
 
 
  const dbURI = 'mongodb+srv://itdaradisuser:itdaradis99@itdaradis.qszzm.mongodb.net/itDB?retryWrites=true&w=majority';
