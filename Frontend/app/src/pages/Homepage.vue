@@ -1,109 +1,70 @@
 <template >
-  <div class="container-fluid">
+  <div class="container-xxl mainDiv" >
     <!-- header with navbar -->
     <header-app></header-app>
-    
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <h2>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-      maiores distinctio necessitatibus soluta labore veritatis, dolorum
-      eligendi nesciunt alias velit nisi! Consequuntur, autem! Laboriosam,
-      obcaecati vitae laudantium consequatur animi sed!
-    </h2>
-    <!-- Page Welcome Header-->
-    <!-- <div class="welcome_header masthead"> -->
-    <!-- <img class="slika" src="../assets/img/job-interview.jpg" alt="ilustration of a job interview"> -->
-    <!-- <h1>IT da radiš sada!</h1> -->
-    <!-- <h3>Započni svoju karijeru jednim klikom</h3> -->
-    <!-- </div> -->
-    <!-- Main Content-->
-    <!-- <div class="companyCards"> -->
-    <!-- <h4>Neke od kompanija na našem prostoru</h4> -->
-    <!-- sada ide jedan div u kome ce da budu desetak ili 12 kompanija -->
-    <!-- <button class="checkAllCompanies">Pogledaj sve kompanije</button> -->
-    <!-- </div> -->
+    <!-- Page Header-->
+    <header class="masthead pictureSection">
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+              <h1>IT da radiš!</h1>
+              <span class="subheading">Započni svoju karijeru jednim klikom</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- company cards -->
+    <div class="container">      
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <h3>Neke od firmi u Srbiji</h3>
+        <div class="row justify-content-around">
+          <company-card></company-card>
+          <company-card></company-card>
+          <company-card></company-card>
+          <company-card></company-card>
+          <company-card></company-card>
+          <company-card></company-card>
+        </div>
+        <router-link :to="{name: 'AllCompaniesPage'}">
+          <button class="btn btn-primary rounded btnAllCompanies ">Sve kompanije</button>
+        </router-link>
+      </div>
+    </div>
     <!-- Footer -->
+    <footer-app></footer-app>
   </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
+import CompanyCard from "../components/CompanyCard.vue"
+import Footer from '../components/Footer.vue'
 
 export default {
   components: {
     "header-app": Header,
+    "company-card": CompanyCard,
+    "footer-app": Footer
   },
   data() {
-    return {};
+    return {
+    };
   },
-  
 };
 </script>
 
 <style scoped>
-.welcome_header {
-  background-size: 300px 300px;
-  height: 100%;
-  width: 100%;
-  background-image: url("../assets/img/job-interview.jpg");
+.mainDiv { 
+  padding: 0;
 }
-#btn-back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
+.btnAllCompanies { 
+  background-color: #00b1a8;
+  color: white;
+  outline: none;
+}
+.pictureSection {
+  background-image: url("../assets/img/job-interview.jpg");
 }
 </style>
