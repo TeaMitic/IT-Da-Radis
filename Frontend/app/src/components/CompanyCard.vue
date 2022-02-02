@@ -1,5 +1,5 @@
 <template>
-  <div class="card col-3 mx-2 my-3">
+  <div class="card col-lg-3  mx-2 my-3">
     <img class="card-img-top" src="../assets/img/company-card-bg.jpg" alt="Card image cap" />
     <div class="card-body">
       <router-link :to="{ name: 'CompanyPage' }" ><h5 class="card-title">Company name</h5></router-link >

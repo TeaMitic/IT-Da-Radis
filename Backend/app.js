@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 // const Company = require('./models/companyModel')
 // const {User} = require('./models/userModel')
 
@@ -13,6 +14,7 @@ const jobUserRel= require('./routes/jobUserRelRoutes')
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cors())
 
 
 app.use('/api/user', user);

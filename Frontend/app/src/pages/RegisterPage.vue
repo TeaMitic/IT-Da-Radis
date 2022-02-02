@@ -6,7 +6,7 @@
     </div>
     <!-- Footer -->
     <div class="row">
-      <footer-app></footer-app>
+      <footer-app class="fixed-bottom"></footer-app>
     </div>
   </div>
 </template>

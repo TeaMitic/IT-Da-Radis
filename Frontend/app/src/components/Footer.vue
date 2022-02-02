@@ -1,5 +1,5 @@
 <template >
-  <div class="container futer fixed-bottom">
+  <div class="container futer">
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; IT-Da-Radiš 2022</p>

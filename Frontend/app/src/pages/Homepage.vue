@@ -38,7 +38,7 @@
     </div>
     <!-- Footer -->
     <div class="row">
-      <footer-app></footer-app>
+      <footer-app class="relative-bottom" ></footer-app>
     </div>
   </div>
 </template>
