@@ -24,6 +24,9 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
+    site:{
+        type:String
+    },
     contactTel:{
         type:String
     },
