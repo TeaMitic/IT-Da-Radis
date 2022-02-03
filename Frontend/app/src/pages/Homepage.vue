@@ -19,6 +19,7 @@
         </div>
       </header>
       <!-- company cards -->
+      <!-- <app-spinner></app-spinner> -->
       <div class="container">      
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <h3>Neke od firmi u Srbiji</h3>
@@ -47,17 +48,21 @@
 import Header from "../components/Header.vue";
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
+// import AppSpiner from '../components/AppSpiner.vue'
 
 export default {
   components: {
+    // 'app-spinner': AppSpiner,
     "header-app": Header,
     "company-card": CompanyCard,
     "footer-app": Footer
   },
   data() {
     return {
+      // isDataLoaded: false
     };
   },
+  
 };
 </script>
 
