@@ -14,25 +14,25 @@
             <label class="d-flex">Tip korisnika:</label>
             <!-- radio user -->
             <div class="form-check d-flex mx-3">
-              <input  class="form-check-input" type="radio" name="userType" id="user" checked
-                  value="user" v-model="userType"/>
-              <label class="form-check-label mx-3" for="user">Običan korisinik</label>
+              <input  class="form-check-input pointerForma" type="radio" name="userType" id="user" checked
+                  value="user" v-model="userType "/>
+              <label class="form-check-label mx-3 pointerForma" for="user">Običan korisinik</label>
             </div>
             <!-- radio company  -->
             <div class="form-check d-flex mx-3">
-              <input class="form-check-input" type="radio" name="userType" id="comapny"
+              <input class="form-check-input pointerForma" type="radio" name="userType" id="company"
                  value="company" v-model="userType"/>
-              <label class="form-check-label mx-3" for="company">Kompanija</label>
+              <label class="form-check-label mx-3 pointerForma" for="company">Kompanija</label>
             </div>
           </div>
           <!-- username and password fields  -->
-          <input type="text" class="form-control" v-model="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
-          <input type="password" class="form-control" v-model="loginInfo.password" name="sifra" placeholder="password" required /> 
+          <input type="text" class="form-control" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
+          <input type="password" class="form-control" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
           <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme">Prijavi se</button>
         </form>
         <div class="row justify-content-center">
           <router-link :to="{ name: 'Register' }">
-            <button class="btn btn-lg btn-link rounded dugme">Nemate nalog?</button>
+            <button class="btn btn-lg btn-link rounded ">Nemate nalog?</button>
           </router-link>
         </div>
       </div>
@@ -64,19 +64,20 @@ export default {
   },
   methods: {
     async login() { 
-      if (this.userType == "user") { 
-        await this.$store.dispatch('loginUser', this.loginInfo)
-      }
-      else { 
-        await this.$store.dispatch('loginCompany', this.loginInfo)
-
-      }
+      await this.$store.dispatch('loginUser', {
+        loginInfo: this.loginInfo,
+        userType: this.userType
+      })
     }
+    
   },
 };
 </script>
 
 <style scoped>
+.pointerForma:hover { 
+  cursor: pointer;
+}
 .PrijavaRow {
   display: flex;
   justify-content: center;

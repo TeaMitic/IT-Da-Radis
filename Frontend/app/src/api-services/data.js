@@ -18,11 +18,18 @@ export default new Vuex.Store({
         currentUserType: null,
     },
     actions: { 
-        async loginUser({commit}, loginInfo) { 
+        async loginUser({commit}, loginObject) { 
             try { 
-                const res = await Api().post('/api/auth/loginUser',loginInfo);
+                let loginInfo = loginObject.loginInfo
+                let userType = loginObject.userType
+                let res = null
+                if (userType == "user") { 
+                    res = await Api().post('/api/auth/loginUser',loginInfo)
+                }
+                else { 
+                    res = await Api().post('/api/auth/loginCompany',loginInfo)
+                }
                 let data = res.data
-                // commit('setUser', currentUser)
                 commit('setUserID', data.id)
                 commit('setUsername', data.username)
                 commit('setToken', data.token)
@@ -38,11 +45,13 @@ export default new Vuex.Store({
                     duration : 2000
                 })
                 // if (data.tip == "U") { 
-                //     router.push("/User")
+                //     router.push('/User')
                 // }
                 // else {
-                //     router.push("/Company")
+                //     router.push('/Company')
+                    
                 // }
+               
 
             }
             catch(err) { 
@@ -61,8 +70,7 @@ export default new Vuex.Store({
             }
 
         },
-        // async loginComapny({commit},loginInfo){
-        // }
+        
 
     },
     mutations: { 
