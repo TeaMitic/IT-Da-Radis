@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     async login() { 
-      await this.$store.dispatch('loginUser', {
+      await this.$store.dispatch('login', {
         loginInfo: this.loginInfo,
         userType: this.userType
       })

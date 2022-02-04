@@ -43,10 +43,7 @@
     </div>
     <!-- Footer -->
     <div class="row">
-
-      <footer-app v-if="userType=='company'" class="relative-bottom"></footer-app>
-      <footer-app v-else class="fixed-bottom"></footer-app>
-
+      <footer-app  class="relative-bottom"></footer-app>
     </div>
   </div>
 </template>

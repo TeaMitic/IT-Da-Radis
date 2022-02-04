@@ -18,7 +18,7 @@ export default new Vuex.Store({
         currentUserType: null,
     },
     actions: { 
-        async loginUser({commit}, loginObject) { 
+        async login({commit}, loginObject) { 
             try { 
                 let loginInfo = loginObject.loginInfo
                 let userType = loginObject.userType
@@ -55,7 +55,6 @@ export default new Vuex.Store({
 
             }
             catch(err) { 
-                console.log(err)
                 if (err.response.status == 500) { 
                     console.log(err.data)
                 }
@@ -70,7 +69,31 @@ export default new Vuex.Store({
             }
 
         },
-        
+        async registerUser({commit}, registerInfo) { 
+            try { 
+                let res = await Api().post('/api/auth/registerUser',registerInfo)
+                let data = res.data
+                commit('setUserID', data.id)
+                commit('setUsername', data.username)
+                commit('setToken', data.token)
+                commit('setUserType', data.tip)
+                Vue.$cookies.set("id", data.id, cookieTime)
+                Vue.$cookies.set("username", data.username,cookieTime)
+                Vue.$cookies.set("token", data.token, cookieTime)
+                Vue.$cookies.set("userType", data.tip, cookieTime)
+                Vue.toasted.show(`Successful register. UserType: ${data.tip}`, {
+                    theme: "bubble", 
+                    position: "top-center", 
+                    duration : 2000
+                })
+                // router.push('/UserHomePage')
+            }
+            catch(err) { 
+                if (err.response.status == 500) { 
+                    console.log(err.data)
+                }
+            }
+        }
 
     },
     mutations: { 

@@ -29,10 +29,27 @@ export default {
   },
   methods: {
     async register() { 
-        
+        await this.$store.dispatch('registerUser', this.registerInfo)
+
     },
   },
 };
 </script>
 <style scoped>
+.form-control {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.dugme {
+  margin: top 0.8rem;
+  margin-bottom: 0.8rem;
+  background-color: #00b1a8;
+  color: white;
+  outline: none;
+  font-weight: 600;
+}
+.dugme:hover {
+  background-color: hsl(177, 100%, 20%);
+
+}
 </style>
