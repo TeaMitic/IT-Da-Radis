@@ -69,9 +69,17 @@ export default new Vuex.Store({
             }
 
         },
-        async registerUser({commit}, registerInfo) { 
+        async register({commit}, registerObject) { 
             try { 
-                let res = await Api().post('/api/auth/registerUser',registerInfo)
+                let registerInfo = registerObject.registerInfo
+                let userType = registerObject.userType
+                let res = null
+                if (userType == "user") { 
+                    res = await Api().post('/api/auth/registerUser', registerInfo)
+                }
+                else { 
+                    res = await Api().post('/api/auth/registerCompany',registerInfo)
+                }
                 let data = res.data
                 commit('setUserID', data.id)
                 commit('setUsername', data.username)
@@ -86,14 +94,22 @@ export default new Vuex.Store({
                     position: "top-center", 
                     duration : 2000
                 })
-                // router.push('/UserHomePage')
+                  // if (data.tip == "U") { 
+                //     router.push('/User')
+                // }
+                // else {
+                //     router.push('/Company')
+                    
+                // }
             }
             catch(err) { 
                 if (err.response.status == 500) { 
                     console.log(err.data)
                 }
             }
-        }
+        },
+        
+        
 
     },
     mutations: { 

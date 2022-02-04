@@ -71,7 +71,7 @@ export default {
 .navbar-toggler { 
   transition: box-shadow 0.15s ease-in-out;
 }
-.menuBtn,.scrollBtn {
+.menuBtn {
   background-color: #00b1a8;
 }
 .nav-link:hover, .nav-link:focus {

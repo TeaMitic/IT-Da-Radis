@@ -65,12 +65,7 @@ export default {
   data() {
     return {
       userType: "user",
-      userInfo: { 
-
-      },
-      companyInfo: { 
-
-      }
+      
     }
   },
   
