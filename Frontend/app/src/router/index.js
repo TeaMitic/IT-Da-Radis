@@ -5,7 +5,8 @@ import Router from 'vue-router'
 import Homepage from '../pages/Homepage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import RegisterPage from '../pages/RegisterPage.vue'
-
+import UserHomepage from '../pages/UserHomepage.vue'
+import CompanyHomepage from '../pages/CompanyHomepage.vue'
 
 Vue.use(Router)
 
@@ -25,7 +26,24 @@ const router = new Router({
             path: '/register',
             name: 'Register',
             component: RegisterPage
-        }
+        },
+        {
+            path:'/UserHomepage',
+            name: 'UserHomepage',
+            component: UserHomepage
+        },
+        {
+            path:'/CompanyHomepage',
+            name: 'CompanyHomepage',
+            component: CompanyHomepage
+        },
+        // { 
+        //     path: '/CompanyPage',
+        //     name: 'CompanyPage',
+        //     component: CompanyPage,
+            
+        // }
+
     ],
     mode: 'history'
 });

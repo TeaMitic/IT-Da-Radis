@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- header with navbar -->
     <div class="row">
-      <header-app></header-app>
+      <Header></Header>
     </div>
      <div class="contaier-xxl registerRow">
       <div class="col-lg-8">
@@ -27,10 +27,10 @@
           </div>
           <!-- account fields  -->
           <div class="row" v-if="userType=='user'">
-            <user-form></user-form>
+            <UserForm></UserForm>
           </div>
           <div class="row" v-else>
-            <company-form></company-form>
+            <CompanyForm></CompanyForm>
           </div>
          
         </form>
@@ -43,7 +43,7 @@
     </div>
     <!-- Footer -->
     <div class="row">
-      <footer-app  class="relative-bottom"></footer-app>
+      <Footer  class="relative-bottom"></Footer>
     </div>
   </div>
 </template>
@@ -51,16 +51,17 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from '../components/Footer.vue';
-import UserForm from '../components/registerUser.vue'
-import CompanyForm from '../components/registerCompany.vue'
+import UserForm from '../components/RegisterUser.vue'
+import CompanyForm from '../components/RegisterCompany.vue'
 
 
 export default {
+  title: 'Register',
   components: {
-    "header-app": Header,
-    "footer-app": Footer,
-    "user-form": UserForm,
-    "company-form": CompanyForm
+    Header,
+    Footer,
+    UserForm,
+    CompanyForm
   },
   data() {
     return {
@@ -73,6 +74,9 @@ export default {
 </script>
 
 <style scoped>
+.rounded { 
+  border-radius: 10px !important;
+}
 .pointerForma:hover { 
   cursor: pointer;
 }

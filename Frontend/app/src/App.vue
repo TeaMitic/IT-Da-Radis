@@ -27,13 +27,17 @@ export default {
     this.user.username = Vue.$cookies.get("username")
 
     if (this.user != null && this.user.id != null) {
-      await this.$store.dispatch("setUserType", this.user.type)
-      await this.$store.dispatch("setToken", this.user.token)
-      await this.$store.dispatch("setUsername", this.user.token)
-      await this.$store.dispatch("setUserID", this.user.id)
+      await this.$store.dispatch("postaviUserType", this.user.type)
+      await this.$store.dispatch("postaviToken", this.user.token)
+      await this.$store.dispatch("postaviUsername", this.user.token)
+      await this.$store.dispatch("postaviUserID", this.user.id)
 
-      // !!!
-      // await this.$store.dispatch("getUserByID", this.user.id)
+      if (this.user.type == 'U') { 
+        await this.$store.dispatch("getUserByID", this.user.id)
+      }
+      else { 
+        await this.$store.dispatch("getCompanyByID", this.user.id)
+      }
     }
   },
 }

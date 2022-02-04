@@ -1,8 +1,8 @@
 <template>
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top " id="mainNav" >
-    <div class="container-fluid ">
-      <router-link :to="{ name: 'Homepage' }">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav" >
+    <div class="container px-4 px-lg-5">
+      <router-link :to="{ name: 'UserHomepage' }">
         <a class="navbar-brand">
           <img src="../assets/img/logo_no_bg.png" alt="logo"/></a>
       </router-link>
@@ -15,18 +15,23 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
-          <router-link :to="{ name: 'Homepage' }">
+          <router-link :to="{ name: 'UserHomepage' }">
             <li class="nav-item active">
-              <a class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
-          <router-link :to="{ name: 'Login' }">
+            <router-link :to="{ name: 'UserHomepage' }">
             <li class="nav-item active">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>
-          <router-link :to="{ name: 'Register' }">
+            <router-link :to="{ name: 'UserHomepage' }">
             <li class="nav-item active">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " @click="logout" href="#!" >Profil</a>
             </li></router-link>
+            <router-link :to="{ name: 'Homepage' }">
+            <li class="nav-item active">
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " @click="logout" href="#!" >Odjavi se</a>
+            </li></router-link>
+         
           
         </ul>
       </div>
@@ -42,7 +47,7 @@ export default {
     };
   },
   methods: {
-    showMenu: function () {
+    showMenu() {
       const div = document.querySelector("#navbarResponsive");
       this.isCollapsed = !this.isCollapsed;
       if (!this.isCollapsed) {
@@ -54,6 +59,10 @@ export default {
         div.classList.add("collapse");
       }
     },
+    logout() { 
+        this.$store.dispatch('logout')
+
+    }
   },
 };
 </script>
@@ -74,7 +83,6 @@ export default {
 .menuBtn {
   background-color: #00b1a8;
 }
-
 .nav-link:hover, .nav-link:focus {
   color: #78e7ff  !important;
 }

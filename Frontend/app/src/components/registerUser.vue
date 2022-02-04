@@ -78,5 +78,7 @@ export default {
 .inputPolje  {
     width: 83%;
 }
-
+.rounded { 
+  border-radius: 10px !important;
+}
 </style>

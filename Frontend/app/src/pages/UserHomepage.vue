@@ -1,49 +1,50 @@
 <template >
-  <div class="container-fluid mainDiv" >
+  <div class="container-fluid mainDiv">
     <!-- header with navbar -->
     <div class="row">
       <Header/>
     </div>
-    
     <div class="container-xxl px-0 moveCont">
       <!-- Page Header-->
       <Welcome/>
       <!-- company cards -->
-      <div v-if="isDataLoaded" class="container">      
+      <div v-if="isDataLoaded" class="container">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <h3>Neke od firmi u Srbiji</h3>
           <div class="row justify-content-around">
             <CompanyCard v-for="company in allCompanies" :key="company._id" :company="company"/>
           </div>
-          <router-link :to="{name: 'AllCompaniesPage'}">
-            <button class="btn btn-lg btn-primary rounded dugme  ">Sve kompanije</button>
+          <router-link :to="{ name: 'AllCompaniesPage' }">
+            <button class="btn btn-lg btn-primary rounded dugme">
+              Sve kompanije
+            </button>
           </router-link>
         </div>
       </div>
       <div v-else>
-        <AppSpinner/>
+        <AppSpiner/>
       </div>
     </div>
     <!-- Footer -->
     <div class="row">
-      <Footer class="relative-bottom" />
+      <Footer class="relative-bottom"/>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "../components/Header.vue";
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
 import Welcome from '../components/WelcomeSection.vue'
-import AppSpinner from '../components/AppSpiner.vue'
+import Header from '../components/UserHeader.vue'
+import AppSpiner from '../components/AppSpiner.vue'
 
 export default {
-  title: 'Homepage',
-  components: {
-    AppSpinner,
-    Welcome,
+  title: 'User homepage',
+    components: {
+    AppSpiner,
     Header,
+    Welcome,
     CompanyCard,
     Footer
   },
@@ -61,15 +62,10 @@ export default {
     this.isDataLoaded = false
     await this.$store.dispatch('getAllCompanies')
     this.isDataLoaded = true
-  }
-  
+  },
 };
 </script>
-
 <style scoped>
-.rounded { 
-  border-radius: 10px !important;
-}
 .moveCont { 
   margin-top: -15px !important;
 }
@@ -77,7 +73,6 @@ export default {
   padding: 0;
   margin: 0;
 }
-
 .dugme {
   margin: top 0.8rem;
   margin-bottom: 0.8rem;
@@ -92,5 +87,8 @@ export default {
 }
 .pictureSection {
   background-image: url("../assets/img/job-interview.jpg");
+}
+.rounded { 
+  border-radius: 10px !important;
 }
 </style>

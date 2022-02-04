@@ -72,22 +72,6 @@
     <label for="name" class=" form-check-label col-2 ">Facebook:</label>
         <input type="url" class="form-control rounded col-9 inputPolje my-1"  v-model.trim="registerInfo.fbLink" name="fbLink" placeholder="https://facebook.com/example" autofocus="" required />
     </div>
-    
-    
-   
-    
-    
-   
-    
-    
-    
-    
-    
-    
-
-    
-
-   
     <!-- button  -->
     <button v-on:click="register" class="btn btn-lg btn-primary rounded dugme">Registruj se</button>
   </div>
@@ -142,6 +126,8 @@ export default {
     width: 83%;
 }
 
-
+.rounded { 
+  border-radius: 10px !important;
+}
 
 </style>

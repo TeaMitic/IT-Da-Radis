@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- header with navbar -->
     <div class="row">
-      <header-app></header-app>
+      <Header></Header>
     </div>
     <div class="contaier-xxl PrijavaRow">
       <div class="col-lg-8">
@@ -26,8 +26,8 @@
             </div>
           </div>
           <!-- username and password fields  -->
-          <input type="text" class="form-control" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
-          <input type="password" class="form-control" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
+          <input type="text" class="form-control rounded" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
+          <input type="password" class="form-control rounded" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
           <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme">Prijavi se</button>
         </form>
         <div class="row justify-content-center">
@@ -39,7 +39,7 @@
     </div>
     <!-- Footer -->
     <div class="row">
-      <footer-app class="fixed-bottom"></footer-app>
+      <Footer class="fixed-bottom"></Footer>
     </div>
   </div>
 </template>
@@ -49,9 +49,10 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 
 export default {
+  title: 'Login',
   components: {
-    "header-app": Header,
-    "footer-app": Footer,
+    Header,
+    Footer,
   },
   data() {
     return {
@@ -75,6 +76,9 @@ export default {
 </script>
 
 <style scoped>
+.rounded { 
+  border-radius: 10px !important;
+}
 .pointerForma:hover { 
   cursor: pointer;
 }
