@@ -11,7 +11,7 @@ const CreateCompany = async (req, res)=>{
             name: req.body.name,
             description: req.body.desc,
             address:req.body.address,
-            site: req.body.site,
+            website: req.body.website,
             contactTel: req.body.contactTel,
             email: req.body.email,
             socialMedia:{
@@ -110,7 +110,7 @@ const UpdateCompany = async (req, res)=>{
             result.description=company.description
             result.address= company.address
             result.email= company.email
-            result.site= company.site
+            result.website= company.website
             //result.categories = company.categories - ima posebna fja za to, da se doda 
             result.socialMedia.instagramLink = company.socialMedia.instagramLink
             result.socialMedia.facebookLink= company.socialMedia.facebookLink
