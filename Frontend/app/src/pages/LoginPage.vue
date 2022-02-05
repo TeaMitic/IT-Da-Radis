@@ -4,6 +4,9 @@
     <div class="row">
       <Header></Header>
     </div>
+    <div v-if="!isDataLoaded">
+      <AppSpinner/>
+    </div>
     <div class="contaier-xxl PrijavaRow">
       <div class="col-lg-8">
         <!-- login-forma -->
@@ -47,10 +50,12 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import AppSpinner from "../components/AppSpinner.vue"
 
 export default {
   title: 'Login',
   components: {
+    AppSpinner,
     Header,
     Footer,
   },
@@ -60,15 +65,18 @@ export default {
         username: "",
         password: "",
       },
-      userType: "user"
+      userType: "user",
+      isDataLoaded: true
     };
   },
   methods: {
     async login() { 
+      this.isDataLoaded = false
       await this.$store.dispatch('login', {
         loginInfo: this.loginInfo,
         userType: this.userType
       })
+      this.isDataLoaded = true
     }
     
   },

@@ -15,7 +15,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
-          <router-link :to="{ name: 'UserHomepage' }">
+          <router-link :to="{ name: 'AllCompaniesUser' }">
             <li class="nav-item active">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
@@ -25,7 +25,7 @@
             </li></router-link>
             <router-link :to="{ name: 'UserHomepage' }">
             <li class="nav-item active">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " @click="logout" href="#!" >Profil</a>
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item "  href="#!" >Profil</a>
             </li></router-link>
             <router-link :to="{ name: 'Homepage' }">
             <li class="nav-item active">

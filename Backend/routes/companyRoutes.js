@@ -12,7 +12,7 @@ const{
     DeleteCategory
 } = require('../controllers/companyController');
 
-router.get('/getAllCompanies', GetAllCompanies)
+router.get('/getAllCompanies/:limit', GetAllCompanies)
 router.get('/getCompany/:id', GetCompanyByID)
 router.get('/getCategories/:id', GetCategories)
 router.put('/updateCompany/:id', UpdateCompany)

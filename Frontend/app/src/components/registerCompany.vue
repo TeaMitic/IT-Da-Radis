@@ -1,5 +1,8 @@
 <template >
   <div class="container ">
+    <div v-if="!isDataLoaded">
+      <AppSpinner/>
+    </div>
     <div class="d-flex flex-row justify-content-start align-items-center">
         <!-- name -->
         <label for="name" class=" form-check-label col-2 ">Name:</label>
@@ -76,8 +79,13 @@
     <button v-on:click="register" class="btn btn-lg btn-primary rounded dugme">Registruj se</button>
   </div>
 </template>
+
 <script>
+import AppSpinner from '../components/AppSpinner.vue'
 export default {
+  components: { 
+    AppSpinner
+  },
   data() {
     return {
       registerInfo: {
@@ -94,6 +102,7 @@ export default {
         twLink: null,
         liLink: null
       },
+      isDataLoaded: true
     };
   },
   methods: { 

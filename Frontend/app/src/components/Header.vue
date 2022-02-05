@@ -15,16 +15,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
-          <router-link :to="{ name: 'Homepage' }">
-            <li class="nav-item active">
+          <router-link :to="{ name: 'AllCompanies' }">
+            <li class="nav-item ">
               <a class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
           <router-link :to="{ name: 'Login' }">
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
             </li></router-link>
           <router-link :to="{ name: 'Register' }">
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
             </li></router-link>
           

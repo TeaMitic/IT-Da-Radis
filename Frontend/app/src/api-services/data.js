@@ -131,9 +131,9 @@ export default new Vuex.Store({
                 console.log(err.data);
             }
         },
-        async getAllCompanies({commit}) { 
+        async getAllCompanies({commit}, limit) { 
             try { 
-                let res = await Api().get('/api/company/getAllCompanies')
+                let res = await Api().get(`/api/company/getAllCompanies/${limit}`)
                 commit('setAllCompanies',res.data)
             }
             catch(err) { 

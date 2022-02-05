@@ -14,11 +14,7 @@
           <div class="row justify-content-around">
             <CompanyCard v-for="company in allCompanies" :key="company._id" :company="company"/>
           </div>
-          <router-link :to="{ name: 'AllCompaniesPage' }">
-            <button class="btn btn-lg btn-primary rounded dugme">
-              Sve kompanije
-            </button>
-          </router-link>
+        
         </div>
       </div>
       <div v-else>
@@ -36,7 +32,7 @@
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
 import Welcome from '../components/WelcomeSection.vue'
-import Header from '../components/UserHeader.vue'
+import Header from '../components/Header.vue'
 import AppSpiner from '../components/AppSpinner.vue'
 
 export default {
@@ -60,7 +56,7 @@ export default {
   },
   async created() {
     this.isDataLoaded = false
-    await this.$store.dispatch('getAllCompanies',2)
+    await this.$store.dispatch('getAllCompanies', 0)
     this.isDataLoaded = true
   },
 };

@@ -1,13 +1,14 @@
 <template>
-  <div class="card col-lg-3  mx-2 my-3 px-0 rounded" v-bind:id="company._id">
+  <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow  bg-white  " v-bind:id="company._id">
     <router-link :to="{name: 'CompanyPage', params: {id:company._id}}">
       <img class="card-img-top roundedImg" src="../assets/img/company-card-bg.jpg" alt="Card image cap" />
     </router-link>
     <div class="card-body d-flex flex-column align-items-start">
       <router-link :to="{ name: 'CompanyPage' }" ><h4 class="card-title ">{{company.name}}</h4></router-link >
-      <a v-bind:href="company.website" target="_blank">{{company.website}}</a>
+      <a class="link" v-bind:href="company.website" target="_blank" rel="noopener">{{company.website | trim-web}}</a>
       <div class="d-flex flex-row flex-wrap ">
-        <a class="m-1 px-1 border  tagBg" v-for="tag in company.categories" :key="tag" href="#!">{{ tag }}</a>
+        <a class="m-1 px-1 border  tagBg " v-for="tag in categories" :key="tag" href="#!" >{{ tag }}</a>
+        <div class="m-1 px-1 border  tagBg cursorNormal" v-if="restCount > 0">+{{restCount}}</div>
       </div>
     </div>
   </div>
@@ -15,22 +16,58 @@
 
 <script>
 export default {
+  filters: { 
+    trimWeb(value) {
+      if (value) {
+        //https://quantox.com/
+        return value.replace(/(^\w+:|^)\/\//, '');
+        
+      }
+    }
+  },
   props: { 
     company: { 
       required: true,
       type: Object
-    }
+    },
   },
   data() {
     return {
-      
-    };
+    }
   },
+  computed: { 
+    categories() {
+      let allCategories = this.company.categories
+      let only5 = allCategories.slice(0,5)
+      return only5
+    },
+    restCount() { 
+      return this.company.categories.length - 5
+    }
+  },
+ 
+  
+ 
   
 };
 </script>
 
 <style scoped>
+.cursorNormal:hover { 
+  cursor: default;
+}
+.link { 
+    color: #5d6bf6;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.link:hover { 
+  text-decoration: underline;
+}
 .rounded { 
   border-radius: 10px !important;
 }

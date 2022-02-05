@@ -13,10 +13,10 @@ export default {
     return {
       user:
       {
-        id: -1,
-        token: "",
-        type: "",
-        username: ""
+        id: null,
+        token: null,
+        type: null,
+        username: null
       }
     }
   },
@@ -25,6 +25,8 @@ export default {
     this.user.token = Vue.$cookies.get("token");
     this.user.type = Vue.$cookies.get("type");
     this.user.username = Vue.$cookies.get("username")
+
+    
 
     if (this.user != null && this.user.id != null) {
       await this.$store.dispatch("postaviUserType", this.user.type)
@@ -39,6 +41,7 @@ export default {
         await this.$store.dispatch("getCompanyByID", this.user.id)
       }
     }
+
   },
 }
 </script>

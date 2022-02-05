@@ -36,7 +36,7 @@ import Header from "../components/Header.vue";
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
 import Welcome from '../components/WelcomeSection.vue'
-import AppSpinner from '../components/AppSpiner.vue'
+import AppSpinner from '../components/AppSpinner.vue'
 
 export default {
   title: 'Homepage',
@@ -59,7 +59,7 @@ export default {
   },
   async created() {
     this.isDataLoaded = false
-    await this.$store.dispatch('getAllCompanies')
+    await this.$store.dispatch('getAllCompanies', 2)
     this.isDataLoaded = true
   }
   

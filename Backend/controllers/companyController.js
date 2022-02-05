@@ -67,9 +67,10 @@ const LoginCompany = async (req, res) =>{
 //get api
 const GetAllCompanies = async (req, res) =>{
     try{
-        await Company.find().then( result =>{
+        await Company.find().limit(req.params.limit).then( result =>{
             res.status(200).send(result)
         })
+            
 
     }
     catch(err){

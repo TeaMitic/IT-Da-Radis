@@ -4,6 +4,7 @@
     <div class="row">
       <Header></Header>
     </div>
+   
      <div class="contaier-xxl registerRow">
       <div class="col-lg-8">
         <!-- Register-forma -->
@@ -54,7 +55,6 @@ import Footer from '../components/Footer.vue';
 import UserForm from '../components/RegisterUser.vue'
 import CompanyForm from '../components/RegisterCompany.vue'
 
-
 export default {
   title: 'Register',
   components: {
@@ -66,7 +66,6 @@ export default {
   data() {
     return {
       userType: "user",
-      
     }
   },
   
