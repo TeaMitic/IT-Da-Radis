@@ -200,6 +200,9 @@ export default new Vuex.Store({
         },
         getAllCompanies(state) { 
             return state.allCompanies
+        },
+        getCurrentCompany(state) {
+            return state.currentCompany
         }
     }
 })

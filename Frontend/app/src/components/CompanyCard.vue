@@ -1,5 +1,5 @@
 <template>
-  <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow  bg-white  " v-bind:id="company._id">
+  <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow kartica " v-bind:id="company._id">
     <router-link :to="{name: 'CompanyPage', params: {id:company._id}}">
       <img class="card-img-top roundedImg" src="../assets/img/company-card-bg.jpg" alt="Card image cap" />
     </router-link>
@@ -53,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+.kartica { 
+
+}
 .cursorNormal:hover { 
   cursor: default;
 }

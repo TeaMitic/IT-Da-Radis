@@ -8,7 +8,7 @@
         <Header/>
     </div>
     
-    <div class="container-xxl px-0 moveCont">
+    <div class="container-xxl px-0 ">
       <!-- Page Header-->
       <Welcome/>
       <!-- company cards -->
@@ -75,12 +75,14 @@ export default {
 </script>
 
 <style scoped>
+.masthead{ 
+  background-size: 100%;
+
+}
 .rounded { 
   border-radius: 10px !important;
 }
-.moveCont { 
-  margin-top: -15px !important;
-}
+
 .mainDiv { 
   padding: 0;
   margin: 0;
