@@ -56,7 +56,7 @@ import UserForm from '../components/RegisterUser.vue'
 import CompanyForm from '../components/RegisterCompany.vue'
 
 export default {
-  title: 'Register',
+  title: 'IT Da Radis - Register',
   components: {
     Header,
     Footer,

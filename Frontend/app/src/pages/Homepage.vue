@@ -1,8 +1,11 @@
 <template >
   <div class="container-fluid mainDiv" >
     <!-- header with navbar -->
-    <div class="row">
-      <Header/>
+    <div v-if="userType == 'U'">
+            <UserHeader/>
+    </div>
+    <div v-else>
+        <Header/>
     </div>
     
     <div class="container-xxl px-0 moveCont">
@@ -15,7 +18,7 @@
           <div class="row justify-content-around">
             <CompanyCard v-for="company in allCompanies" :key="company._id" :company="company"/>
           </div>
-          <router-link :to="{name: 'AllCompaniesPage'}">
+          <router-link :to="{name: 'AllCompanies'}">
             <button class="btn btn-lg btn-primary rounded dugme  ">Sve kompanije</button>
           </router-link>
         </div>
@@ -32,15 +35,18 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Header from "../components/Header.vue";
+import UserHeader from '../components/UserHeader.vue'
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
 import Welcome from '../components/WelcomeSection.vue'
 import AppSpinner from '../components/AppSpinner.vue'
 
 export default {
-  title: 'Homepage',
+  title: 'IT Da Radis - Homepage',
   components: {
+    UserHeader,
     AppSpinner,
     Welcome,
     Header,
@@ -49,7 +55,8 @@ export default {
   },
   data() {
     return {
-      isDataLoaded: false
+      isDataLoaded: false,
+      userType: null
     };
   },
   computed: { 
@@ -58,6 +65,7 @@ export default {
     }
   },
   async created() {
+    this.userType = Vue.$cookies.get('userType')
     this.isDataLoaded = false
     await this.$store.dispatch('getAllCompanies', 2)
     this.isDataLoaded = true
@@ -76,6 +84,8 @@ export default {
 .mainDiv { 
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
+
 }
 
 .dugme {

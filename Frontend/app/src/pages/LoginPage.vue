@@ -53,7 +53,7 @@ import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue"
 
 export default {
-  title: 'Login',
+  title: 'IT Da Radis - Login',
   components: {
     AppSpinner,
     Header,

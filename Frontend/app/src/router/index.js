@@ -5,10 +5,9 @@ import Router from 'vue-router'
 import Homepage from '../pages/Homepage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import RegisterPage from '../pages/RegisterPage.vue'
-import UserHomepage from '../pages/UserHomepage.vue'
 import CompanyHomepage from '../pages/CompanyHomepage.vue'
 import AllCompaniesPage from '../pages/AllCompaniesPage.vue'
-import AllCompaniesPageUser from '../pages/AllCompaniesPageUser.vue'
+import AllJobAdsPage from '../pages/JobAdsPage.vue'
 
 Vue.use(Router)
 
@@ -44,19 +43,7 @@ const router = new Router({
             name: 'Register',
             component: RegisterPage
         },
-        {
-            path:'/UserHomepage',
-            name: 'UserHomepage',
-            component: UserHomepage,
-            beforeEnter(to,from,next) { 
-                if (checkCookie()) { 
-                    next()
-                }
-                else { 
-                    next({name: 'Homepage'})
-                }
-            }
-        },
+       
         {
             path:'/CompanyHomepage',
             name: 'CompanyHomepage',
@@ -77,24 +64,11 @@ const router = new Router({
             
         },
         {
-            path:'/AllCompaniesUser',
-            name: 'AllCompaniesUser',
-            component: AllCompaniesPageUser,
-            beforeEnter(to,from,next) { 
-                if (checkCookie()) { 
-                    next()
-                }
-                else { 
-                    next({name: 'AllCompaniesPage'})
-                }
-            }
-        }
-        // { 
-        //     path: '/CompanyPage',
-        //     name: 'CompanyPage',
-        //     component: CompanyPage,
-            
-        // }
+            path:'/AllJobAds',
+            name: 'AllJobAds',
+            component: AllJobAdsPage,
+        },
+       
 
     ],
     mode: 'history'

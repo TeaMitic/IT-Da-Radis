@@ -1,8 +1,11 @@
 <template >
   <div class="container-fluid mainDiv">
     <!-- header with navbar -->
-    <div class="row">
-      <Header/>
+    <div v-if="userType == 'U'">
+            <UserHeader/>
+    </div>
+    <div v-else>
+        <Header/>
     </div>
     <div class="container-xxl px-0 moveCont">
       <!-- Page Header-->
@@ -29,15 +32,18 @@
 </template>
 
 <script>
+import  Vue  from 'vue'
 import CompanyCard from "../components/CompanyCard.vue"
 import Footer from '../components/Footer.vue'
 import Welcome from '../components/WelcomeSection.vue'
 import Header from '../components/Header.vue'
+import UserHeader from '../components/UserHeader.vue'
 import AppSpiner from '../components/AppSpinner.vue'
 
 export default {
-  title: 'User homepage',
-    components: {
+  title: 'IT Da Radis - Companies',
+  components: {
+    UserHeader,
     AppSpiner,
     Header,
     Welcome,
@@ -46,7 +52,8 @@ export default {
   },
   data() {
     return {
-      isDataLoaded: false
+      isDataLoaded: false,
+      userType: null
     };
   },
   computed: { 
@@ -55,6 +62,7 @@ export default {
     }
   },
   async created() {
+    this.userType = Vue.$cookies.get('userType')
     this.isDataLoaded = false
     await this.$store.dispatch('getAllCompanies', 0)
     this.isDataLoaded = true
@@ -68,6 +76,8 @@ export default {
 .mainDiv { 
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
+
 }
 .dugme {
   margin: top 0.8rem;

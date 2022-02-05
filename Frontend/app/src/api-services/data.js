@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index.js'
 import Api from './dbConfig.js'
-// import router from "@/router"
-// import cookies from 'vue-cookies'
+
 
 const cookieTime = "1h"
 
@@ -17,7 +16,8 @@ export default new Vuex.Store({
         currentUsername: null,
         currentUserID: null,
         currentUserType: null,
-        allCompanies: []
+        allCompanies: [],
+        allJobAds: [],
     },
     actions: { 
         async login({commit}, loginObject) { 
@@ -43,7 +43,7 @@ export default new Vuex.Store({
                 
                
                 if (data.tip == "U") { 
-                    router.push('/UserHomepage')
+                    router.push('/')
                 }
                 else {
                     router.push('/CompanyHomepage')
@@ -112,6 +112,8 @@ export default new Vuex.Store({
             Vue.$cookies.remove("token")
             Vue.$cookies.remove("userType")
             Vue.$cookies.remove("username")
+            window.location.reload()
+
         },
         async getUserByID({commit}, id) {
             try {
@@ -140,6 +142,15 @@ export default new Vuex.Store({
                 console.log(err.data)
             }
         },
+        async getAllJobAds({commit}) { 
+            try { 
+                let res = await Api().get(`/api/jobAd/getAllJobAds`)
+                commit('setAllJobAds',res.data)
+            }
+            catch(err) { 
+                console.log(err.data)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -157,6 +168,9 @@ export default new Vuex.Store({
 
     },
     mutations: { 
+        setAllJobAds(state, allJobAds) { 
+            state.allJobAds = allJobAds
+        },
         setAllCompanies(state,allCompanies) { 
             state.allCompanies = allCompanies
         },
@@ -181,6 +195,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getAllJobAds(state) { 
+            return state.allJobAds
+        },
         getAllCompanies(state) { 
             return state.allCompanies
         }

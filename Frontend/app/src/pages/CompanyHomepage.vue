@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    title: 'Company homepage',
+    title: 'IT Da Radis - Homepage',
 }
 </script>
 

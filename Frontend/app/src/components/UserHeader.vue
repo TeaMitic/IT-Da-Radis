@@ -1,8 +1,8 @@
 <template>
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav" >
-    <div class="container px-4 px-lg-5">
-      <router-link :to="{ name: 'UserHomepage' }">
+    <div class="container-fluid ">
+      <router-link :to="{ name: 'Homepage' }">
         <a class="navbar-brand">
           <img src="../assets/img/logo_no_bg.png" alt="logo"/></a>
       </router-link>
@@ -15,11 +15,11 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
-          <router-link :to="{ name: 'AllCompaniesUser' }">
+          <router-link :to="{ name: 'AllCompanies' }">
             <li class="nav-item active">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
-            <router-link :to="{ name: 'UserHomepage' }">
+            <router-link :to="{ name: 'AllJobAds' }">
             <li class="nav-item active">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>
@@ -60,7 +60,8 @@ export default {
       }
     },
     logout() { 
-        this.$store.dispatch('logout')
+      this.$store.dispatch('logout')
+        
 
     }
   },
