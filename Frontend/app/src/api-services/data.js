@@ -117,7 +117,7 @@ export default new Vuex.Store({
         },
         async getUserByID({commit}, id) {
             try {
-                let res = await Api().get('/api/user/'+id)
+                let res = await Api().get('/api/user/getUser/'+id)
                 commit('setUser', res.data)
                 
             } catch (err) {
@@ -203,6 +203,9 @@ export default new Vuex.Store({
         },
         getCurrentCompany(state) {
             return state.currentCompany
+        },
+        getCurrentUser(state) {
+          return state.currentUser   
         }
     }
 })

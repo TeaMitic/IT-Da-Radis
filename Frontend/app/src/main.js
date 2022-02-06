@@ -8,8 +8,17 @@ import Toasted from 'vue-toasted'
 import VueCookies from 'vue-cookies'
 import titleMixin from './mixins/titleMixins'
 import moment from 'moment'
+import { faSearch, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 
 Vue.mixin(titleMixin)
+library.add(faSearch)
+library.add(faEdit)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false;
 
 Axios.defaults.baseURL = process.env.API_ENDPOINT;

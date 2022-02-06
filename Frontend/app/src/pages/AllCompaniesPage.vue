@@ -78,14 +78,13 @@ export default {
 };
 </script>
 <style scoped>
-.masthead{ 
-  background-size: 100%;
 
-}
 .mainDiv { 
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  background-color: whitesmoke
+
 
 }
 .dugme {

@@ -26,13 +26,8 @@
     <!-- password -->
     <div class="d-flex flex-row justify-content-start align-items-center">
         <label for="name" class=" form-check-label col-2">Password:</label>
-        <input  type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.password" name="password" placeholder="Your password" autofocus="" required />
+        <input  type="password" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.password" name="password" placeholder="Your password" autofocus="" required />
     </div>
-
-
-   
-    
-   
     <!-- button  -->
     <button v-on:click="register" class="btn btn-lg btn-primary rounded dugme">Registruj se</button>
   </div>

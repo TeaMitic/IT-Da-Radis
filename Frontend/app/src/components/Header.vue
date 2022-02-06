@@ -16,19 +16,19 @@
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
           <router-link :to="{ name: 'AllCompanies' }">
-            <li class="nav-item ">
-              <a class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
+            <li class="nav-item" >
+              <a  class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
           <router-link :to="{ name: 'AllJobAds' }">
             <li class="nav-item ">
-              <a class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
+              <a  class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>
           <router-link :to="{ name: 'Login' }">
-            <li class="nav-item ">
+            <li  class="nav-item ">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
             </li></router-link>
           <router-link :to="{ name: 'Register' }">
-            <li class="nav-item ">
+            <li  class="nav-item ">
               <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
             </li></router-link>
           
@@ -58,6 +58,8 @@ export default {
         div.classList.add("collapse");
       }
     },
+    
+    
   },
 };
 </script>
@@ -83,6 +85,9 @@ export default {
   color: #78e7ff  !important;
 }
 .dropdown-item:hover { 
+  background-color: #e6e7ea82;
+}
+.dropdown-item:hover.active{ 
   background-color: #e6e7ea82;
 }
 .menuBtn:hover { 

@@ -8,6 +8,7 @@ import RegisterPage from '../pages/RegisterPage.vue'
 import CompanyHomepage from '../pages/CompanyHomepage.vue'
 import AllCompaniesPage from '../pages/AllCompaniesPage.vue'
 import AllJobAdsPage from '../pages/JobAdsPage.vue'
+import UserProfilePage from '../pages/UserProfilePage.vue'
 
 Vue.use(Router)
 
@@ -43,7 +44,6 @@ const router = new Router({
             name: 'Register',
             component: RegisterPage
         },
-       
         {
             path:'/CompanyHomepage',
             name: 'CompanyHomepage',
@@ -68,6 +68,19 @@ const router = new Router({
             name: 'AllJobAds',
             component: AllJobAdsPage,
         },
+        {
+            path: '/UserProfile',
+            name: 'UserProfile',
+            component: UserProfilePage,
+            beforeEnter(to,from,next) { 
+                if (checkCookie()) { 
+                    next()
+                }
+                else { 
+                    next({name: 'Homepage'})
+                }
+            }
+        }
        
 
     ],

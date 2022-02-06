@@ -10,7 +10,7 @@
     <div class="contaier-xxl PrijavaRow">
       <div class="col-lg-8">
         <!-- login-forma -->
-        <form class="form-signin" @submit.prevent>
+        <form class="form-signin"   @submit.prevent>
           <h2 class="form-signin-heading text-center">Prijava</h2>
           <!-- user type fields -->
           <div class="row d-flex">
@@ -29,7 +29,7 @@
             </div>
           </div>
           <!-- username and password fields  -->
-          <input type="text" class="form-control rounded" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
+          <input type="text"  class="form-control rounded" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
           <input type="password" class="form-control rounded" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
           <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme">Prijavi se</button>
         </form>
