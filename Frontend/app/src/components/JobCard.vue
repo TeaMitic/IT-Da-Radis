@@ -4,7 +4,7 @@
     <div class="card-body d-flex flex-column align-items-start ">  
       <router-link :to="{ name: 'AboutJob', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
       <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
-      <p>{{jobAd.description}}</p>
+      <br>
       <label>{{jobAd.city}}</label>
       <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
 .pictureDiv { 
-    margin: 5rem;
+    margin: 3rem;
 }
 .kartica { 
     width: 100%;

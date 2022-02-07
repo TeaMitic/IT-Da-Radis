@@ -43,6 +43,10 @@
               <a class="socialIcon" v-bind:href="company.socialMedia.twitterLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'twitter']"/></a>
               <a class="socialIcon" v-bind:href="company.socialMedia.facebookLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'facebook']"/></a>
           </div>
+          <div >
+            <hr/>
+          <h4 class="text-muted">About company</h4>
+        </div>
           <div class="company-description">
             <p>{{company.description}}</p>
           </div>

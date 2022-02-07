@@ -92,8 +92,8 @@ const router = new Router({
             // }
         },
         {
-            path: '/CompanyProfilePage',
-            name: 'CompanyProfilePage',
+            path: '/CompanyProfile',
+            name: 'CompanyProfile',
             component: CompanyProfilePage,
             beforeEnter(to,from,next) { 
                 if (checkCookie()) { 

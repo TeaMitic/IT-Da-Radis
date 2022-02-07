@@ -1,7 +1,7 @@
 <template >
   <div class="container-fluid mainDiv " >
     <!-- header with navbar -->
-    <UserHeader/>
+    <CompanyHeader/>
     <!-- main -->
     <!-- user info  -->
     <div v-if="!isDataLoaded">
@@ -135,14 +135,14 @@
 </template>
 
 <script>
-import UserHeader from '../components/UserHeader.vue'
+import CompanyHeader from '../components/CompanyHeader.vue'
 import Footer from '../components/Footer.vue'
 import AppSpinner from '../components/AppSpinner.vue'
 
 export default {
   title: 'IT Da Radis - Homepage',
   components: {
-    UserHeader,
+    CompanyHeader,
     AppSpinner,
     Footer
   },
