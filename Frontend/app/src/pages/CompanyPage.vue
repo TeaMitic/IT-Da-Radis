@@ -168,7 +168,7 @@ export default {
     .company-info-basic { 
             display: flex;
             flex-direction: column !important;
-        }
+    }
     .company { 
         margin: 2rem !important;
         padding: 2rem !important;
