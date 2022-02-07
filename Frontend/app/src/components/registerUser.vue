@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import AppSpinner from '../components/AppSpinner.vue'
+import AppSpinner from './AppSpinner.vue'
 
 export default {
   components: { 
