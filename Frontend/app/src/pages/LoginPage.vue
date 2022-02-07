@@ -34,9 +34,11 @@
           <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme">Prijavi se</button>
         </form>
         <div class="row justify-content-center">
-          <router-link :to="{ name: 'Register' }">
-            <button class="btn btn-lg btn-link rounded ">Nemate nalog?</button>
-          </router-link>
+          <div class="col-xl-3">
+            <router-link :to="{ name: 'Register' }">
+              <button class="btn btn-lg btn-link rounded ">Nemate nalog?</button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>

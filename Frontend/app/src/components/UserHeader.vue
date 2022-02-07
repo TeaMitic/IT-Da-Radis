@@ -17,7 +17,7 @@
           
           <router-link :to="{ name: 'AllCompanies' }">
             <li class="nav-item active">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
+              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Kompanije</a>
             </li></router-link>
             <router-link :to="{ name: 'AllJobAds' }">
             <li class="nav-item active">

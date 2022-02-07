@@ -36,9 +36,11 @@
          
         </form>
         <div class="row justify-content-center">
-          <router-link :to="{ name: 'Login' }">
-            <button class="btn btn-lg btn-link rounded ">Već imate nalog?</button>
-          </router-link>
+          <div class="col-xl-3">
+            <router-link :to="{ name: 'Login' }">
+              <button class="btn btn-lg btn-link rounded">Već imate nalog?</button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -52,8 +54,8 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from '../components/Footer.vue';
-import UserForm from '../components/RegisterUser.vue'
-import CompanyForm from '../components/RegisterCompany.vue'
+import UserForm from '../components/registerUser.vue';
+import CompanyForm from '../components/registerCompany.vue';
 
 export default {
   title: 'IT Da Radis - Register',
