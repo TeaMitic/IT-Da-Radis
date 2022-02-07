@@ -10,7 +10,7 @@
 
     <div class="container-xxl px-0">
       <div v-if="isDataLoaded">
-        <div class="card rounded company my-3 mx-5 p-5 d-flex flex-row align-items-end flex-wrap justify-content-between">
+        <div class="card rounded company my-3 mx-5 p-5 ">
           <div class="d-flex flex-column company-info">
             <div class="d-flex flex-row company-info-basic">
                 <div class="imageDiv d-flex justify-content-center">
@@ -33,7 +33,7 @@
               <a  class="m-1 px-1 border tagBg" v-for="tag in company.categories"  :key="tag" href="#!" >{{ tag }}</a >
             </div>
           </div>
-          <div class="d-flex justify-content-between company-social-media ">
+          <div class="d-flex flex-row-reverse  company-social-media ">
               <a class="socialIcon" v-bind:href="company.socialMedia.linkedInLink" target="_blank" rel="noopener" ><font-awesome-icon :icon="['fab', 'linkedin']"/></a>
               <a class="socialIcon" v-bind:href="company.socialMedia.instagramLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'instagram']"/></a>
               <a class="socialIcon" v-bind:href="company.socialMedia.twitterLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'twitter']"/></a>
@@ -166,17 +166,21 @@ export default {
 @media (max-width: 576px) {
 
     .company-info-basic { 
-            display: flex;
-            flex-direction: column !important;
+      display: flex !important;
+      flex-direction: column !important;
     }
     .company { 
-        margin: 2rem !important;
-        padding: 2rem !important;
+      margin: 2rem !important;
+      padding: 2rem !important;
     }
     .company-info-basic > div  > h4 { 
-        align-self: center !important;
-        display: flex;
+      align-self: center !important;
+      display: flex !important;
     }
+    .company-social-media { 
+      flex-direction: row !important;
+    }
+
 
 
 }
