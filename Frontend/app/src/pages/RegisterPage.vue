@@ -6,7 +6,7 @@
     </div>
    
      <div class="contaier-xxl registerRow">
-      <div class="col-lg-8">
+      <div class="col-lg-8 ">
         <!-- Register-forma -->
         <form class="form-signin" @submit.prevent>
           <h2 class="form-signin-heading text-center">Registracija</h2>
