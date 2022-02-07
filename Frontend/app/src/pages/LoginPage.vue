@@ -29,9 +29,9 @@
             </div>
           </div>
           <!-- username and password fields  -->
-          <input type="text"  class="form-control rounded" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
-          <input type="password" class="form-control rounded" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
-          <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme">Prijavi se</button>
+          <input type="text"  class="form-control rounded mt-3 mb-1" v-model.trim="loginInfo.username" name="username" placeholder="Username" autofocus=""  required/>
+          <input type="password" class="form-control rounded my-2" v-model.trim="loginInfo.password" name="sifra" placeholder="password" required /> 
+          <button v-on:click="login" class="btn btn-lg btn-primary rounded dugme mt-3">Prijavi se</button>
         </form>
         <div class="row justify-content-center">
           <div class="col-xl-3">
@@ -103,8 +103,8 @@ export default {
   margin-bottom: 1.2rem;
 }
 .mainDiv { 
-  background-color: whitesmoke
-
+  background-color: whitesmoke;
+  height: 100vh;
 }
 .dugme {
   margin: top 0.8rem;
