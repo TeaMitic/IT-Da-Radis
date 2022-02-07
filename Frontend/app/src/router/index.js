@@ -10,6 +10,7 @@ import AllCompaniesPage from '../pages/AllCompaniesPage.vue'
 import AllJobAdsPage from '../pages/JobAdsPage.vue'
 import UserProfilePage from '../pages/UserProfilePage.vue'
 import Companypage from '../pages/CompanyPage.vue'
+import CompanyProfilePage from '../pages/CompanyProfilePage'
 
 Vue.use(Router)
 
@@ -89,7 +90,21 @@ const router = new Router({
             // params: {
             //     id: String
             // }
+        },
+        {
+            path: '/CompanyProfilePage',
+            name: 'CompanyProfilePage',
+            component: CompanyProfilePage,
+            beforeEnter(to,from,next) { 
+                if (checkCookie()) { 
+                    next()
+                }
+                else { 
+                    next({name: 'Homepage'})
+                }
+            }
         }
+
        
 
     ],
