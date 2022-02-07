@@ -9,6 +9,7 @@ import CompanyHomepage from '../pages/CompanyHomepage.vue'
 import AllCompaniesPage from '../pages/AllCompaniesPage.vue'
 import AllJobAdsPage from '../pages/JobAdsPage.vue'
 import UserProfilePage from '../pages/UserProfilePage.vue'
+import Companypage from '../pages/CompanyPage.vue'
 
 Vue.use(Router)
 
@@ -80,6 +81,14 @@ const router = new Router({
                     next({name: 'Homepage'})
                 }
             }
+        },
+        {
+            path: '/AboutCompany/:id',
+            name: 'AboutCompany',
+            component: Companypage,
+            // params: {
+            //     id: String
+            // }
         }
        
 

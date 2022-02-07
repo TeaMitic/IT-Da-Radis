@@ -11,6 +11,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: { 
         currentCompany: null,
+        currentCompanyJobAds: null,
         currentUser: null,
         currentToken: null,
         currentUsername: null,
@@ -89,7 +90,7 @@ export default new Vuex.Store({
                 Vue.$cookies.set("userType", data.tip, cookieTime)
                 
                 if (data.tip == "U") { 
-                    router.push('/UserHomepage')
+                    router.push('/Homepage')
                 }
                 else {
                     router.push('/CompanyHomepage')
@@ -151,6 +152,16 @@ export default new Vuex.Store({
                 console.log(err.data)
             }
         },
+        async getCompanyJobAds({commit},companyID) { 
+            try {
+                
+                let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
+                commit('setCompanyJobAds',res.data)
+            } catch (err) {
+                console.log(err.data)
+            }
+            
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -168,6 +179,9 @@ export default new Vuex.Store({
 
     },
     mutations: { 
+        setCompanyJobAds(state,jobAds) { 
+            state.currentCompanyJobAds = jobAds
+        },
         setAllJobAds(state, allJobAds) { 
             state.allJobAds = allJobAds
         },
@@ -195,6 +209,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentCompanyJobAds(state) { 
+            return state.currentCompanyJobAds
+        },
         getAllJobAds(state) { 
             return state.allJobAds
         },

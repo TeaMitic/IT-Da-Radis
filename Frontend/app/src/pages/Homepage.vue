@@ -75,10 +75,7 @@ export default {
 </script>
 
 <style scoped>
-.masthead{ 
-  background-size: 100%;
 
-}
 .rounded { 
   border-radius: 10px !important;
 }

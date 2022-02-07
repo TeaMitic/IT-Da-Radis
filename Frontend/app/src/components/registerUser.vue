@@ -6,7 +6,7 @@
     <!-- name -->
     <div class="d-flex flex-row justify-content-start align-items-center">
         <label for="name" class=" form-check-label col-2 ">Name:</label>
-        <input type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.name" name="name" placeholder="Your name" autofocus="" required />
+        <input type="text" class="form-control rounded col-9  inputPolje my-1" v-model.trim="registerInfo.name" name="name" placeholder="Your name" autofocus="" required />
     </div>
     <!-- surname -->
     <div class="d-flex flex-row justify-content-start align-items-center">

@@ -1,5 +1,5 @@
 <template >
-  <div class="container-fluid">
+  <div class="container-fluid mainDiv">
     <!-- header with navbar -->
     <div class="row">
       <Header></Header>
@@ -100,7 +100,10 @@ export default {
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
 }
+.mainDiv { 
+  background-color: whitesmoke
 
+}
 .dugme {
   margin: top 0.8rem;
   margin-bottom: 0.8rem;

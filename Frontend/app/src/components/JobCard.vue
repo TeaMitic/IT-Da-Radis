@@ -2,8 +2,8 @@
   <div v-if="isDataLoaded" class="card col-lg-3   my-3 px-0 rounded shadow   kartica " v-bind:id="jobAd._id">
     
     <div class="card-body d-flex flex-column align-items-start ">  
-      <router-link :to="{ name: 'CompanyPage' }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
-      <router-link :to="{ name: 'CompanyPage' }"><h6 class="card-subtitle">{{companyName.name}}</h6></router-link>
+      <router-link :to="{ name: 'AboutJob', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
+      <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
       <p>{{jobAd.description}}</p>
       <label>{{jobAd.city}}</label>
       <label>{{jobAd.expireAt | date-format}}</label>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'CompanyPage', params: {id:jobAd.companyID}}">
+        <router-link  :to="{name: 'AboutCompany', params: {id:jobAd.companyID}}">
             <img class=" roundedImg " src="../assets/img/company-card-bg.jpg" alt="Comapny logo" />
         </router-link>
     </div>
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: { 
-    companyName() { 
+    company() { 
         return this.$store.getters['getCurrentCompany']
         
     }
@@ -66,7 +66,7 @@ export default {
 .link { 
     color: #5d6bf6;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 550;
     letter-spacing: 0;
     line-height: 18px;
     text-decoration: none;
@@ -86,7 +86,7 @@ export default {
 
 }
 .tagBg { 
-  font-weight: 700;
+  font-weight: 550;
   letter-spacing: 0;
   border-radius: 2px;
   background-color: #f4f5f9;

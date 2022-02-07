@@ -17,19 +17,19 @@
           
           <router-link :to="{ name: 'AllCompanies' }">
             <li class="nav-item" >
-              <a  class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
+              <a  class=" nav-link px-lg-2 text-white slova rounded dropdown-item " href="#!" >Komapnije</a>
             </li></router-link>
           <router-link :to="{ name: 'AllJobAds' }">
             <li class="nav-item ">
-              <a  class=" nav-link px-lg-3 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
+              <a  class=" nav-link px-lg-2 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>
           <router-link :to="{ name: 'Login' }">
             <li  class="nav-item ">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
+              <a class=" nav-link px-lg-2  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
             </li></router-link>
           <router-link :to="{ name: 'Register' }">
             <li  class="nav-item ">
-              <a class=" nav-link px-lg-3  text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
+              <a class=" nav-link px-lg-2  text-white slova rounded dropdown-item " href="#!" >Registruj se</a>
             </li></router-link>
           
         </ul>
@@ -70,7 +70,7 @@ export default {
 }
 .slova {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 550;
   letter-spacing: 0.0625em;
   text-transform: uppercase;
 }
