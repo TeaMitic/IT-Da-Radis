@@ -29,7 +29,7 @@
         <input  type="password" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.password" name="password" placeholder="Your password" autofocus="" required />
     </div>
     <!-- button  -->
-    <button v-on:click="register" class="btn btn-lg btn-primary rounded dugme">Registruj se</button>
+    <button v-on:click="register" class="btn btn-lg btn-primary rounded dugme mt-3">Registruj se</button>
   </div>
 </template>
 

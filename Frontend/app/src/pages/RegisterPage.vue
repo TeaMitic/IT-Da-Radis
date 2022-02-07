@@ -28,7 +28,7 @@
           </div>
           <!-- account fields  -->
           <div class="row" v-if="userType=='user'">
-            <UserForm></UserForm>
+            <UserForm ></UserForm>
           </div>
           <div class="row" v-else>
             <CompanyForm></CompanyForm>
@@ -36,7 +36,7 @@
          
         </form>
         <div class="row justify-content-center">
-          <div class="col-xl-3">
+          <div class="col-xl-4">
             <router-link :to="{ name: 'Login' }">
               <button class="btn btn-lg btn-link rounded">Već imate nalog?</button>
             </router-link>
