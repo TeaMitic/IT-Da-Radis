@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'AboutCompany', params: {id:jobAd.companyID}}">
+        <router-link  :to="{name: 'AboutJob', params: {id:jobAd._id}}">
             <img class=" roundedImg " src="../assets/img/company-card-bg.jpg" alt="Comapny logo" />
         </router-link>
     </div>

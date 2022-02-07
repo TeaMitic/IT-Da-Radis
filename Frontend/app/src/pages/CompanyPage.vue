@@ -10,6 +10,10 @@
 
     <div class="container-xxl px-0">
       <div v-if="isDataLoaded">
+        <div class="px-5">
+          <hr/>
+          <h4 class="text-muted">Company informations</h4>
+        </div>
         <div class="card rounded company my-3 mx-5 p-5 ">
           <div class="d-flex flex-column company-info">
             <div class="d-flex flex-row company-info-basic">
@@ -39,8 +43,19 @@
               <a class="socialIcon" v-bind:href="company.socialMedia.twitterLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'twitter']"/></a>
               <a class="socialIcon" v-bind:href="company.socialMedia.facebookLink" target="_blank" rel="noopener"><font-awesome-icon :icon="['fab', 'facebook']"/></a>
           </div>
+          <div class="company-description">
+            <p>{{company.description}}</p>
+          </div>
         </div>
-        <div class="ads"></div>
+        
+        <div class="px-5">
+          <hr/>
+          <h4 class="text-muted">Jobs</h4>
+        </div>
+        <div class="ads mx-5">
+          <JobCard v-for="job in jobAds" :key="job._id" :jobAd="job"/>
+        </div>
+       
       </div>
       <div v-else>
         <AppSpinner />
@@ -59,11 +74,13 @@ import Header from "../components/Header.vue";
 import UserHeader from "../components/UserHeader.vue";
 import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue";
+import JobCard from '../components/JobCard.vue'
 
 export default {
   title: "IT Da Radis - Homepage",
   components: {
     UserHeader,
+    JobCard,
     AppSpinner,
     Header,
     Footer,
