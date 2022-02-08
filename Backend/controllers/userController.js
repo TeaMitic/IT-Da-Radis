@@ -12,7 +12,8 @@ const CreateUser = async (req, res)=>{
             password: req.body.password,
             name: req.body.name,
             surname:req.body.surname,
-            email:req.body.email
+            email:req.body.email,
+            contactTel: req.body.contactTel
         })
         let token = jwt.createToken(user._id)
         let sendInfo ={
@@ -109,6 +110,7 @@ const UpdateUser = async (req, res)=>{
             result.name= user.name
             result.surname= user.surname
             result.email= user.email
+            result.contactTel= user.contactTel
 
             result.save().then(()=>{
                 res.status(200).send('Uspesno izmenjeno')
