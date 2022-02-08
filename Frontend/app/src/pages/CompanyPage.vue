@@ -25,10 +25,22 @@
                 <div class="d-flex flex-column align-items-start">
                   <label>Contact:</label>
                   <div class="d-flex flex-column align-items-start px-3">
-                    <a class="link" v-bind:href="company.website" target="_blank" rel="noopener" >{{ company.website | trim-web }}</a >
-                    <p class="par my-0 small">{{ company.address }}</p>
-                    <p class="par my-0 small">{{ company.email }}</p>
-                    <p class="par my-0 small">{{ company.contactTel }}</p>
+                    <div  class="d-flex align-items-center my-1">
+                      <font-awesome-icon  :icon="['fas', 'globe']" v-if="company.website"/>
+                      <a class="link mx-2" v-bind:href="company.website" target="_blank" rel="noopener" >{{ company.website | trim-web }}</a >
+                    </div>
+                    <div class="d-flex align-items-center my-1">
+                      <font-awesome-icon  :icon="['fas', 'search-location']" v-if="company.address" />
+                      <p class="par my-0 mx-2 small">{{ company.address }}</p>
+                    </div>
+                    <div class="d-flex align-items-center my-1">
+                      <font-awesome-icon  :icon="['fas', 'envelope']" v-if="company.email" />
+                      <p class="par my-0  mx-2 small">{{ company.email }}</p>
+                    </div>
+                    <div class="d-flex align-items-center my-1">
+                      <font-awesome-icon  :icon="['fas', 'phone']" v-if="company.contactTel" />
+                      <p class="par mx-2 my-0 small">{{ company.contactTel }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,7 +157,7 @@ export default {
   cursor: pointer;
 }
 .par {
-  font-size: 14px;
+  font-size: medium;
   color: #2c3e50;
   font-weight: 550;
   letter-spacing: 0;
