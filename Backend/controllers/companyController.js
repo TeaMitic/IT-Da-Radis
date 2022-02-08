@@ -21,14 +21,15 @@ var upload = multer({ storage: storage }); //????
 
 const UploadImage = async(req, res) => {
     try{
+        const filepath= "D:\\Users\\Pictures\\stickers" 
         upload.single('image')
         await Company.findById(req.params.id).then(result=>{
-            console.log(req.body.filename)
+            console.log(req)
             const obj={
                 name: req.body.filename,
                 img:{
                     
-                    data: fs.readFileSync(path.join(__dirname + '/uploads/'+ req.body.image)),
+                    data: fs.readFileSync(path.join(filepath + '\\' + req.files.image.name)),
                     contentType: 'image/png'
                 }
             }
