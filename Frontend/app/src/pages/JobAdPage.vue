@@ -67,7 +67,9 @@
           <div class="apply-section">
             <button @click="toggleApplySection" class="btn btn-lg btn-primary rounded dugme">Apply here</button>
             <div class="apply-form" v-if="showApply">
-                <h1>not yet</h1>
+                <div class="user-form">
+                    
+                </div>
             </div>
           </div>
         </div>

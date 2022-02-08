@@ -118,6 +118,15 @@ export default new Vuex.Store({
             window.location.reload()
 
         },
+        async deleteUser({commit,dispatch},id) { 
+            try {
+                await Api().delete(`/api/user/deleteUser/${id}`)
+                commit('setNista')
+                dispatch('logout')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
         async getUserByID({commit}, id) {
             try {
                 let res = await Api().get('/api/user/getUser/'+id)
@@ -157,7 +166,7 @@ export default new Vuex.Store({
         },
         async getCompanyJobAds({commit},companyID) { 
             try {
-                
+                //promena api: getCompaniesActiveJobAds
                 let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
                 commit('setCompanyJobAds',res.data)
             } catch (err) {
