@@ -14,6 +14,7 @@ export default new Vuex.Store({
         currentCompanyJobAds: null,
         currentCompanyCategories: null,
         currentUser: null,
+        currentJobAd: null,
         currentToken: null,
         currentUsername: null,
         currentUserID: null,
@@ -117,6 +118,15 @@ export default new Vuex.Store({
             window.location.reload()
 
         },
+        async deleteUser({commit,dispatch},id) { 
+            try {
+                await Api().delete(`/api/user/deleteUser/${id}`)
+                commit('setNista')
+                dispatch('logout')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
         async getUserByID({commit}, id) {
             try {
                 let res = await Api().get('/api/user/getUser/'+id)
@@ -156,7 +166,7 @@ export default new Vuex.Store({
         },
         async getCompanyJobAds({commit},companyID) { 
             try {
-                
+                //promena api: getCompaniesActiveJobAds
                 let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
                 commit('setCompanyJobAds',res.data)
             } catch (err) {
@@ -199,6 +209,15 @@ export default new Vuex.Store({
                 console.log(error.data)
             }
         },
+        async getJobAdByID({commit}, id) { 
+            try {
+                let res = await Api().get(`/api/jobAd/getJobAdByID/${id}`)
+                commit('setJobAd',res.data)
+            } catch (error) {
+                console.log(error.data)
+            }
+            
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -220,6 +239,9 @@ export default new Vuex.Store({
     },
     mutations: { 
         setNista() { },
+        setJobAd(state,job) { 
+            state.currentJobAd = job
+        },
         setCompanyJobAds(state,jobAds) { 
             state.currentCompanyJobAds = jobAds
         },
@@ -253,6 +275,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentJobAd(state) { 
+            return state.currentJobAd
+        },
         getCurrentCompanyJobAds(state) { 
             return state.currentCompanyJobAds
         },

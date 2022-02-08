@@ -44,7 +44,8 @@
           </div>
         </div>
         <div v-if="editable">
-          <button @click="update" class="btn btn-lg btn-primary rounded dugme mt-3">Update profile</button>
+          <button @click="update" class="btn btn-lg btn-primary rounded dugme mt-3 mx-1">Update profile</button>
+          <button @click="deleteUser" class="btn btn-lg btn-danger rounded  mt-3 mx-1 dugme deleteBtn">Delete profile</button>
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center mt-3">
@@ -147,6 +148,9 @@ export default {
         }
       });
     },
+    async deleteUser() { 
+      await this.$store.dispatch('deleteUser',this.user._id)
+    },
     async update() {
       await this.$store.dispatch('updateUser', this.user)
     },
@@ -197,5 +201,14 @@ export default {
 }
 .dugme:hover {
   background-color: hsl(177, 100%, 20%);
+}
+.deleteBtn { 
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+}
+.deleteBtn:hover { 
+      background-color: #bb2d3b;
+      border-color: #b02a37;
 }
 </style>

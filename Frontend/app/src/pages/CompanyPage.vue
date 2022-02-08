@@ -47,7 +47,7 @@
             <hr/>
           <h4 class="text-muted">About company</h4>
         </div>
-          <div class="company-description">
+          <div class="company-description text-start">
             <p>{{company.description}}</p>
           </div>
         </div>
@@ -105,7 +105,6 @@ export default {
     this.userType = Vue.$cookies.get("userType");
     this.isDataLoaded = false;
     let id = this.$route.params.id;
-    console.log(id);
     await this.$store.dispatch("getCompanyByID", id);
     this.company = this.$store.getters["getCurrentCompany"];
     await this.$store.dispatch("getCompanyJobAds", id);
