@@ -107,7 +107,7 @@
                 <div class="col-12 d-flex flex-column align-items-start">
                     <label for="description" class=" form-check-label px-1">Description:</label>
                      <textarea disabled class="form-control rounded col-9 inputPolje my-1" name="description" v-model="user.description"
-              placeholder="Company description" maxlength="500" rows="5" autoofocus required ></textarea>                    
+              placeholder="Company description" maxlength="1000" rows="5" autoofocus required ></textarea>                    
                 </div>
                  <div class="col-12 d-flex  flex-column align-items-start mt-3">
                     <label for="categories" class=" form-check-label px-1">Categories:</label>
