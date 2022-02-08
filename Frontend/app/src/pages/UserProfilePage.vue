@@ -47,7 +47,7 @@
           <!-- contact tel -->
           <div class="col-6 d-flex flex-column align-items-start">
             <label for="email" class="form-check-label px-1">Contact telephone:</label>
-            <input disabled type="text" class="form-control rounded inputPolje my-1" v-model.trim="user.contactTel"  
+            <input disabled type="tel" class="form-control rounded inputPolje my-1" v-model.trim="user.contactTel"  
               name="contact_telephone" autofocus="" value="user.contactTel" />
           </div>
         </div>
