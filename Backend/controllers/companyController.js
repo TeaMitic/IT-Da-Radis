@@ -90,6 +90,27 @@ const GetAllCompanies = async (req, res) =>{
         res.status(500).send(err.message)
     }
 }
+
+const GetCompaniesByIndex = async (req, res) =>{
+    try{
+        let reslist = await Company.aggregate([
+            {
+                "$search":{
+                    "index":"trazenje",
+                    "text":{
+                        "query":req.body.trazeniTag,
+                        "path":["categories","name"]
+                    }
+                }
+            }
+        ])
+        res.status(200).send(reslist)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 const GetCompanyByID = async (req, res) =>{
     try{
         const id= req.params.id
@@ -207,7 +228,8 @@ module.exports = {
     GetCategories,
     DeleteCategory,
     UpdatePassword,
-    UpdateCategories
+    UpdateCategories,
+    GetCompaniesByIndex
 }
 
 //1. opcija
