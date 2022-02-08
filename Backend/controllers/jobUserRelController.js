@@ -8,6 +8,8 @@ const CreateJobApplication= async (req,res)=>{
             jobID: req.body.jobID,
             userID: req.body.userID,
             cv: req.body.cv,
+            name:req.body.name,
+            surname:req.body.surname,
             userEmail: req.body.userEmail,
             userTel: req.body.userTel
         })

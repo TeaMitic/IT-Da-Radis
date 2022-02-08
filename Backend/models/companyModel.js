@@ -56,13 +56,6 @@ const companySchema = new Schema({
     }
   });
 
-  companySchema.pre('save', async function(next){
-    const salt = 10
-    this.password = await bcrypt.hash(this.password, salt)
-    next()
-})
-
-
 
 const Company = mongoose.model('Company', companySchema);
 

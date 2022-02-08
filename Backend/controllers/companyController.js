@@ -4,10 +4,10 @@ const jwt = require('../token')
 const bcrypt = require('bcrypt')
 
 const CreateCompany = async (req, res)=>{
-    try{
+    bcrypt.hash(req.body.password, 10).then(async hash => {
         const company = await Company.create({
             username: req.body.username,
-            password: req.body.password,
+            password: hash,
             name: req.body.name,
             description: req.body.desc,
             address:req.body.address,
@@ -30,9 +30,8 @@ const CreateCompany = async (req, res)=>{
         }
         res.status(200).send(sendInfo)
         console.log(sendInfo)
-    }catch(err){
-        res.status(500).send(err.message)
-    }
+
+    }).catch(err => res.status(500).send(err.message))
 }
 const UpdatePassword = async (req,res) => { 
     try {

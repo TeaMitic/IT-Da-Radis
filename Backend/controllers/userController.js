@@ -5,7 +5,8 @@ const jwt = require('../token')
 const bcrypt = require('bcrypt')
 
 const CreateUser = async (req, res)=>{
-    try{
+
+    bcrypt.hash(req.body.password, 10).then(async hash => {
         const user = await User.create({
             username: req.body.username,
             password: req.body.password,
@@ -22,9 +23,9 @@ const CreateUser = async (req, res)=>{
         }
         res.status(200).send(sendInfo)
         console.log(sendInfo)
-    }catch(err){
-        res.status(500).send(err.message)
-    }
+        
+
+    }).catch(err => res.status(500).send(err.message))
 }
 
 const LoginUser = async (req, res) =>{
