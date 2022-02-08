@@ -65,12 +65,28 @@ const GetUserByID= async (req, res)=>{
         res.status(500).send(err.message)
     }
 }
+
+const UpdatePassword = async (req,res) => { 
+    try {
+        let user = await User.findById(req.params.id)
+        if (user) { 
+            let newPassword = req.body.newPassword
+            user.password = newPassword
+            await user.save()
+            res.status(200).send("Uspesno promenjena sifra!")
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+        
+    }
+}
+
 const UpdateUser = async (req, res)=>{
     try{
         await User.findById(req.params.id).then(result=>{
             const user = req.body
             result.username= user.username
-            result.password= user.password
+            // result.password= user.password
             result.name= user.name
             result.surname= user.surname
             result.email= user.email
@@ -90,5 +106,6 @@ module.exports = {
     CreateUser,
     LoginUser,
     GetUserByID,
-    UpdateUser
+    UpdateUser,
+    UpdatePassword
 }

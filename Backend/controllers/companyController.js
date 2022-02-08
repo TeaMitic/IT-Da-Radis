@@ -120,7 +120,7 @@ const UpdateCompany = async (req, res)=>{
         await Company.findById(req.params.id).then(result=>{
             const company = req.body
             result.username = company.username
-            result.password= company.password
+            // result.password= company.password
             result.name= company.name
             result.description=company.description
             result.address= company.address
