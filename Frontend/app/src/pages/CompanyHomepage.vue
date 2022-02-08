@@ -5,15 +5,11 @@
     
     <div class="container-xxl px-0 ">
       <!-- company cards -->
-      <div v-if="isDataLoaded" class="container">      
+      <div v-if="!isDataLoaded" class="container">      
         <div class="row gx-4 gx-lg-5 justify-content-center">
-          <h3>Neke od firmi u Srbiji</h3>
-          <div class="row justify-content-around">
-            <CompanyCard v-for="company in allCompanies" :key="company._id" :company="company"/>
-          </div>
-          <router-link :to="{name: 'AllCompanies'}">
-            <button class="btn btn-lg btn-primary rounded dugme  ">Sve kompanije</button>
-          </router-link>
+          <h1>not implemented</h1>
+          
+          
         </div>
       </div>
       <div v-else>

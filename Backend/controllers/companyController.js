@@ -34,6 +34,20 @@ const CreateCompany = async (req, res)=>{
         res.status(500).send(err.message)
     }
 }
+const UpdatePassword = async (req,res) => { 
+    try {
+        let company = await Company.findById(req.params.id)
+        if (company) { 
+            let newPassword = req.body.newPassword
+            company.password = newPassword
+            await company.save()
+            res.status(200).send("Uspesno promenjena sifra!")
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+        
+    }
+}
 
 const LoginCompany = async (req, res) =>{
     try{
@@ -178,7 +192,8 @@ module.exports = {
     UpdateCompany,
     AddCategory,
     GetCategories,
-    DeleteCategory
+    DeleteCategory,
+    UpdatePassword,
 }
 
 //1. opcija
