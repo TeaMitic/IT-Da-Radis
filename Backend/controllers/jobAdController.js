@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const {JobAd} = require('../models/jobAdModel')
+const {JobUserRel} = require('../models/jobUserRelModel')
 
 const CreateJobAd = async (req, res)=>{
     try{
@@ -23,15 +24,20 @@ const CreateJobAd = async (req, res)=>{
 }
 
 const DeleteJobAd = async (req, res)=>{
-    const id = req.params.jobAdID
-    JobAd.deleteOne({ _id: id })
-    .then(()=>{
-        res.status(200).send("proba: sve okej")
-    })
-    .catch(err=>{
+    try{
+        const id = req.params.jobAdID
+        const count = await JobUserRel.deleteMany({jobID:id})
+        JobAd.deleteOne({ _id: id })
+        .then(()=>{
+            res.status(200).send("proba: sve okej")
+        }).catch((err)=>{
+            res.status(404).send('Oglas nije pronadjen')
+        })
+    }
+    catch(err){
         console.log(err.message)
         res.status(500).send(err.message)
-    })
+    }
 }
 
 const GetAllJobAds = async (req, res)=>{
