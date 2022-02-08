@@ -162,6 +162,20 @@ const AddCategory = async (req, res) => {
         res.status(500).send(err.message)
     }
 }
+const UpdateCategories = async(req, res)=>{
+    try{
+        await Company.findById(req.params.id).then(result=>{
+            result.categories= req.body.categories
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 //delete api
 const DeleteCategory = async (req, res)=>{
@@ -194,6 +208,7 @@ module.exports = {
     GetCategories,
     DeleteCategory,
     UpdatePassword,
+    UpdateCategories
 }
 
 //1. opcija

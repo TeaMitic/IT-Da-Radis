@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const {User} = require('../models/userModel');
+const {JobUserRel} = require('../models/jobUserRelModel')
 const jwt = require('../token')
 const bcrypt = require('bcrypt')
 
@@ -81,8 +82,25 @@ const UpdatePassword = async (req,res) => {
     }
 }
 
+const DeleteUser = async (req, res)=>{
+    try{
+        const userID = req.params.id
+        const count = await JobUserRel.deleteMany({userID:userID})
+        console.log(count)
+        await User.deleteOne({_id:userID}).then(()=>{
+            res.status(200).send('Uspesno izbrisano')
+        }).catch((err)=>{
+            res.status(404).send('Korisnik nije pronadjen')
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 const UpdateUser = async (req, res)=>{
     try{
+
         await User.findById(req.params.id).then(result=>{
             const user = req.body
             result.username= user.username
@@ -107,5 +125,6 @@ module.exports = {
     LoginUser,
     GetUserByID,
     UpdateUser,
-    UpdatePassword
+    UpdatePassword,
+    DeleteUser
 }
