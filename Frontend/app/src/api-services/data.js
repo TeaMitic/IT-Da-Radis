@@ -164,6 +164,26 @@ export default new Vuex.Store({
             }
             
         },
+        async changePassword({commit},userObject) { 
+            let id = userObject.id
+            let jsonPass = {
+                newPassword: userObject.newPassword
+            }
+            try {
+                let res = await Api().put(`api/user/changePassword/${id}`,jsonPass)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
+            }
+            
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -184,6 +204,7 @@ export default new Vuex.Store({
 
     },
     mutations: { 
+        setNista() { },
         setCompanyJobAds(state,jobAds) { 
             state.currentCompanyJobAds = jobAds
         },

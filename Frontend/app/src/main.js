@@ -8,14 +8,23 @@ import Toasted from 'vue-toasted'
 import VueCookies from 'vue-cookies'
 import titleMixin from './mixins/titleMixins'
 import moment from 'moment'
-import { faSearch, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faFacebook, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import Validation from '../src/helpers/validation'  
 
-
+const pluginValidation = { 
+  install() {
+    Vue.helpers = Validation,
+    Vue.prototype.$helpers = Validation
+  }
+}
+Vue.use(pluginValidation)
 Vue.mixin(titleMixin)
+
 library.add(faSearch)
+library.add(faCheck)
 library.add(faEdit)
 library.add(faInstagram)
 library.add(faFacebook)
