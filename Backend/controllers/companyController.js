@@ -2,9 +2,52 @@ const mongoose = require('mongoose')
 const {Company} = require('../models/companyModel');
 const jwt = require('../token')
 const bcrypt = require('bcrypt')
+const multer = require('multer')  
+var fs = require('fs');
+var path = require('path');
+// require('dotenv/config');
+
+
+const storage= multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb)=>{
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
+
+var upload = multer({ storage: storage }); //????
+
+const UploadImage = async(req, res) => {
+    try{
+        upload.single('image')
+        await Company.findById(req.params.id).then(result=>{
+            console.log(req.body.filename)
+            const obj={
+                name: req.body.filename,
+                img:{
+                    
+                    data: fs.readFileSync(path.join(__dirname + '/uploads/'+ req.body.image)),
+                    contentType: 'image/png'
+                }
+            }
+            result.image = obj
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 const CreateCompany = async (req, res)=>{
     try{
+
         const company = await Company.create({
             username: req.body.username,
             password: req.body.password,
@@ -208,7 +251,8 @@ module.exports = {
     GetCategories,
     DeleteCategory,
     UpdatePassword,
-    UpdateCategories
+    UpdateCategories,
+    UploadImage
 }
 
 //1. opcija

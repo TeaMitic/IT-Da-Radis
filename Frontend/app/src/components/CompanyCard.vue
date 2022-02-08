@@ -1,7 +1,7 @@
 <template>
   <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow  " v-bind:id="company._id">
     <router-link :to="{name: 'AboutCompany', params: {id: company._id}}">
-      <img class="card-img-top roundedImg" src="../assets/img/company-card-bg.jpg" alt="Card image cap" />
+      <img class="card-img-top roundedImg" v-bind:src="company.img.data.toString('base64')" alt="Card image cap" />
     </router-link>
     <div class="card-body d-flex flex-column align-items-start">
       <router-link :to="{ name: 'AboutCompany', params: {id: company._id}}" ><h4 class="card-title ">{{company.name}}</h4></router-link >
