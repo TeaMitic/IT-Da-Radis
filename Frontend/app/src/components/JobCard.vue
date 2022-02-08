@@ -31,17 +31,15 @@ export default {
   },
   data() {
     return {
-        isDataLoaded: false
+        isDataLoaded: false,
+        company: null
+
     }
   },
-  computed: { 
-    company() { 
-        return this.$store.getters['getCurrentCompany']
-        
-    }
-  },
+  
   async created() {
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
+    this.company = this.$store.getters['getCurrentCompany']
     this.isDataLoaded = true
   },
  
