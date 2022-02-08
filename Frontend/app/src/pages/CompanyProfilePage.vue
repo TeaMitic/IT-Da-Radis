@@ -10,7 +10,7 @@
     <div v-else class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large">
         <div class="d-flex justify-content-between ">
             <h4 class="col-3 pt-3">Podaci o kompaniji:</h4>
-            <button @click="edit" class="btn btn-lg btn-primary rounded dugme editBtn"><font-awesome-icon  :icon="['fas', 'edit']" /></button>
+            <button @click="edit" class="btn btn-lg btn-primary rounded dugme editBtn  "><font-awesome-icon  :icon="['fas', 'edit']" /></button>
         </div>
         <div class="row px-4">
             <div class="row ">
@@ -109,15 +109,17 @@
                      <textarea disabled class="form-control rounded col-9 inputPolje my-1" name="description" v-model="user.description"
               placeholder="Company description" maxlength="500" rows="5" autoofocus required ></textarea>                    
                 </div>
-                 <div class="col-12 d-flex flex-column align-items-start">
-                <label for="categories" class=" form-check-label px-1">Categories:</label>
-                    <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.categories"
-                        name="categories"  autofocus=""  value=categories />    
+                 <div class="col-12 d-flex  flex-column align-items-start mt-3">
+                    <label for="categories" class=" form-check-label px-1">Categories:</label>
+                    <div class="categoriesInputs  d-flex flex-wrap mt-3 `">
+                        <Category v-for="cat in categories" :key="cat" :category="cat" :allCategories="categories" class="inputPolje" />
+                    </div>
+                   
                  </div>     
             </div>
         </div>
        
-        <div v-if="editable" class="col-12 d-flex flex-column align-items-start">            
+        <div v-if="editable" class="col-12 d-flex flex-column align-items-end ">            
             <button @click="update" class="btn btn-lg btn-primary rounded dugme">Update profile</button>
         </div>
     
@@ -138,11 +140,13 @@
 import CompanyHeader from '../components/CompanyHeader.vue'
 import Footer from '../components/Footer.vue'
 import AppSpinner from '../components/AppSpinner.vue'
+import Category from '../components/CompanyCategory.vue'
 
 export default {
   title: 'IT Da Radis - Homepage',
   components: {
     CompanyHeader,
+    Category,
     AppSpinner,
     Footer
   },
@@ -153,8 +157,12 @@ export default {
       password: null,
       repeatPassword: null,
       editable: false,
-      categories: null,
     };
+  },
+  computed: {
+      categories() { 
+          return this.$store.getters['getCurrentCompanyCategories']
+      }
   },
   async created() {
     this.isDataLoaded = false
@@ -162,14 +170,12 @@ export default {
     await this.$store.dispatch('getCompanyByID',id)
     this.user = this.$store.getters['getCurrentCompany']
     this.isDataLoaded = true
-    this.categories = this.user.categories.toString()
     console.log(this.user);
-    console.log(this.categories)
   },
   methods: {
       edit() { 
         this.editable = !this.editable
-        let inputs = document.querySelectorAll('input')
+        let inputs = document.querySelectorAll('.inputPolje')
         let ta = document.querySelector("textarea")
         console.log(ta);
         if (ta.disabled) {
@@ -188,6 +194,11 @@ export default {
 
             }
         });
+      },
+      enableCategory(id) { 
+          console.log("ID:",id)
+          let inputPolje = document.getElementById(id)
+          inputPolje.disabled = !inputPolje.disabled
       },
       async update() { 
 

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     state: { 
         currentCompany: null,
         currentCompanyJobAds: null,
+        currentCompanyCategories: null,
         currentUser: null,
         currentToken: null,
         currentUsername: null,
@@ -129,6 +130,7 @@ export default new Vuex.Store({
             try {
                 let res = await Api().get('/api/company/getCompany/'+id)
                 commit('setCompany', res.data)
+                commit('setCurrentCompanyCategories',res.data.categories)
                 
             } catch (err) {
                 console.log(err.data);
@@ -173,6 +175,9 @@ export default new Vuex.Store({
         },
         postaviUserID({commit},id) { 
             commit('setID',id)
+        },
+        postaviCurrentCompanyCategories({commit},categories) { 
+            commit('setCurrentCompanyCategories',categories)
         }
         
         
@@ -205,6 +210,9 @@ export default new Vuex.Store({
         },
         setUserType(state, type) { 
             state.currentUserType = type
+        },
+        setCurrentCompanyCategories(state,categories) { 
+            state.currentCompanyCategories = categories
         }
 
     },
@@ -223,6 +231,9 @@ export default new Vuex.Store({
         },
         getCurrentUser(state) {
           return state.currentUser   
+        },
+        getCurrentCompanyCategories(state) { 
+            return state.currentCompanyCategories
         }
     }
 })
