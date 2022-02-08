@@ -2,7 +2,7 @@
   <div v-if="isDataLoaded" class="card col-lg-3   my-3 px-0 rounded shadow   kartica " v-bind:id="jobAd._id">
     
     <div class="card-body d-flex flex-column align-items-start ">  
-      <router-link :to="{ name: 'AboutJob', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
+      <router-link :to="{ name: 'AboutJobAd', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
       <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
       <br>
       <label>{{jobAd.city}}</label>

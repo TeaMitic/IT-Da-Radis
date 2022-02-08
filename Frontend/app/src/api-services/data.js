@@ -14,6 +14,7 @@ export default new Vuex.Store({
         currentCompanyJobAds: null,
         currentCompanyCategories: null,
         currentUser: null,
+        currentJobAd: null,
         currentToken: null,
         currentUsername: null,
         currentUserID: null,
@@ -199,6 +200,15 @@ export default new Vuex.Store({
                 console.log(error.data)
             }
         },
+        async getJobAdByID({commit}, id) { 
+            try {
+                let res = await Api().get(`/api/jobAd/getJobAdByID/${id}`)
+                commit('setJobAd',res.data)
+            } catch (error) {
+                console.log(error.data)
+            }
+            
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -220,6 +230,9 @@ export default new Vuex.Store({
     },
     mutations: { 
         setNista() { },
+        setJobAd(state,job) { 
+            state.currentJobAd = job
+        },
         setCompanyJobAds(state,jobAds) { 
             state.currentCompanyJobAds = jobAds
         },
@@ -253,6 +266,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentJobAd(state) { 
+            return state.currentJobAd
+        },
         getCurrentCompanyJobAds(state) { 
             return state.currentCompanyJobAds
         },
