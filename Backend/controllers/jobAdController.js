@@ -8,6 +8,7 @@ const CreateJobAd = async (req, res)=>{
             name: req.body.name,
             description:req.body.desc,
             city: req.body.city,
+            salary:req.body.salary,
             tags: req.body.tags,
             expireAt:new Date(req.body.expireAt)
         }).then(jobAd=>{
@@ -35,9 +36,9 @@ const DeleteJobAd = async (req, res)=>{
 
 const GetAllJobAds = async (req, res)=>{
     try{
-        let allJobAds = await JobAd.find()
+        let date = new Date(Date.now())
+        let allJobAds = await JobAd.find({expireAt:{$gte:date}})
         res.status(200).send(allJobAds)
-
     }
     catch(err){
         res.status(500).send(err.message)
@@ -48,6 +49,19 @@ const GetCompaniesJobAds = async (req, res)=>{
     try{
         const companyID = req.params.companyID
         let companiesJobAds = await JobAd.find({ companyID })
+        res.status(200).send(companiesJobAds)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
+const GetCompaniesActiveJobAds = async (req, res)=>{
+    try{
+        const compID = req.params.companyID
+        let date = new Date(Date.now())
+        console.log(date)
+        let companiesJobAds = await JobAd.find({companyID: compID, expireAt:{$gte:date}})
         res.status(200).send(companiesJobAds)
     }
     catch(err){
@@ -73,6 +87,7 @@ const UpdateJobAd = async (req, res)=>{
         jobAd.name = req.body.name
         jobAd.description = req.body.desc
         jobAd.city = req.body.city
+        jobAd.salary = req.body.salary
         jobAd.expireAt = new Date(req.body.expireAt)
         jobAd.save().then((result)=>{
             res.status(200).send(result)
@@ -131,5 +146,6 @@ module.exports = {
     GetJobAdByID,
     UpdateJobAd,
     AddTagToJobAd,
-    DeleteTagToJobAd
+    DeleteTagToJobAd,
+    GetCompaniesActiveJobAds
 }

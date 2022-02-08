@@ -18,6 +18,9 @@ const jobAdSchema = new Schema({
         type:String,
         required:true
     },
+    salary:{
+        type:String
+    },
     expireAt:{
         type:Date,
         required:true
