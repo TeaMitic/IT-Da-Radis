@@ -184,6 +184,21 @@ export default new Vuex.Store({
             }
             
         },
+        async updateUser({commit},user) { 
+            try {
+                let res = await Api().put(`api/user/updateUser/${user._id}`,user)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },

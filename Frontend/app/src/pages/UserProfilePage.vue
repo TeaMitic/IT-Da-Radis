@@ -147,7 +147,9 @@ export default {
         }
       });
     },
-    async update() {},
+    async update() {
+      await this.$store.dispatch('updateUser', this.user)
+    },
     async changePassword() {
       let responseMessage = this.$helpers.validatePassword(this.password,this.repeatPassword)
       if ( responseMessage !== 'OK') { 
