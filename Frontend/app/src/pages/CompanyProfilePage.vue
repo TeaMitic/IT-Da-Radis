@@ -252,7 +252,8 @@ export default {
           inputPolje.disabled = !inputPolje.disabled
       },
       async update() { 
-
+            await this.$store.dispatch('updateCompany', this.user)
+            this.edit()
       },
       async changePassword(){
             let responseMessage = this.$helpers.validatePassword(this.password,this.repeatPassword)
