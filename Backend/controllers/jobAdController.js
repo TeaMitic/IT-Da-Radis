@@ -51,6 +51,31 @@ const GetAllJobAds = async (req, res)=>{
     }
 }
 
+const GetFilteredJobAds = async (req, res)=>{
+    try{
+        let date = new Date(Date.now())
+        let reslist = await JobAd.aggregate([
+            {
+                "$search":{
+                    "index":"trazenjeOglasa",
+                    "text":{
+                        "query":req.body.trazeniTag,
+                        "path":["tags","name","city"]
+                    }
+                }
+            }
+        ])
+        // console.log(reslist)
+        reslist = reslist.filter((el)=>{
+            return el.expireAt.getTime() > date.getTime()
+        })
+        res.status(200).send(reslist)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 const GetCompaniesJobAds = async (req, res)=>{
     try{
         const companyID = req.params.companyID
@@ -168,5 +193,6 @@ module.exports = {
     AddTagToJobAd,
     DeleteTagToJobAd,
     GetCompaniesActiveJobAds,
-    UpdateTagsToJobAd
+    UpdateTagsToJobAd,
+    GetFilteredJobAds
 }
