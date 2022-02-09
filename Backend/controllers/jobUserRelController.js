@@ -54,9 +54,21 @@ const GetUsersJobAds = async (req, res)=>{
         res.status(500).send(err.message)
     }
 }
+const GetCandidatesForJobAd= async (req,res)=>{
+    try{
+        let candidates = await JobUserRel.find({jobID: req.params.id})
+
+        res.status(200).send(candidates)    
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 module.exports={
     CreateJobApplication,
     DeleteJobApplication,
-    GetUsersJobAds
+    GetUsersJobAds,
+    GetCandidatesForJobAd
 }

@@ -12,7 +12,9 @@ const { CreateJobAd,
         DeleteTagToJobAd,
         GetCompaniesActiveJobAds,
         GetFilteredJobAds,
-        GetAllTags} = require('../controllers/jobAdController')
+        GetAllTags,
+        UpdateTagsToJobAd,
+        } = require('../controllers/jobAdController')
 
 router.post('/createJobAd/:companyID', CreateJobAd)
 router.delete('/deleteJobAd/:jobAdID', DeleteJobAd)
@@ -23,6 +25,7 @@ router.put('/updateJobAd/:jobAdID', UpdateJobAd)
 router.put('/addTag/:jobAdID', AddTagToJobAd)
 router.put('/deleteTag/:jobAdID', DeleteTagToJobAd)
 router.get('/getCompaniesActiveJobAds/:companyID', GetCompaniesActiveJobAds)
+router.put('/updateTags/:id', UpdateTagsToJobAd)
 router.get('/getFilteredJobAds', GetFilteredJobAds)
 router.get('/getAllTags', GetAllTags)
 
