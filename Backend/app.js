@@ -19,7 +19,7 @@ app.use(cors())
 app.use(fileUpload({
   createParentPath:true
 }))
-app.use(express.static("D:\\Users\\Pictures\\stickers"))
+// app.use(express.static("D:\\Users\\Pictures\\stickers"))
 
 
 app.use('/api/user', user);
