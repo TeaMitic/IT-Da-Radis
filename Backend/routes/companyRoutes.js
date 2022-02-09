@@ -24,7 +24,7 @@ router.put('/addCategory/:id', AddCategory)
 router.put('/deleteCategory/:id', DeleteCategory)
 router.put('/changePassword/:id', UpdatePassword)
 router.put('/updateCategories/:id', UpdateCategories)
-router.get('/getCompaniesByIndex', GetCompaniesByIndex)
+router.put('/getCompaniesByIndex', GetCompaniesByIndex)
 router.get('/getAllCategories', GetAllCategories)
 
 

@@ -21,6 +21,7 @@ export default new Vuex.Store({
         currentUserType: null,
         allCompanies: [],
         allJobAds: [],
+        allCategories: [],
     },
     actions: { 
         async login({commit}, loginObject) { 
@@ -57,7 +58,7 @@ export default new Vuex.Store({
             }
             catch(err) { 
                 if (err.response.status == 500) { 
-                    console.log(err.data)
+                    console.log(err)
                 }
                 else { 
                     Vue.toasted.show(err.response.data, { 
@@ -101,7 +102,7 @@ export default new Vuex.Store({
             }
             catch(err) { 
                 if (err.response.status == 500) { 
-                    console.log(err.data)
+                    console.log(err)
                 }
             }
         },
@@ -124,7 +125,7 @@ export default new Vuex.Store({
                 commit('setNista')
                 dispatch('logout')
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
             }
         },
         async getUserByID({commit}, id) {
@@ -133,7 +134,7 @@ export default new Vuex.Store({
                 commit('setUser', res.data)
                 
             } catch (err) {
-                console.log(err.data);
+                console.log(err);
             }
         },
         async getCompanyByID({commit}, id) {
@@ -143,7 +144,7 @@ export default new Vuex.Store({
                 commit('setCurrentCompanyCategories',res.data.categories)
                 
             } catch (err) {
-                console.log(err.data);
+                console.log(err);
             }
         },
         async getAllCompanies({commit}, limit) { 
@@ -152,7 +153,7 @@ export default new Vuex.Store({
                 commit('setAllCompanies',res.data)
             }
             catch(err) { 
-                console.log(err.data)
+                console.log(err)
             }
         },
         async getAllJobAds({commit}) { 
@@ -161,7 +162,7 @@ export default new Vuex.Store({
                 commit('setAllJobAds',res.data)
             }
             catch(err) { 
-                console.log(err.data)
+                console.log(err)
             }
         },
         async getCompanyJobAds({commit},companyID) { 
@@ -170,7 +171,7 @@ export default new Vuex.Store({
                 let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
                 commit('setCompanyJobAds',res.data)
             } catch (err) {
-                console.log(err.data)
+                console.log(err)
             }
             
         },
@@ -190,7 +191,7 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
             }
             
         },
@@ -206,7 +207,25 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
+            }
+        },
+        async getAllCategories({commit}) { 
+            try {
+                let res = await Api().get('/api/company/getAllCategories')
+                commit('setAllCategories', res.data)
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async getCompaniesByIndex({commit}, index) { 
+            
+            try {
+                let res = await Api().put('/api/company/getCompaniesByIndex', index)
+                commit('setAllCompanies',res.data)
+            } catch (error) {
+                console.log(error);
+                
             }
         },
         async getJobAdByID({commit}, id) { 
@@ -214,7 +233,7 @@ export default new Vuex.Store({
                 let res = await Api().get(`/api/jobAd/getJobAdByID/${id}`)
                 commit('setJobAd',res.data)
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
             }
             
         },
@@ -241,6 +260,9 @@ export default new Vuex.Store({
         setNista() { },
         setJobAd(state,job) { 
             state.currentJobAd = job
+        },
+        setAllCategories(state, allCategories){
+            state.allCategories = allCategories
         },
         setCompanyJobAds(state,jobAds) { 
             state.currentCompanyJobAds = jobAds
@@ -277,6 +299,9 @@ export default new Vuex.Store({
     getters: { 
         getCurrentJobAd(state) { 
             return state.currentJobAd
+        },
+        getAllCategories(state) { 
+            return state.allCategories
         },
         getCurrentCompanyJobAds(state) { 
             return state.currentCompanyJobAds

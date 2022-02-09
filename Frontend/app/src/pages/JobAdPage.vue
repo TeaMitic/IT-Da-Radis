@@ -108,12 +108,12 @@
                     <input type="tel" class="form-control rounded inputPolje my-1" v-model.trim="user.contactTel" name="contact_tel"/>
                   </div>
                   <!-- cv -->
-                  <!-- <div class="col-6 d-flex flex-column align-items-start">
-                          <label for="contact_tel" class="form-check-label px-1">CV:</label>
-                          <input  type="file" class="form-control rounded inputPolje my-1"  name="cv" @change="processFile($event)"/> 
-                        </div> -->
+                  <div class="col-6 d-flex flex-column align-items-start">
+                    <label for="contact_tel" class="form-check-label px-1">CV:</label>
+                    <input  type="file" class="form-control rounded inputPolje my-1"  name="cv" @change="processFile($event)" accept=".pdf, .docx, .doc"/> 
+                  </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                   <label class="d-flex" name="cv">CV:</label>
                   <textarea class="rounded p-3" name="cv" maxlength="150" cols="30" rows="10" > 
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, porro hic blanditiis
@@ -128,7 +128,7 @@
                     adipisci deserunt distinctio nemo dolorum maiores vel neque, magnam quam commodi a laudantium officiis. 
                     Ut molestias voluptatem molestiae doloremque odit ex iste quam ratione tempore! Ab, expedita.
                   </textarea>
-                </div>
+                </div> -->
               </div>
               <button @click="send" class="btn btn-lg btn-primary rounded dugme mt-3">Send</button>
             </div>

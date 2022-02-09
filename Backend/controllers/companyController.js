@@ -93,6 +93,7 @@ const GetAllCompanies = async (req, res) =>{
 
 const GetCompaniesByIndex = async (req, res) =>{
     try{
+        console.log(req.body);
         let reslist = await Company.aggregate([
             {
                 "$search":{
@@ -108,6 +109,7 @@ const GetCompaniesByIndex = async (req, res) =>{
     }
     catch(err){
         res.status(500).send(err.message)
+        console.log(err)
     }
 }
 
