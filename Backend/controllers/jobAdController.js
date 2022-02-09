@@ -51,6 +51,24 @@ const GetAllJobAds = async (req, res)=>{
     }
 }
 
+const GetAllTags = async (req, res)=>{
+    try{
+        let resList = []
+        let newEl = {}
+        let listOfTags = await JobAd.distinct("tags")
+        for await (el of listOfTags){
+            newEl ={}
+            newEl.nameOfTag = el
+            newEl.numOfAds = await JobAd.count({tags: { $elemMatch:{ $eq: el} }})
+            resList.push(newEl)
+        }
+        res.status(200).send(resList)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 const GetFilteredJobAds = async (req, res)=>{
     try{
         let date = new Date(Date.now())
@@ -169,6 +187,9 @@ const DeleteTagToJobAd = async (req, res)=>{
     }
 }
 
+
+
+
 module.exports = {
     CreateJobAd,
     DeleteJobAd,
@@ -179,5 +200,6 @@ module.exports = {
     AddTagToJobAd,
     DeleteTagToJobAd,
     GetCompaniesActiveJobAds,
-    GetFilteredJobAds
+    GetFilteredJobAds,
+    GetAllTags
 }

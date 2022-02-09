@@ -12,7 +12,8 @@ const{
     DeleteCategory,
     UpdatePassword,
     UpdateCategories,
-    GetCompaniesByIndex
+    GetCompaniesByIndex,
+    GetAllCategories
 } = require('../controllers/companyController');
 
 router.get('/getAllCompanies/:limit', GetAllCompanies)
@@ -24,6 +25,7 @@ router.put('/deleteCategory/:id', DeleteCategory)
 router.put('/changePassword/:id', UpdatePassword)
 router.put('/updateCategories/:id', UpdateCategories)
 router.get('/getCompaniesByIndex', GetCompaniesByIndex)
+router.get('/getAllCategories', GetAllCategories)
 
 
 module.exports = router

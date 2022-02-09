@@ -111,6 +111,24 @@ const GetCompaniesByIndex = async (req, res) =>{
     }
 }
 
+const GetAllCategories = async (req, res)=>{
+    try{
+        let resList = []
+        let newEl = {}
+        let listOfCat = await Company.distinct("categories")
+        for await (el of listOfCat){
+            newEl ={}
+            newEl.nameOfCat = el
+            newEl.numOfComp = await Company.count({categories: { $elemMatch:{ $eq: el} }})
+            resList.push(newEl)
+        }
+        res.status(200).send(resList)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
+
 const GetCompanyByID = async (req, res) =>{
     try{
         const id= req.params.id
@@ -229,7 +247,8 @@ module.exports = {
     DeleteCategory,
     UpdatePassword,
     UpdateCategories,
-    GetCompaniesByIndex
+    GetCompaniesByIndex,
+    GetAllCategories
 }
 
 //1. opcija
