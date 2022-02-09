@@ -218,6 +218,44 @@ export default new Vuex.Store({
             }
             
         },
+        async upadteCategoriesCompany({commit},companyObject){
+            let id = companyObject.id
+            let jsonPass = {
+                categories: companyObject.categories
+            }
+            try {
+                let res = await Api().put(`/api/company/updateCategories/${id}`,jsonPass)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
+        async changePasswordCompany({commit},companyObject){
+            let id = companyObject.id
+            let jsonPass = {
+                newPassword: companyObject.newPassword
+            }
+            try {
+                let res = await Api().put(`/api/company/changePassword/${id}`,jsonPass)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
