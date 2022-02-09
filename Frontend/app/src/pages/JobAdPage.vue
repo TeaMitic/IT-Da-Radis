@@ -130,7 +130,7 @@
                   </textarea>
                 </div>
               </div>
-              <button class="btn btn-lg btn-primary rounded dugme mt-3">Send</button>
+              <button @click="send" class="btn btn-lg btn-primary rounded dugme mt-3">Send</button>
             </div>
             <div v-else>
               <AppSpinner />
