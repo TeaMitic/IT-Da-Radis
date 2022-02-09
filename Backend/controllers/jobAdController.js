@@ -50,18 +50,40 @@ const GetAllJobAds = async (req, res)=>{
         res.status(500).send(err.message)
     }
 }
+//1. NACIN - koristeci distinct i count
+
+// const GetAllTags = async (req, res)=>{
+//     try{
+//         let resList = []
+//         let newEl = {}
+//         let listOfTags = await JobAd.distinct("tags")
+//         for await (el of listOfTags){
+//             newEl ={}
+//             newEl.nameOfTag = el
+//             newEl.numOfAds = await JobAd.count({tags: { $elemMatch:{ $eq: el} }})
+//             resList.push(newEl)
+//         }
+//         res.status(200).send(resList)
+//     }
+//     catch(err){
+//         res.status(500).send(err.message)
+//     }
+// }
+
+
+//2. nacin - koristeci aggregate (nemam pojma kako ovo radi, provalicu ga u petak)
+//https://stackoverflow.com/questions/21509045/mongodb-group-by-array-inner-elements
 
 const GetAllTags = async (req, res)=>{
     try{
-        let resList = []
-        let newEl = {}
-        let listOfTags = await JobAd.distinct("tags")
-        for await (el of listOfTags){
-            newEl ={}
-            newEl.nameOfTag = el
-            newEl.numOfAds = await JobAd.count({tags: { $elemMatch:{ $eq: el} }})
-            resList.push(newEl)
-        }
+        let resList = await JobAd.aggregate([
+            {$project: { _id: 0, tags: 1 } },
+            {$unwind: "$tags" },
+            {$group: { _id: "$tags", num: { $sum: 1 } }},
+            {$project: { _id: 0,tag: "$_id", num: 1 } },
+            {$sort: { num: -1 } }
+          ])
+
         res.status(200).send(resList)
     }
     catch(err){
@@ -69,6 +91,36 @@ const GetAllTags = async (req, res)=>{
     }
 }
 
+
+//1. NACIN
+
+// const GetFilteredJobAds = async (req, res)=>{
+//     try{
+//         let date = new Date(Date.now())
+//         let reslist = await JobAd.aggregate([
+//             {
+//                 "$search":{
+//                     "index":"trazenjeOglasa",
+//                     "text":{
+//                         "query":req.body.trazeniTag,
+//                         "path":["tags","name","city"]
+//                     }
+//                 }
+//             }
+//         ])
+//         // console.log(reslist)
+//         reslist = reslist.filter((el)=>{
+//             return el.expireAt.getTime() > date.getTime()
+//         })
+//         res.status(200).send(reslist)
+//     }
+//     catch(err){
+//         res.status(500).send(err.message)
+//     }
+// }
+
+
+//2. NACIN - samo koristi aggregate nad modelom
 const GetFilteredJobAds = async (req, res)=>{
     try{
         let date = new Date(Date.now())
@@ -81,12 +133,10 @@ const GetFilteredJobAds = async (req, res)=>{
                         "path":["tags","name","city"]
                     }
                 }
-            }
+            },
+            {"$match": { expireAt: { $gte: date } } },
+            {"$sort":{ createdAt: -1}}
         ])
-        // console.log(reslist)
-        reslist = reslist.filter((el)=>{
-            return el.expireAt.getTime() > date.getTime()
-        })
         res.status(200).send(reslist)
     }
     catch(err){
