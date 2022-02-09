@@ -43,6 +43,14 @@
               name="username" autofocus="" value="user.username" />
           </div>
         </div>
+        <div class="row">
+          <!-- contact tel -->
+          <div class="col-6 d-flex flex-column align-items-start">
+            <label for="email" class="form-check-label px-1">Contact telephone:</label>
+            <input disabled type="tel" class="form-control rounded inputPolje my-1" v-model.trim="user.contactTel"  
+              name="contact_telephone" autofocus="" value="user.contactTel" />
+          </div>
+        </div>
         <div v-if="editable">
           <button @click="update" class="btn btn-lg btn-primary rounded dugme mt-3 mx-1">Update profile</button>
           <button @click="deleteUser" class="btn btn-lg btn-danger rounded  mt-3 mx-1 dugme deleteBtn">Delete profile</button>
@@ -153,6 +161,7 @@ export default {
     },
     async update() {
       await this.$store.dispatch('updateUser', this.user)
+      this.edit()
     },
     async changePassword() {
       let responseMessage = this.$helpers.validatePassword(this.password,this.repeatPassword)

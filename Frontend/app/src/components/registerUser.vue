@@ -10,22 +10,27 @@
     </div>
     <!-- surname -->
     <div class="d-flex flex-row justify-content-start align-items-center">
-        <label for="name" class=" form-check-label col-2">Surname:</label>
+        <label for="surname" class=" form-check-label col-2">Surname:</label>
         <input  type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.surname" name="surname" placeholder="Your surname" autofocus="" required />
     </div>
     <!-- email -->
     <div class="d-flex flex-row justify-content-start align-items-center">
-        <label for="name" class=" form-check-label col-2">Email:</label>
+        <label for="email" class=" form-check-label col-2">Email:</label>
         <input  type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.email" name="email" placeholder="your-email@domain" autofocus="" required />
+    </div>
+    <!-- contact telephone  -->
+    <div class="d-flex flex-row justify-content-start align-items-center">
+        <label for="contact_telephone" class=" form-check-label col-2">Contact telephone:</label>
+        <input  type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.contactTel" name="contact_telephone" placeholder="06*******" autofocus="" required />
     </div>
     <!-- username -->
     <div class="d-flex flex-row justify-content-start align-items-center">
-        <label for="name" class=" form-check-label col-2">Username:</label>
+        <label for="username" class=" form-check-label col-2">Username:</label>
         <input  type="text" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.username" name="username" placeholder="Your username" autofocus="" required />
     </div>
     <!-- password -->
     <div class="d-flex flex-row justify-content-start align-items-center">
-        <label for="name" class=" form-check-label col-2">Password:</label>
+        <label for="password" class=" form-check-label col-2">Password:</label>
         <input  type="password" class="form-control rounded col-9 inputPolje my-1" v-model.trim="registerInfo.password" name="password" placeholder="Your password" autofocus="" required />
     </div>
     <!-- button  -->
