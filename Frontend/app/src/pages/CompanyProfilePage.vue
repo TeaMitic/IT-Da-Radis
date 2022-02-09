@@ -9,7 +9,7 @@
     </div>
     <div v-else class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large">
         <div class="d-flex justify-content-between ">
-            <h4 class="col-3 pt-3">Podaci o kompaniji:</h4>
+            <h4 class="col-3 pt-3  text-start">Podaci o kompaniji:</h4>
             <button @click="edit" class="btn btn-lg btn-primary rounded dugme editBtn  "><font-awesome-icon  :icon="['fas', 'edit']" /></button>
         </div>
         <div class="row px-4">
@@ -20,12 +20,13 @@
                     <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.name" 
                         name="name"  autofocus=""  value=user.name />
                 </div>
-                <!-- address -->
+                 <!-- username -->
                 <div class="col-6 d-flex flex-column align-items-start">
-                    <label for="address" class=" form-check-label px-1">Address:</label>
-                    <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.address"
-                        name="address"  autofocus=""  value=user.address />
+                    <label for="username" class=" form-check-label px-1">Username:</label>
+                    <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.username"
+                        name="username"  autofocus=""  value=user.username />
                 </div>
+               
             </div>
             <div class="row">
                 <!-- email -->
@@ -34,34 +35,18 @@
                     <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.email" 
                         name="email"  autofocus=""  value=user.email />
                 </div>
-                <!-- username -->
+                <!-- address -->
                 <div class="col-6 d-flex flex-column align-items-start">
-                    <label for="username" class=" form-check-label px-1">Username:</label>
-                    <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.username"
-                        name="username"  autofocus=""  value=user.username />
+                    <label for="address" class=" form-check-label px-1">Address:</label>
+                    <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.address"
+                        name="address"  autofocus=""  value=user.address />
                 </div>
             </div>           
        
         </div>
-         <div class="row px-4">
-            <div class="row">
-                <!-- password input  -->
-                <div class="col-6 d-flex flex-column align-items-start">
-                    <label for="newPassword" class=" form-check-label px-1">New password:</label>
-                    <input disabled type="password" class="form-control rounded  inputPolje my-1" v-model.trim="password" 
-                        name="newPassword"  autofocus="" value=user.password />
-                </div>
-                <!-- repeat password  -->
-                <div class="col-6 d-flex flex-column align-items-start">
-                    <label for="repeatPassword" class=" form-check-label px-1">Repeat password:</label>
-                    <input disabled type="password" class="form-control rounded  inputPolje my-1" v-model.trim="repeatPassword"
-                        name="repeatPassword"  autofocus="" value=user.password />
-                </div>
-            </div>
-        </div>
+        
         <div class="row px-4">
             <div class="row">   
-                <!-- cotactTel -->
                 <div class="col-6 d-flex flex-column align-items-start">
                     <label for="contactTel" class=" form-check-label px-1">Contact Phone:</label>
                     <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.contactTel"
@@ -74,15 +59,14 @@
                 </div>
             </div>
         </div>
+
         <div class="row px-4">
             <div class="row">
-                <!-- instagram input  -->
                 <div class="col-3 d-flex flex-column align-items-start">
                     <label for="instagram" class=" form-check-label px-1">Instagram:</label>
                     <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.socialMedia.instagramLink" 
                         name="instagram"  autofocus="" value=user.socialMedia.instagramLink />
                 </div>
-                <!-- repeat password  -->
                 <div class="col-3 d-flex flex-column align-items-start">
                     <label for="facebook" class=" form-check-label px-1">Facebook:</label>
                     <input disabled type="text" class="form-control rounded  inputPolje my-1" v-model.trim="user.socialMedia.facebookLink"
@@ -102,26 +86,72 @@
         </div>
         
         <div class="row px-4">
-         <div class="row">   
+            <div class="row">   
                 <!-- description -->
                 <div class="col-12 d-flex flex-column align-items-start">
                     <label for="description" class=" form-check-label px-1">Description:</label>
                      <textarea disabled class="form-control rounded col-9 inputPolje my-1" name="description" v-model="user.description"
-              placeholder="Company description" maxlength="1000" rows="5" autoofocus required ></textarea>                    
+                placeholder="Company description" maxlength="1000" rows="5" autoofocus required ></textarea>                    
+                </div>                     
+            </div>            
+        </div>
+        <div v-if="editable" class="col-12 d-flex flex-column align-items-justify ">            
+            <button @click="update" class="btn btn-lg btn-primary rounded dugme">Update profile</button>
+        </div>        
+        
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <h4 class="col-2  text-start">Promena šifre:</h4>
+            <button @click="editPassword" class="btn btn-lg btn-primary rounded dugme editBtn" >
+            <font-awesome-icon :icon="['fas', 'edit']" />
+            </button>
+        </div>
+
+        <div class="row px-4">
+            <div class="row">
+                <!-- password input  -->
+                <div class="col-6 d-flex flex-column align-items-start">
+                    <label for="newPassword" class=" form-check-label px-1">New password:</label>
+                    <input disabled type="password" class="form-control rounded passwordPolje my-1" v-model.trim="password" 
+                        name="newPassword"  autofocus="" value=user.password />
                 </div>
-                 <div class="col-12 d-flex  flex-column align-items-start mt-3">
+                <!-- repeat password  -->
+                <div class="col-6 d-flex flex-column align-items-start">
+                    <label for="repeatPassword" class=" form-check-label px-1">Repeat password:</label>
+                    <input disabled type="password" class="form-control rounded passwordPolje my-1" v-model.trim="repeatPassword"
+                        name="repeatPassword"  autofocus="" value=user.password />
+                </div>
+                
+            </div>  
+            <div v-if="passwordEditable" class="col-12 d-flex flex-column align-items-justify ">
+                <button @click="changePassword" class="btn btn-lg btn-primary rounded dugme mt-3">Change password</button>
+            </div>     
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <h4 class="col-3 text-start">Izmena kategorija:</h4>            
+        </div>
+
+        <div class="row px-4">
+            <div class="row">
+                <div class="col-6 d-flex  flex-column align-items-start mt-3">
                     <label for="categories" class=" form-check-label px-1">Categories:</label>
                     <div class="categoriesInputs  d-flex flex-wrap mt-3 `">
-                        <Category v-for="cat in categories" :key="cat" :category="cat" :allCategories="categories" class="inputPolje" />
-                    </div>
-                   
-                 </div>     
-            </div>
+                        <Category v-for="cat in categories" :key="cat" :category="cat" :allCategories="categories"/>
+                    </div>                   
+                </div>
+                <div class="col-6 d-flex  flex-column align-items-start mt-3">
+                    <label for="categories" class=" form-check-label px-1">Dodaj kategoriju:</label>
+                    <input type="text" class="form-control rounded kategorijaPolje abcd my-1"
+                        name="kategorijaPolje" v-model="inputkat" />
+                    <button @click="addCategory" class="btn btn-lg btn-primary rounded dugme mt-3">Add Category</button>
+                </div>
+                <button @click="saveCategories" class="btn btn-lg btn-primary rounded dugme mt-3">Save categories</button>
+            </div>            
         </div>
-       
-        <div v-if="editable" class="col-12 d-flex flex-column align-items-end ">            
-            <button @click="update" class="btn btn-lg btn-primary rounded dugme">Update profile</button>
+        <div v-if="categoriesEditable">
+                
         </div>
+        
     
     </div>
     <!-- previous job ads  -->
@@ -137,6 +167,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import CompanyHeader from '../components/CompanyHeader.vue'
 import Footer from '../components/Footer.vue'
 import AppSpinner from '../components/AppSpinner.vue'
@@ -157,6 +188,9 @@ export default {
       password: null,
       repeatPassword: null,
       editable: false,
+      passwordEditable: false,
+      categoriesEditable: false,
+      inputkat: ""
     };
   },
   computed: {
@@ -195,6 +229,23 @@ export default {
             }
         });
       },
+      editPassword() {
+      this.passwordEditable = !this.passwordEditable;
+      let inputs = document.querySelectorAll(".passwordPolje");
+       inputs.forEach((input) => {
+        if (this.passwordEditable) {
+          input.disabled = false;
+        } else {
+          input.disabled = true;
+        }
+      });
+      },
+     
+      addCategory(){          
+          this.categories.push(this.inputkat)
+          this.inputkat = ""
+          this.$store.dispatch('postaviCurrentCompanyCategories',this.categories)
+      },
       enableCategory(id) { 
           console.log("ID:",id)
           let inputPolje = document.getElementById(id)
@@ -202,7 +253,32 @@ export default {
       },
       async update() { 
 
+      },
+      async changePassword(){
+            let responseMessage = this.$helpers.validatePassword(this.password,this.repeatPassword)
+            if ( responseMessage !== 'OK') { 
+            Vue.toasted.show(responseMessage, { 
+              theme: "bubble", 
+              position: "top-center", 
+              duration : 2000
+    
+                })
+            } 
+      await this.$store.dispatch('changePasswordCompany',{
+        id: this.user._id,
+        newPassword: this.repeatPassword
+      })
+      this.editPassword()
+    }
+      ,
+      async saveCategories(){
+          await this.$store.dispatch('upadteCategoriesCompany',{
+        id: this.user._id,
+        categories: this.categories
+      })
+          
       }
+
   },
   
 };

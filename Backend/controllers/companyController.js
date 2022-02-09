@@ -36,11 +36,13 @@ const CreateCompany = async (req, res)=>{
 const UpdatePassword = async (req,res) => { 
     try {
         let company = await Company.findById(req.params.id)
-        if (company) { 
-            let newPassword = req.body.newPassword
-            company.password = newPassword
+        if (company) {          
+            
+            let hash = await bcrypt.hash(req.body.newPassword, 10)
+            company.password = hash
             await company.save()
             res.status(200).send("Uspesno promenjena sifra!")
+            
         }
     } catch (error) {
         res.status(500).send(error.message)

@@ -73,8 +73,8 @@ const UpdatePassword = async (req,res) => {
     try {
         let user = await User.findById(req.params.id)
         if (user) { 
-            let newPassword = req.body.newPassword
-            user.password = newPassword
+            let hash = await bcrypt.hash(req.body.newPassword, 10)
+            user.password = hash
             await user.save()
             res.status(200).send("Uspesno promenjena sifra!")
         }
