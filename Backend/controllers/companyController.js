@@ -8,16 +8,16 @@ var path = require('path');
 // require('dotenv/config');
 
 
-const storage= multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb)=>{
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-})
+// const storage= multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb)=>{
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// })
 
-var upload = multer({ storage: storage }); //????
+// var upload = multer({ storage: storage }); //????
 
 const UploadImage = async(req, res) => {
     try{
