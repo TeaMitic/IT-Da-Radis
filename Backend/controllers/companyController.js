@@ -35,7 +35,7 @@ const UploadImage = async(req, res) => {
             }
             result.image = obj
             result.save().then(()=>{
-                res.status(200).send('Uspesno izmenjeno')
+                res.status(200).send(req.body)
             })
 
         })
