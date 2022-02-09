@@ -30,8 +30,27 @@ const DeleteJobApplication = async (req, res)=>{
     }
 
 }
+const UploadCV =async(req,res)=>{
+    try{
+        await JobUserRel.findById(req.params.id).then(result=>{
+            const obj={
+                data: req.files.cv.data,
+                contentType: 'application/msword'
+            }
+            result.cv= obj
+            result.save().then(()=>{
+                res.status(200).send('Upseno dodato')
+            })
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 module.exports={
     CreateJobApplication,
-    DeleteJobApplication
+    DeleteJobApplication,
+    UploadCV
 }
