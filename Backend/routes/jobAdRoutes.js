@@ -10,6 +10,7 @@ const { CreateJobAd,
         UpdateJobAd,
         AddTagToJobAd,
         DeleteTagToJobAd,
+        UpdateTagsToJobAd,
         GetCompaniesActiveJobAds} = require('../controllers/jobAdController')
 
 router.post('/createJobAd/:companyID', CreateJobAd)
@@ -21,5 +22,6 @@ router.put('/updateJobAd/:jobAdID', UpdateJobAd)
 router.put('/addTag/:jobAdID', AddTagToJobAd)
 router.put('/deleteTag/:jobAdID', DeleteTagToJobAd)
 router.get('/getCompaniesActiveJobAds/:companyID', GetCompaniesActiveJobAds)
+router.put('/updateTags/:id', UpdateTagsToJobAd)
 
 module.exports = router

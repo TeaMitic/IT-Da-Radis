@@ -122,6 +122,20 @@ const AddTagToJobAd = async (req, res)=>{
         res.status(500).send(err.message)
     }
 }
+const UpdateTagsToJobAd = async(req,res)=>{
+    try{
+        await JobAd.findById(req.params.id).then(result=>{
+            result.tags = req.body.tags
+            result.save().then(()=>{
+                res.status(200).send('Uspesno izmenjeno')
+            })
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 const DeleteTagToJobAd = async (req, res)=>{
     try{
@@ -153,5 +167,6 @@ module.exports = {
     UpdateJobAd,
     AddTagToJobAd,
     DeleteTagToJobAd,
-    GetCompaniesActiveJobAds
+    GetCompaniesActiveJobAds,
+    UpdateTagsToJobAd
 }
