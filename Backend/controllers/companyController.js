@@ -95,7 +95,6 @@ const GetAllCompanies = async (req, res) =>{
 
 const GetCompaniesByIndex = async (req, res) =>{
     try{
-        console.log(req.body);
         let reslist = await Company.aggregate([
             {
                 "$search":{

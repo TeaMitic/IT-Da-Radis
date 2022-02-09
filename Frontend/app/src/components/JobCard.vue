@@ -8,11 +8,12 @@
       <label>{{jobAd.city}}</label>
       <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
-        <a class="m-1 px-1 border  tagBg " v-for="tag in jobAd.tags" :key="tag" href="#!" >{{ tag }}</a>
+        <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" >{{tag}}</router-link>
+
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'AboutJob', params: {id:jobAd._id}}">
+        <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd._id}}">
             <img class=" roundedImg " src="../assets/img/company-card-bg.jpg" alt="Comapny logo" />
         </router-link>
     </div>

@@ -18,7 +18,7 @@
           <div class="row justify-content-around">
             <CompanyCard v-for="company in allCompanies" :key="company._id" :company="company"/>
           </div>
-          <router-link :to="{name: 'AllCompanies'}">
+          <router-link :to="{name: 'AllCompanies', params: {tag: '_'}}">
             <button class="btn btn-lg btn-primary rounded dugme  ">Sve kompanije</button>
           </router-link>
         </div>

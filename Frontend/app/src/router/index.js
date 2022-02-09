@@ -61,13 +61,13 @@ const router = new Router({
             }
         },
         {
-            path:'/AllCompanies',
+            path:'/AllCompanies/:tag',
             name: 'AllCompanies',
             component: AllCompaniesPage,
             
         },
         {
-            path:'/AllJobAds',
+            path:'/AllJobAds/:tag',
             name: 'AllJobAds',
             component: AllJobAdsPage,
         },

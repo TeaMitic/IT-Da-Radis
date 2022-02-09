@@ -46,7 +46,8 @@
               </div>
             </div>
             <div class="d-flex company-categories justify-content-start flex-wrap mt-3">
-              <a  class="m-1 px-1 border tagBg" v-for="tag in company.categories"  :key="tag" href="#!" >{{ tag }}</a >
+              <router-link  v-for="tag in company.categories" :key="tag" :to="{name: 'AllCompanies', params: { tag: tag}}"  class="m-1 px-1 border  tagBg "  >{{tag}}</router-link>
+              <!-- <a  class="m-1 px-1 border tagBg" v-for="tag in company.categories"  :key="tag" href="#!" >{{ tag }}</a > -->
             </div>
           </div>
           <div class="d-flex flex-row-reverse  company-social-media ">

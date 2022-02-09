@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="d-flex jobAd-tags justify-content-start flex-wrap mt-3">
-              <a class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" href="#!" >{{ tag }}</a >
+              <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" >{{tag}}</router-link>
             </div>
           </div>
           <div>

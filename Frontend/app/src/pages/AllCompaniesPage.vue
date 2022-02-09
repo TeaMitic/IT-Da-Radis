@@ -9,12 +9,11 @@
     </div>
     <div class="container-xxl px-0">
       <!-- technologies  -->
-      <div class="card flex-row flex-wrap d-flex tagForm">
+      <div v-if="isDataLoaded" class="card flex-row flex-wrap d-flex tagForm">
         <div
           class="m-2 cat rounded catDiv d-flex flex-row align-items-center"
           v-for="cat in allCategories"
           :key="cat.nameOfCat"
-          href="#!"
           @click="searchByCategory(cat.nameOfCat)"
         >
           <div class="cat-info">
@@ -32,16 +31,20 @@
             X
           </button>
         </div>
+        <!-- search box  -->
         <div class="container-fluid searchForm ">
         <div class="input-group d-flex justify-content-end">
             <div class="form-outline d-flex align-items-center">
-                <input type="search" id="form1" class="form-control rounded searchBar " @mouseleave="checkInput($event)"  placeholder="Company name.." v-model="searchName"/>
+                <input type="search" id="form1" class="form-control rounded searchBar "  @change="checkInput($event)"  placeholder="Company name.." v-model="searchName"/>
             </div>
             <button type="button" @click="searchByName" class="btn btn-primary dugme rounded p-2 my-2 searchBtn ">
                 <font-awesome-icon  :icon="['fas', 'search']" />
             </button>
         </div>
     </div>
+      </div>
+      <div v-else>
+        <AppSpinner/>
       </div>
       <!-- company cards -->
       <div v-if="isDataLoaded" class="container">
@@ -56,7 +59,7 @@
         </div>
       </div>
       <div v-else>
-        <AppSpiner />
+        <AppSpinner />
       </div>
     </div>
     <!-- Footer -->
@@ -72,17 +75,20 @@ import CompanyCard from "../components/CompanyCard.vue";
 import Footer from "../components/Footer.vue";
 import Header from "../components/Header.vue";
 import UserHeader from "../components/UserHeader.vue";
-import AppSpiner from "../components/AppSpinner.vue";
+import AppSpinner from "../components/AppSpinner.vue";
 
 export default {
   title: "IT Da Radis - Companies",
   components: {
     UserHeader,
-    AppSpiner,
+    AppSpinner,
     Header,
     CompanyCard,
     Footer,
   },
+  // props: { 
+  //   filterTag: null,
+  // },
   data() {
     return {
       isDataLoaded: false,
@@ -110,8 +116,13 @@ export default {
     clearSearchForm() { 
       this.searchName = ""
     },
+    // enterFunc(event) { 
+    //   console.log(event);
+    //   if (event.keyCode == 13) { 
+
+    //   }
+    // },
     async checkInput(event) { 
-      console.log(event.target._value);
       let value = event.target._value
       if (value == "") { 
         await this.noFilterCompanies()
@@ -147,15 +158,26 @@ export default {
       this.clearTagForm()
       this.clearSearchForm()
       await this.$store.dispatch("getAllCompanies", 0);
-      await this.$store.dispatch("getAllCategories");
     },
   },
   async created() {
     this.userType = Vue.$cookies.get("userType");
     this.isDataLoaded = false;
-    await this.noFilterCompanies();
+    await this.$store.dispatch("getAllCategories");
+    let preload_cat = this.$route.params.tag
+
+    if (preload_cat == '_') { 
+        await this.noFilterCompanies();
+      }
+    else { 
+      await this.filterCompanies(preload_cat)
+    }
+    
     this.isDataLoaded = true;
   },
+  
+    
+
 };
 </script>
 <style scoped>
@@ -207,9 +229,7 @@ export default {
 .dugme:hover {
   background-color: #006661;
 }
-.pictureSection {
-  background-image: url("../assets/img/desk.jpg");
-}
+
 .rounded {
   border-radius: 10px !important;
 }

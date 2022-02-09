@@ -15,11 +15,11 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto py-4 py-lg-0">
           
-          <router-link :to="{ name: 'AllCompanies' }">
+          <router-link :to="{ name: 'AllCompanies', params: {tag: '_'} }">
             <li class="nav-item" >
               <a  class=" nav-link px-lg-2 text-white slova rounded dropdown-item " href="#!" >Kompanije</a>
             </li></router-link>
-          <router-link :to="{ name: 'AllJobAds' }">
+          <router-link :to="{ name: 'AllJobAds', params: {tag: '_'} }">
             <li class="nav-item ">
               <a  class=" nav-link px-lg-2 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>

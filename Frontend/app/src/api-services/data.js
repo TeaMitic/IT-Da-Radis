@@ -22,6 +22,7 @@ export default new Vuex.Store({
         allCompanies: [],
         allJobAds: [],
         allCategories: [],
+        allJobTags: []
     },
     actions: { 
         async login({commit}, loginObject) { 
@@ -228,6 +229,16 @@ export default new Vuex.Store({
                 
             }
         },
+        async getJobAdsByIndex({commit}, index) { 
+            
+            try {
+                let res = await Api().put('/api/jobAd/getFilteredJobAds', index)
+                commit('setAllJobAds',res.data)
+            } catch (error) {
+                console.log(error);
+                
+            }
+        },
         async getJobAdByID({commit}, id) { 
             try {
                 let res = await Api().get(`/api/jobAd/getJobAdByID/${id}`)
@@ -236,6 +247,14 @@ export default new Vuex.Store({
                 console.log(error)
             }
             
+        },
+        async getAllJobTags({commit}) { 
+            try {
+                let res = await Api().get('/api/jobAd/getAllTags')
+                commit('setAllJobTags', res.data)
+            } catch (error) {
+                console.log(error)
+            }
         },
         async upadteCategoriesCompany({commit},companyObject){
             let id = companyObject.id
@@ -299,6 +318,9 @@ export default new Vuex.Store({
         setJobAd(state,job) { 
             state.currentJobAd = job
         },
+        setAllJobTags(state,allJobTags) { 
+            state.allJobTags = allJobTags
+        },
         setAllCategories(state, allCategories){
             state.allCategories = allCategories
         },
@@ -335,6 +357,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getAllJobTags(state) { 
+            return state.allJobTags
+        },
         getCurrentJobAd(state) { 
             return state.currentJobAd
         },
