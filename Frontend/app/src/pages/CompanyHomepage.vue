@@ -127,10 +127,11 @@ export default {
   },
   async created() {
     this.userType = this.$cookies.get("userType");
-    let id = this.$cookies.get("id");
+    let id = await this.$cookies.get("id");
     this.isDataLoaded = false;
-    await this.$store.dispatch("getCompanyJobAds", id);
+    console.log(id);
     await this.$store.dispatch("getCompanyByID", id);
+    await this.$store.dispatch("getCompanyJobAds", id);
     this.user = this.$store.getters["getCurrentCompany"];
     this.isDataLoaded = true;
   },

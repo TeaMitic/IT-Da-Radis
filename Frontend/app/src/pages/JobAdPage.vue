@@ -18,7 +18,7 @@
           <div class="d-flex flex-column jobAd-info">
             <div class="d-flex flex-row jobAd-info-basic">
               <div class="imageDiv d-flex justify-content-center">
-                <img class="logo p-2" src="../assets/img/company-card-bg.jpg"  alt="Logo firme"/>
+                <img class="logo p-2" v-bind:src=imageUrl  alt="Logo firme"/>
               </div>
               <div class=" mx-3 d-flex flex-column align-items-start mt-3 text-start" > 
                 <h4 class="mb-3">
@@ -148,6 +148,7 @@ export default {
       user: null,
       isUserDataLoaded: false,
       cv: null,
+      imageUrl: ""
     };
   },
   methods: {
@@ -222,6 +223,9 @@ export default {
     this.company = this.$store.getters["getCurrentCompany"];
 
     this.isDataLoaded = true;
+
+    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+    this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
   },
 };
 </script>

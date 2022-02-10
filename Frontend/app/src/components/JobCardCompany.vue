@@ -42,7 +42,8 @@ export default {
   },
   
   async created() {
-    await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
+    console.log(this.jobAd.jobAd)
+    await this.$store.dispatch('getCompanyByID',this.jobAd.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
     this.isDataLoaded = true
     const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));

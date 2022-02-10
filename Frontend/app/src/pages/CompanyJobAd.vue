@@ -1,7 +1,7 @@
 <template >
   <div class="container-fluid mainDiv">
     <!-- header with navbar -->
-    <div v-if="userType == 'U'">
+    <div v-if="userType == 'C'">
       <CompanyHeader />
     </div>
     <div v-else>
@@ -41,13 +41,12 @@
                 
               </div>
               <br />
-                  <div>
-                      <router-link :to="{ name: 'CompanyJobAd', params: { id: jobAd._id} }" ><button class="btn btn-lg btn-primary rounded dugme editBtn" >
-                        <!--  @click="editPassword" -->
-                        <font-awesome-icon :icon="['fas', 'edit']" />
-                </button></router-link >
-                      
-                  </div>
+                <div>
+                  <button class="btn btn-lg btn-primary rounded dugme editBtn" >
+                    <!--  @click="editPassword" -->
+                    <font-awesome-icon :icon="['fas', 'edit']" />
+                  </button>
+                </div>
             </div>
             <div class="d-flex jobAd-tags justify-content-start flex-wrap mt-3">
               <a class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" href="#!" >{{ tag }}</a >
@@ -88,6 +87,7 @@
 <script>
 import Vue from "vue";
 import Header from "../components/Header.vue";
+import CompanyHeader from '../components/CompanyHeader.vue'
 import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue";
 import CandidateInfo from "../components/CandidateInfo.vue"
@@ -99,6 +99,7 @@ export default {
     AppSpinner,
     Header,
     Footer,
+    CompanyHeader,
     CandidateInfo
   },
   data() {

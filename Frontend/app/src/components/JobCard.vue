@@ -1,19 +1,19 @@
 <template>
-  <div v-if="isDataLoaded" class="card col-lg-3   my-3 px-0 rounded shadow   kartica " v-bind:id="jobAd.jobAd._id">
+  <div v-if="isDataLoaded" class="card col-lg-3   my-3 px-0 rounded shadow   kartica " v-bind:id="jobAd._id">
     
     <div class="card-body d-flex flex-column align-items-start ">  
-      <router-link :to="{ name: 'AboutJobAd', params: { id: jobAd.jobAd._id} }" ><h4 class="card-title ">{{jobAd.jobAd.name}}</h4></router-link >
-      <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
+      <router-link :to="{ name: 'AboutJobAd', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
+      <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
       <br>
-      <label>{{jobAd.jobAd.city}}</label>
-      <label>{{jobAd.jobAd.expireAt | date-format}}</label>
+      <label>{{jobAd.city}}</label>
+      <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
-        <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.jobAd.tags" :key=tag.id >{{tag}}</router-link>
+        <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key=tag.id >{{tag}}</router-link>
 
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd.jobAd._id}}">
+        <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd._id}}">
             <img class=" roundedImg img" v-bind:src= imageUrl alt="Comapny logo" />
         </router-link>
     </div>
@@ -45,7 +45,6 @@ export default {
     this.isDataLoaded = true
     const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
     this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
-    // console.log(this.company.image.img.data)
   },
  
   
