@@ -288,6 +288,21 @@ export default new Vuex.Store({
                 console.log(error)
             }
         },
+        async updateCompany({commit},company) { 
+            try {
+                let res = await Api().put(`api/company/updateCompany/${company._id}`,company)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
+            }
+        },
         async upadteCategoriesCompany({commit},companyObject){
             let id = companyObject.id
             let jsonPass = {
@@ -340,6 +355,23 @@ export default new Vuex.Store({
                 commit('setNista')
             } catch (error) {
                 console.log(error);
+            }
+        },
+        async createAd({commit},adObj) { 
+            console.log(adObj)
+            try {
+                let res = await Api().post(`api/jobAd/createJobAd/${adObj.companyID}`,adObj.ad)
+                console.log(res)
+                if (res.status == 200) { 
+                    Vue.toasted.show("Oglas je napravljen", { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error.data)
             }
         },
         postaviUserType({commit},userType) { 
