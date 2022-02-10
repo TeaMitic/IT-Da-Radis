@@ -15,6 +15,7 @@ export default new Vuex.Store({
         currentCompanyCategories: null,
         currentUser: null,
         currentUsersJobs: null,
+        currentJobAppID: null,
         currentJobAd: null,
         currentToken: null,
         currentUsername: null,
@@ -344,9 +345,10 @@ export default new Vuex.Store({
         async createJobApplication({commit},application) { 
             try {
                 let res = await Api().post('/api/jobUserRel/createJobApplication',application)
-                console.log(res)
+                //ne treba kasnije 
                 if (res.status == 200) { 
-                    Vue.toasted.show(res.data,{ 
+                    commit("setJobAppID", res.data.jobRelID)
+                    Vue.toasted.show(res.data.jobRelID,{ 
                         theme: "bubble", 
                         position: "top-center", 
                         duration : 2000
@@ -374,6 +376,27 @@ export default new Vuex.Store({
                 console.log(error.data)
             }
         },
+        async sendCV({commit},cv) { 
+            try {
+                let id = cv.jobRelID
+                let form = cv.cv
+                let res = await Api().put(`/api/jobUserRel/uploadCV/${id}`,form, { 
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data,{ 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                    })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -398,6 +421,9 @@ export default new Vuex.Store({
     },
     mutations: { 
         setNista() { },
+        setJobAppID(state,jobID) { 
+            state.currentJobAppID = jobID
+        },
         setJobAd(state,job) { 
             state.currentJobAd = job
         },
@@ -443,6 +469,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentJobAppID(state) { 
+            return state.currentJobAppID
+        },
         getCurrentUsersJobs(state) { 
             return state.currentUsersJobs
         },

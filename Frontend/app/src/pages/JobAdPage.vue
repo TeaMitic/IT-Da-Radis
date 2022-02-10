@@ -166,15 +166,26 @@ export default {
       await this.$store.dispatch('createJobApplication', {
         jobID: this.$route.params.id,
         userID: this.user._id,
-        cv: null,
+        // cv: null,
         name: this.user.name,
         surname: this.user.surname,
         userEmail: this.user.email,
         userTel: this.user.contactTel
       })
+
+      let jobRelID = this.$store.getters['getCurrentJobAppID']
+    
+      var form = new FormData()
+      form.append('my_file', this.cv);
+      await this.$store.dispatch('sendCV',{
+        jobRelID: jobRelID,
+        cv: form
+      })
+
     },
     processFile(event) {
       this.cv = event.target.files[0];
+      console.log(this.cv)
     },
     async getUser() {
       let id = Vue.$cookies.get("id");

@@ -153,6 +153,11 @@ export default {
     addTag(){
       this.adTags.push(this.adTag)
     }
+    // this.userType = Vue.$cookies.get('userType')
+    // this.isDataLoaded = false
+    // await this.$store.dispatch('getAllCompanies', 2)
+    // this.isDataLoaded = true
+
   }
   
 };

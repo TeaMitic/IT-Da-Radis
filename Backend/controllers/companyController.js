@@ -2,8 +2,54 @@ const mongoose = require('mongoose')
 const {Company} = require('../models/companyModel');
 const jwt = require('../token')
 const bcrypt = require('bcrypt')
+const multer = require('multer')  
+var fs = require('fs');
+var path = require('path');
+// require('dotenv/config');
+
+
+// const storage= multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'uploads')
+//     },
+//     filename: (req, file, cb)=>{
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// })
+
+// var upload = multer({ storage: storage }); //????
+
+const UploadImage = async(req, res) => {
+    try{
+        // const filepath= "E:\\Users\\Pictures\\stickers" 
+        // upload.single('image')
+        await Company.findById(req.params.id).then(result=>{
+
+            console.log(req.files.image)
+            const obj={
+                name: req.body.filename,
+                img:{
+                    data: req.files.image.data,
+                    // data: fs.readFileSync(path.join(filepath + '\\' + req.files.image.name)),
+                    contentType: 'image/png'
+                }
+            }
+            result.image = obj
+            result.save().then(()=>{
+                res.status(200).send(req.body)
+            })
+
+        })
+
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 const CreateCompany = async (req, res)=>{
+    
+
     bcrypt.hash(req.body.password, 10).then(async hash => {
         const company = await Company.create({
             username: req.body.username,
@@ -31,8 +77,10 @@ const CreateCompany = async (req, res)=>{
         res.status(200).send(sendInfo)
         console.log(sendInfo)
 
-    }).catch(err => res.status(500).send(err.message))
+    }
+    ).catch(err => res.status(500).send(err.message))
 }
+
 const UpdatePassword = async (req,res) => { 
     try {
         let company = await Company.findById(req.params.id)
@@ -251,7 +299,8 @@ module.exports = {
     UpdatePassword,
     UpdateCategories,
     GetCompaniesByIndex,
-    GetAllCategories
+    GetAllCategories,
+    UploadImage
 }
 
 //1. opcija

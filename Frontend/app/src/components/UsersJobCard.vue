@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isDataLoaded" class="card col-md-12 col-lg-3  m-3 px-0 rounded shadow flex-row" v-bind:id="jobAd._id">
+  <div v-if="isDataLoaded" class="card col-md-12 col-lg-5  m-3 px-0 rounded shadow flex-row" v-bind:id="jobAd._id">
     
     <div class="card-body d-flex flex-column align-items-start ">  
       <router-link :to="{ name: 'AboutJobAd', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
@@ -9,7 +9,9 @@
       <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
         <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" >{{tag}}</router-link>
-
+      </div>
+      <div class="cv">
+        <a v-bind:href=downloadCV v-bind:download=cv.name >{{cv.name}}</a>
       </div>
     </div>
     <div class="px-3 py-2">
@@ -35,12 +37,17 @@ export default {
     allUsersJobs: {
       required: true,
       type: Array
+    },
+    cv: { 
+      required: true,
+      type: Object
     }
   },
   data() {
     return {
         isDataLoaded: false,
-        company: null
+        company: null,
+        downloadCV: null 
 
     }
   },
@@ -48,6 +55,15 @@ export default {
   async created() {
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
+    
+    const blob = new Blob([new Uint8Array(this.cv.data.data)], {type: this.cv.contentType })
+    console.log(this.cv);
+    // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.cv.data.data)));
+    // this.downloadCV = `data:${this.cv.contentType};base64,${blob}`
+    this.downloadCV = window.URL.createObjectURL(blob)
+    console.log(blob);
+    console.log(this.downloadCV);
+
     this.isDataLoaded = true
   },
   methods: { 

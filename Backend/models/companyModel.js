@@ -34,6 +34,14 @@ const companySchema = new Schema({
         type:String,
         required:true
     },
+    image:{
+        name: String,
+        img:{
+            data:Buffer,
+            contentType: String
+        }
+
+    },
     categories:{
         type:Array,
         items: {
