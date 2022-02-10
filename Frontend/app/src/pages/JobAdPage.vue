@@ -22,8 +22,7 @@
               </div>
               <div class=" mx-3 d-flex flex-column align-items-start mt-3 text-start" > 
                 <h4 class="mb-3">
-                  {{ jobAd.name }} Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Eligendi, provident.
+                  {{ jobAd.name }} 
                 </h4>
                 <div class="d-flex flex-column align-items-start">
                   <div class="d-flex flex-column align-items-start">
@@ -50,25 +49,12 @@
           <div class="jobAd-description text-start">
             <p class="">
               {{ jobAd.description }}
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Aspernatur aliquam nobis delectus aut dolorem dicta architecto
-              autem ut sint facere maiores obcaecati, eaque, ipsam rem aperiam!
-              Perspiciatis vitae nulla sequi aspernatur deleniti nihil delectus
-              veniam hic? Maiores cupiditate possimus culpa obcaecati nisi
-              fugiat tenetur vitae animi cumque ut blanditiis illo assumenda
-              optio nemo dolores odit, odio rem velit. Ab minus quod fuga? Ullam
-              laudantium labore ipsam neque rerum minima perspiciatis
-              repellendus iusto ipsum esse vero, impedit incidunt velit veniam
-              ducimus reprehenderit, sequi animi. Incidunt unde a deleniti
-              perferendis nisi eum et provident ipsum quas, velit non mollitia
-              saepe aut. Minima magnam eius, praesentium minus porro totam
-              laboriosam inventore rem placeat earum facere expedita eveniet
-              omnis atque consectetur hic molestias fugiat! Corporis impedit at
+              
             </p>
           </div>
         </div>
         <hr class="mx-5" />
-        <div class="card apply-section mx-5 pt-3 px-5 rounded jobAd">
+        <div  class="card apply-section mx-5 pt-3 px-5 rounded jobAd">
           <h4 class="text-muted">Interested about this job?</h4>
           <div>
             <button @click="toggleApplySection" class="btn btn-lg btn-primary rounded dugme my-4" > Apply here </button>
@@ -77,58 +63,43 @@
             <div v-if="isUserDataLoaded" lass="user-form ">
               <label class="" for="user-info-group">Your informations:</label>
               <div class="user-info-group" name="user-info-group">
-                <div class="row">
+                <div class=" row">
                   <!-- name -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="name" class="form-check-label px-1">Name:</label>
                     <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="user.name" name="name"/>
                   </div>
                   <!-- surname -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="surname" class="form-check-label px-1">Surname:</label >
                     <input type="text"  class="form-control rounded inputPolje my-1" v-model.trim="user.surname" name="surname"/>
                   </div>
                 </div>
-                <div class="row">
-                  <!-- username -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                <div class=" row">
+                <!-- username -->
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="username" class="form-check-label px-1">Username:</label>
                     <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="user.username" name="username" />
                   </div>
                   <!-- mail -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="email" class="form-check-label px-1" >Email:</label > 
                     <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="user.email" name="email" />
                   </div>
                 </div>
-                <div class="row">
+                <div class=" row">
                   <!-- contact telephone -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="contact_tel" class="form-check-label px-1">Contact telephone:</label >
                     <input type="tel" class="form-control rounded inputPolje my-1" v-model.trim="user.contactTel" name="contact_tel"/>
                   </div>
                   <!-- cv -->
-                  <div class="col-6 d-flex flex-column align-items-start">
+                  <div class="col-md-6 col-sm-12 d-flex flex-column align-items-start ">
                     <label for="contact_tel" class="form-check-label px-1">CV:</label>
                     <input  type="file" class="form-control rounded inputPolje my-1"  name="cv" @change="processFile($event)" accept=".pdf, .docx, .doc"/> 
                   </div>
                 </div>
-                <!-- <div class="row">
-                  <label class="d-flex" name="cv">CV:</label>
-                  <textarea class="rounded p-3" name="cv" maxlength="150" cols="30" rows="10" > 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, porro hic blanditiis
-                    tenetur eligendi repellat saepe sit minus labore veniam suscipit expedita officiis iste 
-                    id aliquid doloribus maiores inventore quae! Nihil autem quaerat cum sunt natus tempore ullam 
-                    aut quis, neque nisi qui quasi voluptatum est vel ab vero officiis velit facilis quos et atque? 
-                    Reiciendis vero itaque aliquid totam illo tenetur cum soluta voluptatibus facere maiores, consequatur 
-                    doloremque officiis aspernatur nisi incidunt distinctio eveniet expedita non esse reprehenderit 
-                    nostrum sint? Autem laudantium dicta eius delectus id fugiat hic quaerat dolore enim iure ipsam 
-                    debitis laboriosam, ut animi dolorem vel aut nam mollitia minima at eum unde in nesciunt! Repellendus 
-                    adipisci saepe ex harum repudiandae cum eos officiis perferendis itaque! Iste suscipit molestias 
-                    adipisci deserunt distinctio nemo dolorum maiores vel neque, magnam quam commodi a laudantium officiis. 
-                    Ut molestias voluptatem molestiae doloremque odit ex iste quam ratione tempore! Ab, expedita.
-                  </textarea>
-                </div> -->
+                
               </div>
               <button @click="send" class="btn btn-lg btn-primary rounded dugme mt-3">Send</button>
             </div>
@@ -157,6 +128,8 @@ import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue";
 import router from "../router/index";
 
+// var FormData = require('form-data');
+
 export default {
   title: "IT Da Radis - Homepage",
   components: {
@@ -178,6 +151,28 @@ export default {
     };
   },
   methods: {
+    async send() { 
+      // var form = new FormData()
+      // form.append('jobID',this.$route.params.id)
+      // form.append('userID',this.user._id)
+      // form.append('name',this.user.name)
+      // form.append('surname',this.user.surname)
+      // form.append('userEmail',this.user.email)
+      // form.append('userTel',this.user.contactTel)
+      // form.append('cv',null)
+
+
+
+      await this.$store.dispatch('createJobApplication', {
+        jobID: this.$route.params.id,
+        userID: this.user._id,
+        cv: null,
+        name: this.user.name,
+        surname: this.user.surname,
+        userEmail: this.user.email,
+        userTel: this.user.contactTel
+      })
+    },
     processFile(event) {
       this.cv = event.target.files[0];
     },
@@ -196,7 +191,9 @@ export default {
           position: "top-center",
           duration: 2000,
         });
-        router.push("/login");
+        console.log(this.$route.params);
+        Vue.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`,"1h")
+        router.push(`/login/_` );
       }
       if (this.user == null) {
         await this.getUser();
@@ -212,6 +209,8 @@ export default {
     this.jobAd = this.$store.getters["getCurrentJobAd"];
     await this.$store.dispatch("getCompanyByID", this.jobAd.companyID);
     this.company = this.$store.getters["getCurrentCompany"];
+    this.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`, "1h" )
+
     this.isDataLoaded = true;
   },
 };
@@ -282,6 +281,7 @@ export default {
   background-color: hsl(240, 1%, 78%);
   transition: 0.25s;
 }
+
 @media (max-width: 576px) {
   .jobAd-info-basic {
     display: flex !important;
@@ -295,5 +295,6 @@ export default {
     align-self: center !important;
     display: flex !important;
   }
+  
 }
 </style> 

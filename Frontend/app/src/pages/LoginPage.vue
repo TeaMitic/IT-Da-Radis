@@ -76,7 +76,8 @@ export default {
       this.isDataLoaded = false
       await this.$store.dispatch('login', {
         loginInfo: this.loginInfo,
-        userType: this.userType
+        userType: this.userType,
+        page: this.$cookies.get("currentPage")
       })
       this.isDataLoaded = true
     }
