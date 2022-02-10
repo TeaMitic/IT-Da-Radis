@@ -35,8 +35,18 @@
                     <label class="par">{{ jobAd.salary }}</label>
                     <label class="par">{{ jobAd.expireAt | date-format }}</label>
                   </div>
+                  
                 </div>
+
+                
               </div>
+              <br />
+                  <div>
+                      <router-link :to="{ name: 'CompanyJobAd', params: { id: jobAd._id} }" ><button @click="editPassword" class="btn btn-lg btn-primary rounded dugme editBtn" >
+                        <font-awesome-icon :icon="['fas', 'edit']" />
+                </button></router-link >
+                      
+                  </div>
             </div>
             <div class="d-flex jobAd-tags justify-content-start flex-wrap mt-3">
               <a class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" href="#!" >{{ tag }}</a >
