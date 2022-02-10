@@ -3,16 +3,17 @@
     
     <div class="card-body d-flex flex-column align-items-start ">  
       <router-link :to="{ name: 'CompanyJobAd', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
-      <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link>
-      <br>
+      <!-- <h4 class="card-title">{{jobAd.name}}</h4> -->
+      <!-- <router-link :to="{ name: 'AboutCompany', params: { id: jobAd.companyID}  }"><h6 class="card-subtitle">{{company.name}}</h6></router-link> -->
+      <br><h6 class="card-subtitle">{{company.name}}</h6>
       <label>{{jobAd.city}}</label>
       <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
-        <a class="m-1 px-1 border  tagBg " v-for="tag in jobAd.tags" :key="tag" href="#!" >{{ tag }}</a>
+        <div class="m-1 px-1 border  tagBg cursorNormal" v-for="tag in jobAd.tags" :key="tag"  >{{ tag }}</div>
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'AboutJob', params: {id:jobAd._id}}">
+        <router-link  :to="{name: 'CompanyJobAd', params: {id:jobAd._id}}">
             <img class=" roundedImg " src="../assets/img/company-card-bg.jpg" alt="Comapny logo" />
         </router-link>
     </div>
