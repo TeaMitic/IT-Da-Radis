@@ -166,21 +166,22 @@ export default {
       await this.$store.dispatch('createJobApplication', {
         jobID: this.$route.params.id,
         userID: this.user._id,
-        // cv: null,
         name: this.user.name,
         surname: this.user.surname,
         userEmail: this.user.email,
         userTel: this.user.contactTel
       })
+      if (this.cv != null ) { 
+        let jobRelID = this.$store.getters['getCurrentJobAppID']
+      
+        let form = new FormData()
+        form.append('my_file', this.cv);
+        await this.$store.dispatch('sendCV',{
+          jobRelID: jobRelID,
+          cv: form
+        })
 
-      let jobRelID = this.$store.getters['getCurrentJobAppID']
-    
-      var form = new FormData()
-      form.append('my_file', this.cv);
-      await this.$store.dispatch('sendCV',{
-        jobRelID: jobRelID,
-        cv: form
-      })
+      }
 
     },
     processFile(event) {

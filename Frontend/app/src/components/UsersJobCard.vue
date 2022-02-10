@@ -39,7 +39,7 @@ export default {
       type: Array
     },
     cv: { 
-      required: true,
+      required: false,
       type: Object
     }
   },
@@ -55,14 +55,13 @@ export default {
   async created() {
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
-    
-    const blob = new Blob([new Uint8Array(this.cv.data.data)], {type: this.cv.contentType })
-    console.log(this.cv);
-    // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.cv.data.data)));
-    // this.downloadCV = `data:${this.cv.contentType};base64,${blob}`
-    this.downloadCV = window.URL.createObjectURL(blob)
-    console.log(blob);
-    console.log(this.downloadCV);
+    if (this.cv.data != null) {
+      const blob = new Blob([new Uint8Array(this.cv.data.data)], {type: this.cv.contentType })
+     
+      this.downloadCV = window.URL.createObjectURL(blob)
+      
+
+    }
 
     this.isDataLoaded = true
   },

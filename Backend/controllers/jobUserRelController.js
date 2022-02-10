@@ -18,6 +18,7 @@ const CreateJobApplication= async (req,res)=>{
     }
     catch(err){
         res.status(500).send(err.message)
+        console.log( err.message);
     }
 }
 const DeleteJobApplication = async (req, res)=>{
@@ -29,7 +30,7 @@ const DeleteJobApplication = async (req, res)=>{
         })                         
     }
     catch(err){
-        res.status(500).send(err.message)
+        res.status(500).send({message: err.message})
     }
 }
 

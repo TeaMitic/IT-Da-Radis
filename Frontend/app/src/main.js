@@ -12,7 +12,8 @@ import { faSearch, faEdit, faCheck, faPhone, faSearchLocation, faEnvelope, faGlo
 import { faInstagram, faFacebook, faLinkedin, faTwitter,  } from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Validation from '../src/helpers/validation'  
+import Validation from '../src/helpers/validation'
+
 
 const pluginValidation = { 
   install() {
@@ -20,6 +21,7 @@ const pluginValidation = {
     Vue.prototype.$helpers = Validation
   }
 }
+
 Vue.use(pluginValidation)
 Vue.mixin(titleMixin)
 

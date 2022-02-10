@@ -44,7 +44,6 @@ export default {
     this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
     console.log(this.company.image.img.data)
     //   this.imageUrl = URL.createObjectURL( this.company.image.img.data[0] );
-    
   }
  
   

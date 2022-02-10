@@ -356,7 +356,12 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error);
+                console.log(error.response);
+                Vue.toasted.show(error.response.data,{ 
+                    theme: "bubble", 
+                    position: "top-center",  
+                    duration : 2000
+                })
             }
         },
         async createAd({commit},adObj) { 
