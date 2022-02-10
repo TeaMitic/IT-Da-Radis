@@ -1,196 +1,212 @@
 <template >
-  <div class="container-fluid mainDiv" >
+  <div class="container-fluid mainDiv">
     <!-- header with navbar -->
-    <CompanyHeader/>
-    
-    <div class="container-xxl px-0 ">
+    <CompanyHeader />
+
+    <div class="container-xxl px-0">
       <!-- company cards -->
-      <div v-if="isDataLoaded" class="container">      
+      <div v-if="isDataLoaded" class="container">
         <div class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large">
-          <div class="d-flex ">
-            <h4 class="col-3 pt-3  text-start">Napravi novi oglas:</h4>
-            
-        </div>
-        <div class="row px-4">
-            <div class="row ">
-                <!-- name -->
-                <div class="col-4 d-flex flex-column align-items-start">
-                    <label for="name" class=" form-check-label px-1 ">Ime:</label>
-                    <input type="text" class="form-control rounded  inputPolje my-1" v-model.trim="adName" 
-                        name="name"  autofocus=""  value=user.name />
-                </div>
-                <div class="col-4 d-flex flex-column align-items-start">
-                    <label for="tags" class=" form-check-label px-1">Grad:</label>
-                    <input type="text" class="form-control rounded  inputPolje my-1" v-model.trim="adCity" 
-                        name="tags"  autofocus="" />
-                </div>
-                 <!-- username -->
-                <div class="col-4 d-flex flex-column align-items-start">
-                    <label for="time" class=" form-check-label px-1">Rok za prijavu:</label>
-                    <input type="date" class="form-control rounded  inputPolje my-1" v-model.trim="adExpires"
-                        name="username"  autofocus=""  value=user.username />
-                </div>
-                
-               
+          <div class="d-flex">
+            <h4 class="col-3 pt-3 text-start">Napravi novi oglas:</h4>
+          </div>
+          <div class=" row px-4 ">
+            <div class="row">
+              <!-- ad name -->
+              <div class="col-4 d-flex flex-column align-items-start">
+                <label for="name" class="form-check-label px-1">Ime:</label>
+                <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="adName" name="name"   autofocus=""  />
+              </div>
+              <!-- ad city  -->
+              <div class="col-4 d-flex flex-column align-items-start">
+                <label for="city" class="form-check-label px-1">Grad:</label>
+                <input type="text" class="form-control  rounded inputPolje my-1" v-model.trim="adCity" name="city"  autofocus="" />
+              </div>
+              <!-- time expires -->
+              <div class="col-4 d-flex flex-column align-items-start">
+                <label for="time" class="form-check-label px-1" >Rok za prijavu:</label>
+                <input type="date" class="form-control rounded inputPolje my-1" v-model.trim="adExpires" name="timeExpires" autofocus="" />
+              </div>
             </div>
             <div class="row">
-               <div class="col-4 d-flex flex-column align-items-start">
-                    <label for="time" class=" form-check-label px-1">Plata:</label>
-                    <input type="text" class="form-control rounded  inputPolje my-1" v-model.trim="adSalary"
-                        name="username"  autofocus=""  value=user.username />
-                </div>
-               <div class="col-4 d-flex flex-column align-items-start">
-                    <label for="tags" class=" form-check-label px-1">Tag: </label>                    
-                    <input type="text" class="form-control rounded  inputPolje my-1" v-model.trim="adTag" 
-                        name="tags"  autofocus="" />
-                </div>
-                <div class=" col-4 d-flex flex-column align-items-start">            
-                    <button @click="addTag" class="btn btn-lg btn-primary rounded dugme ">Dodaj tag</button>
-                </div>  
-            </div>  
+              <!-- salary -->
+              <div class="col-4 d-flex flex-column align-items-start">
+                <label for="salary" class="form-check-label px-1">Plata:</label>
+                <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="adSalary" name="salary" autofocus="" /> 
+              </div>
+              <!-- tags -->
+              <div class="col-4 d-flex flex-column align-items-start">
+                <label for="tags" class="form-check-label px-1">Tag: </label>
+                <input type="text" class="form-control rounded inputPolje my-1" v-model.trim="adTag" name="tags" autofocus=""  />
+              </div>
+              <div class="col-4 d-flex flex-column align-items-start justify-content-end " >
+                <button @click="addTag" class="btn btn-lg btn-primary rounded dugme" > Dodaj tag</button>
+              </div>
+            </div>
             <div class="row">
               <div class="col-12 d-flex flex-column align-items-start">
-                    <label for="time" class=" form-check-label px-1">Tagovi:</label>
-                    <div class="col-12  d-flex flex-row flex-wrap">
-                      <div v-for="tag in this.adTags" :key="tag" class="col-2 container card rounded">
-                        <label for="tag" class="form-check-label px-1 ">{{tag}}</label>          
-                      </div>                            
-                   </div>  
+                <label for="time" class="form-check-label px-1">Tagovi:</label>
+                <div class="col-12 d-flex flex-row flex-wrap">
+                  <div v-for="tag in this.adTags" :key="tag" class="col-2 container card rounded" >
+                    <label for="tag" class="form-check-label px-1">{{tag}}</label>
+                  </div>
                 </div>
+              </div>
             </div>
             <div class="row">
-               <div class="col-12 d-flex flex-column align-items-start">
-                    <label for="description" class=" form-check-label px-1">Description:</label>
-                     <textarea class="form-control rounded col-9 inputPolje my-1" name="description" v-model="adDescription"
-                placeholder="Company description" maxlength="1000" rows="5" autoofocus required ></textarea>                    
-                </div>  
-            </div>        
+              <div class="col-12 d-flex flex-column align-items-start">
+                <label for="description" class="form-check-label px-1" >Description:</label>
+                <textarea class="form-control rounded col-9 inputPolje my-1" name="description" v-model="adDescription" 
+                  placeholder="Company description" maxlength="1000" rows="5" autoofocus required >
+                </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button @click="createAd" class="btn btn-lg btn-primary rounded dugme" >Napravi oglas</button>
+          </div>
         </div>
-        <div class=" d-flex justify-content-end">            
-            <button @click="createAd" class="btn btn-lg btn-primary rounded dugme">Napravi oglas</button>
-        </div>  
-      </div>
-     <div v-if="jobAds">
-       <div class="d-flex justify-content-between ">
-            <h4 class="col-3 pt-3  text-start">Moji oglasi:</h4>            
-        </div>
-       <div class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large">
-         <CompanyJobCard  v-for="job in jobAds" :key="job._id" :jobAd="job"/>
+        <div v-if="jobAds">
+          <div class="d-flex justify-content-between">
+            <h4 class="col-3 pt-3 text-start">Moji oglasi:</h4>
+          </div>
+          <div class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large" >
+            <CompanyJobCard v-for="job in jobAds" :key="job._id" :jobAd="job" />
+          </div>
         </div>
       </div>
+      <div v-else>
+        <AppSpinner />
       </div>
-       <div v-else>
-        <AppSpinner/>
+      <!-- Footer -->
+      <div class="row">
+        <Footer class="relative-bottom" />
       </div>
-    <!-- Footer -->
-    <div class="row">
-      <Footer class="relative-bottom" />
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-// import Vue from 'vue'
-import CompanyHeader from '../components/CompanyHeader.vue'
-import Footer from '../components/Footer.vue'
-import AppSpinner from '../components/AppSpinner.vue'
-import CompanyJobCard from '../components/JobCardCompany.vue'
+import Vue from "vue";
+import CompanyHeader from "../components/CompanyHeader.vue";
+import Footer from "../components/Footer.vue";
+import AppSpinner from "../components/AppSpinner.vue";
+import CompanyJobCard from "../components/JobCardCompany.vue";
 export default {
-  title: 'IT Da Radis - Homepage',
+  title: "IT Da Radis - Homepage",
   components: {
     AppSpinner,
     Footer,
     CompanyHeader,
-    CompanyJobCard
+    CompanyJobCard,
   },
   data() {
     return {
       isDataLoaded: false,
       user: null,
       adSalary: null,
-      adName:null,
-      adExpires:null,
-      adDescription:null,
-      adTags:[],
-      adTag:null,
-      adCity:null,
-      
-    //   userType: null
+      adName: null,
+      adExpires: null,
+      adDescription: null,
+      adTags: [],
+      adTag: null,
+      adCity: null,
+
+      //   userType: null
     };
   },
-  computed: { 
-    jobAds() { 
-          return this.$store.getters['getCurrentCompanyJobAds']
-      }
+  computed: {
+    jobAds() {
+      return this.$store.getters["getCurrentCompanyJobAds"];
+    },
   },
   async created() {
-     this.userType = this.$cookies.get('userType')
-     let id = this.$cookies.get('id')
-     this.isDataLoaded = false     
-     await this.$store.dispatch('getCompanyJobAds',id)
-     await this.$store.dispatch('getCompanyByID',id)
-     this.user = this.$store.getters['getCurrentCompany']
-     this.jobAds = this.$store.getters['getCurrentCompanyJobAds']
-     this.isDataLoaded = true
-     console.log(this.user);
+    this.userType = this.$cookies.get("userType");
+    let id = this.$cookies.get("id");
+    this.isDataLoaded = false;
+    await this.$store.dispatch("getCompanyJobAds", id);
+    await this.$store.dispatch("getCompanyByID", id);
+    this.user = this.$store.getters["getCurrentCompany"];
+    this.isDataLoaded = true;
   },
-  methods:{
-    async createAd(){ 
-      await this.$store.dispatch('createAd', {
-        companyID: this.user._id,
-        ad : {        
-        name: this.adName,
-        desc:this.adDescription,
-        city: this.adCity,
-        salary:100,
-        tags: this.adTags,
-        expireAt:this.adExpires
+  methods: {
+    validateInputs() { 
+      let inputs = document.querySelectorAll('.inputPolje')
+      let valid = false
+      for (let element of inputs) { 
+        let responseMessage = this.$helpers.validateInput(element)
+        if (responseMessage != 'OK') { 
+          valid = false
+          Vue.toasted.show(responseMessage, {
+            theme: "bubble",
+            position: "top-center",
+            duration: 2000,
+          });
+          break
+        }
+        valid = true
       }
-      })
-      await this.$store.dispatch('getCompanyJobAds',this.user._id)
+        
+      return valid
     },
-    addTag(){
-      this.adTags.push(this.adTag)
-    }
+    async createAd() {
+      if (this.validateInputs()) { 
+        await this.$store.dispatch("createAd", {
+          companyID: this.user._id,
+          ad: {
+            name: this.adName,
+            desc: this.adDescription,
+            city: this.adCity,
+            salary: 100,
+            tags: this.adTags,
+            expireAt: this.adExpires,
+          },
+        });
+        await this.$store.dispatch("getCompanyJobAds", this.user._id);
+      }
+    },
+    addTag() {
+      if (this.adTag == null || this.adTag == "") {
+        Vue.toasted.show("Polje za tag mora biti popunjeno.", {
+          theme: "bubble",
+          position: "top-center",
+          duration: 2000,
+        });
+      } else {
+        this.adTags.push(this.adTag);
+      }
+    },
     // this.userType = Vue.$cookies.get('userType')
     // this.isDataLoaded = false
     // await this.$store.dispatch('getAllCompanies', 2)
     // this.isDataLoaded = true
-
-  }
-  
+  },
 };
 </script>
 
 <style scoped>
-
-.rounded { 
+.rounded {
   border-radius: 10px !important;
 }
 
-.mainDiv { 
+.mainDiv {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
-  background-color: whitesmoke
-
-
+  background-color: whitesmoke;
 }
 
 .dugme {
   margin: top 0.8rem;
-  margin-bottom: 0.8rem;
   background-color: #00b1a8;
   color: white;
   outline: none;
   font-weight: 600;
 }
-.dugme:hover { 
+.dugme:hover {
   background-color: hsl(177, 100%, 20%);
-
 }
 .pictureSection {
   background-image: url("../assets/img/job-interview.jpg");
 }
-</style>
+</style> 

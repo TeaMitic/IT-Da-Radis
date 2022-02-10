@@ -10,5 +10,12 @@ export default {
             return 'Sifre se ne poklapaju.'
         }
         return 'OK'
+    },
+    validateInput(input) { 
+        if (input.value == null || input.value == "") { 
+            return `Polje ${input.name} ne sme da bude prazno`
+        } 
+        return 'OK'
     }
+
 }
