@@ -69,7 +69,6 @@ export default {
     this.isDataLoaded = false
     await this.$store.dispatch('getAllCompanies', 2)
     this.isDataLoaded = true
-    this.$cookies.set('currentPage',`_`, "1h" )
 
   }
   

@@ -180,6 +180,7 @@
             :jobAd="job.jobAdInfo"
             :jobRelID="job._id"
             :allUsersJobs="jobs"
+            :cv="job.cv"
           />
         </div>
     </div>

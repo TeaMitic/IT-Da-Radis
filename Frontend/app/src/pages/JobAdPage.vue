@@ -166,15 +166,26 @@ export default {
       await this.$store.dispatch('createJobApplication', {
         jobID: this.$route.params.id,
         userID: this.user._id,
-        cv: null,
+        // cv: null,
         name: this.user.name,
         surname: this.user.surname,
         userEmail: this.user.email,
         userTel: this.user.contactTel
       })
+
+      let jobRelID = this.$store.getters['getCurrentJobAppID']
+    
+      var form = new FormData()
+      form.append('my_file', this.cv);
+      await this.$store.dispatch('sendCV',{
+        jobRelID: jobRelID,
+        cv: form
+      })
+
     },
     processFile(event) {
       this.cv = event.target.files[0];
+      console.log(this.cv)
     },
     async getUser() {
       let id = Vue.$cookies.get("id");
@@ -192,8 +203,7 @@ export default {
           duration: 2000,
         });
         console.log(this.$route.params);
-        Vue.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`,"1h")
-        router.push(`/login/_` );
+        router.push(`/login` );
       }
       if (this.user == null) {
         await this.getUser();
@@ -209,7 +219,6 @@ export default {
     this.jobAd = this.$store.getters["getCurrentJobAd"];
     await this.$store.dispatch("getCompanyByID", this.jobAd.companyID);
     this.company = this.$store.getters["getCurrentCompany"];
-    this.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`, "1h" )
 
     this.isDataLoaded = true;
   },

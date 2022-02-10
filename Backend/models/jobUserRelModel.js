@@ -19,6 +19,7 @@ const jobUserRelSchema = new Schema({
         required:true
     },
     cv:{
+        name: String,
         data:Buffer,
         contentType: String
     },

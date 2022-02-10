@@ -2,7 +2,7 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top " id="mainNav" >
     <div class="container">
-      <router-link :to="{ name: 'Homepage' }">
+      <router-link :to="{ name: 'Homepage'}">
         <a class="navbar-brand">
           <img src="../assets/img/logo_no_bg.png" alt="logo"/></a>
       </router-link>

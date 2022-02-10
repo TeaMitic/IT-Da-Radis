@@ -15,6 +15,7 @@ export default new Vuex.Store({
         currentCompanyCategories: null,
         currentUser: null,
         currentUsersJobs: null,
+        currentJobAppID: null,
         currentJobAd: null,
         currentToken: null,
         currentUsername: null,
@@ -30,7 +31,6 @@ export default new Vuex.Store({
             try { 
                 let loginInfo = loginObject.loginInfo
                 let userType = loginObject.userType
-                let page = loginObject.page
                 let res = null
                 if (userType == "user") { 
                     res = await Api().post('/api/auth/loginUser',loginInfo)
@@ -48,20 +48,14 @@ export default new Vuex.Store({
                 Vue.$cookies.set("token", data.token, cookieTime)
                 Vue.$cookies.set("userType", data.tip, cookieTime)
                 
-                if (page == '_' ) { 
+                
+                if (data.tip == "U") { 
                     router.push('/')
                 }
-                else { 
-                    router.push(`/${page}`)
-
-                }
-                // if (data.tip == "U") { 
-                //     router.push('/')
-                // }
-                // else {
-                //     router.push('/CompanyHomepage')
+                else {
+                    router.push('/CompanyHomepage')
                     
-                // }
+                }
                
 
             }
@@ -336,7 +330,29 @@ export default new Vuex.Store({
         async createJobApplication({commit},application) { 
             try {
                 let res = await Api().post('/api/jobUserRel/createJobApplication',application)
-                console.log(res)
+                //ne treba kasnije 
+                if (res.status == 200) { 
+                    commit("setJobAppID", res.data.jobRelID)
+                    Vue.toasted.show(res.data.jobRelID,{ 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                    })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async sendCV({commit},cv) { 
+            try {
+                let id = cv.jobRelID
+                let form = cv.cv
+                let res = await Api().put(`/api/jobUserRel/uploadCV/${id}`,form, { 
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
                 if (res.status == 200) { 
                     Vue.toasted.show(res.data,{ 
                         theme: "bubble", 
@@ -346,7 +362,7 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
         },
         postaviUserType({commit},userType) { 
@@ -373,6 +389,9 @@ export default new Vuex.Store({
     },
     mutations: { 
         setNista() { },
+        setJobAppID(state,jobID) { 
+            state.currentJobAppID = jobID
+        },
         setJobAd(state,job) { 
             state.currentJobAd = job
         },
@@ -418,6 +437,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentJobAppID(state) { 
+            return state.currentJobAppID
+        },
         getCurrentUsersJobs(state) { 
             return state.currentUsersJobs
         },
