@@ -14,6 +14,7 @@ export default new Vuex.Store({
         currentCompanyJobAds: null,
         currentCompanyCategories: null,
         currentUser: null,
+        currentUsersJobs: null,
         currentJobAd: null,
         currentToken: null,
         currentUsername: null,
@@ -29,6 +30,7 @@ export default new Vuex.Store({
             try { 
                 let loginInfo = loginObject.loginInfo
                 let userType = loginObject.userType
+                let page = loginObject.page
                 let res = null
                 if (userType == "user") { 
                     res = await Api().post('/api/auth/loginUser',loginInfo)
@@ -46,14 +48,20 @@ export default new Vuex.Store({
                 Vue.$cookies.set("token", data.token, cookieTime)
                 Vue.$cookies.set("userType", data.tip, cookieTime)
                 
-               
-                if (data.tip == "U") { 
+                if (page == '_' ) { 
                     router.push('/')
                 }
-                else {
-                    router.push('/CompanyHomepage')
-                    
+                else { 
+                    router.push(`/${page}`)
+
                 }
+                // if (data.tip == "U") { 
+                //     router.push('/')
+                // }
+                // else {
+                //     router.push('/CompanyHomepage')
+                    
+                // }
                
 
             }
@@ -122,8 +130,15 @@ export default new Vuex.Store({
         },
         async deleteUser({commit,dispatch},id) { 
             try {
-                await Api().delete(`/api/user/deleteUser/${id}`)
+                let res = await Api().delete(`/api/user/deleteUser/${id}`)
                 commit('setNista')
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
                 dispatch('logout')
             } catch (error) {
                 console.log(error)
@@ -239,6 +254,30 @@ export default new Vuex.Store({
                 
             }
         },
+        async deleteJobApplication({commit},id) { 
+            try {
+                let res = await Api().delete('/api/jobUserRel/deleteJobApplication/' + id)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data, { 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                   })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async getUsersJobs({commit}, id) {
+            try {
+                let res = await Api().get(`/api/jobUserRel/getUsersJobAds/${id}`)
+                commit('setCurrentUsersJobs', res.data)
+            } catch (error) {
+                console.log(error);
+                
+            }
+        },
         async getJobAdByID({commit}, id) { 
             try {
                 let res = await Api().get(`/api/jobAd/getJobAdByID/${id}`)
@@ -272,7 +311,7 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
             }
         },
         async changePasswordCompany({commit},companyObject){
@@ -291,7 +330,23 @@ export default new Vuex.Store({
                 }
                 commit('setNista')
             } catch (error) {
-                console.log(error.data)
+                console.log(error)
+            }
+        },
+        async createJobApplication({commit},application) { 
+            try {
+                let res = await Api().post('/api/jobUserRel/createJobApplication',application)
+                console.log(res)
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data,{ 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                    })
+                }
+                commit('setNista')
+            } catch (error) {
+                console.log(error);
             }
         },
         postaviUserType({commit},userType) { 
@@ -308,6 +363,9 @@ export default new Vuex.Store({
         },
         postaviCurrentCompanyCategories({commit},categories) { 
             commit('setCurrentCompanyCategories',categories)
+        },
+        postaviCurrentUserJobs({commit}, jobs) { 
+            commit('setCurrentUsersJobs',jobs)
         }
         
         
@@ -317,6 +375,9 @@ export default new Vuex.Store({
         setNista() { },
         setJobAd(state,job) { 
             state.currentJobAd = job
+        },
+        setCurrentUsersJobs(state, jobs) { 
+            state.currentUsersJobs = jobs
         },
         setAllJobTags(state,allJobTags) { 
             state.allJobTags = allJobTags
@@ -357,6 +418,9 @@ export default new Vuex.Store({
 
     },
     getters: { 
+        getCurrentUsersJobs(state) { 
+            return state.currentUsersJobs
+        },
         getAllJobTags(state) { 
             return state.allJobTags
         },

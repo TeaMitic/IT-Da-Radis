@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isDataLoaded" class="card col-lg-3   my-3 px-0 rounded shadow   kartica " v-bind:id="jobAd._id">
+  <div v-if="isDataLoaded" class="card col-md-12 col-lg-3  m-3 px-0 rounded shadow flex-row" v-bind:id="jobAd._id">
     
     <div class="card-body d-flex flex-column align-items-start ">  
       <router-link :to="{ name: 'AboutJobAd', params: { id: jobAd._id} }" ><h4 class="card-title ">{{jobAd.name}}</h4></router-link >
@@ -8,15 +8,14 @@
       <label>{{jobAd.city}}</label>
       <label>{{jobAd.expireAt | date-format}}</label>
       <div class="d-flex flex-row flex-wrap ">
-        <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key=tag.id >{{tag}}</router-link>
+        <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" >{{tag}}</router-link>
 
       </div>
     </div>
-    <div class="d-flex align-items-center pictureDiv">
-        <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd._id}}">
-            <img class=" roundedImg " src="../assets/img/company-card-bg.jpg" alt="Comapny logo" />
-        </router-link>
+    <div class="px-3 py-2">
+      <button class="btn btn-lg btn-danger rounded mt-3  dugme deleteBtn " @click="deleteJob">X</button>
     </div>
+    
     
   </div>
 </template>
@@ -29,6 +28,14 @@ export default {
       required: true,
       type: Object
     },
+    jobRelID: { 
+      required: true,
+      type: String
+    },
+    allUsersJobs: {
+      required: true,
+      type: Array
+    }
   },
   data() {
     return {
@@ -43,7 +50,12 @@ export default {
     this.company = this.$store.getters['getCurrentCompany']
     this.isDataLoaded = true
   },
- 
+  methods: { 
+    async deleteJob() { 
+      await  this.$store.dispatch('deleteJobApplication', this.jobRelID)
+      this.$store.dispatch('postaviCurrentUserJobs', this.allUsersJobs.filter(job => job._id != this.jobRelID))
+    }
+  }
   
  
   
@@ -51,9 +63,7 @@ export default {
 </script>
 
 <style scoped>
-.pictureDiv { 
-    margin: 3rem;
-}
+
 .kartica { 
     width: 100%;
     display: flex !important;
@@ -97,6 +107,25 @@ export default {
   background-color: hsl(240, 1%, 78%);
   transition: 0.25s;
 
+}
+.dugme {
+  /* margin: 0.8rem; */
+  background-color: #00b1a8;
+  color: white;
+  outline: none;
+  font-weight: 600;
+}
+.dugme:hover {
+  background-color: hsl(177, 100%, 20%);
+}
+.deleteBtn {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.deleteBtn:hover {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
 }
 </style>
  

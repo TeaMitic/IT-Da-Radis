@@ -172,7 +172,7 @@ export default {
     else { 
       await this.filterCompanies(preload_cat)
     }
-    
+    this.$cookies.set('currentPage',`AllCompanies/${this.$route.params.tag}`, "1h" )
     this.isDataLoaded = true;
   },
   

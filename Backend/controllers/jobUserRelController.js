@@ -38,14 +38,17 @@ const GetUsersJobAds = async (req, res)=>{
         const id = req.params.id
         let usersJobAds = await JobUserRel.find({ userID: id })
         let resultList = []
-        let newElement = {}
         for await (let el of usersJobAds){
+            let newElement = {}
             newElement._id = el._id
             newElement.userEmail = el.userEmail
             newElement.userTel = el.userTel
+            newElement.name = el.name
+            newElement.surname = el.surname
+
             let jobad = await JobAd.findById(el.jobID)
             newElement.jobAdInfo = jobad
-            console.log(newElement)
+            // console.log(newElement)
             resultList.push(newElement)
         }
         res.status(200).send(resultList)

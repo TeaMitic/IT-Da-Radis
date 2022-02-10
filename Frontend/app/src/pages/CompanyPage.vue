@@ -121,6 +121,8 @@ export default {
     await this.$store.dispatch("getCompanyByID", id);
     this.company = this.$store.getters["getCurrentCompany"];
     await this.$store.dispatch("getCompanyJobAds", id);
+    this.$cookies.set('currentPage',`AboutCompany/${this.$route.params}`, "1h" )
+
     this.isDataLoaded = true;
   },
 };

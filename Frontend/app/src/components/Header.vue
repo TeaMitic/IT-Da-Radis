@@ -23,7 +23,7 @@
             <li class="nav-item ">
               <a  class=" nav-link px-lg-2 text-white slova rounded dropdown-item " href="#!" >Oglasi</a>
             </li></router-link>
-          <router-link :to="{ name: 'Login' }">
+          <router-link :to="{ name: 'Login', params: {page: '_'} }">
             <li  class="nav-item ">
               <a class=" nav-link px-lg-2  text-white slova rounded dropdown-item " href="#!" >Prijavi se</a>
             </li></router-link>
