@@ -1,9 +1,9 @@
 <template>
   <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow  " v-bind:id="company._id">
     <router-link :to="{name: 'AboutCompany', params: {id: company._id}}">
-      <img class="card-img-top roundedImg" v-bind:src= imageUrl alt="Card image cap" />
+      <img class="card-img-top roundedImg img" v-bind:src= imageUrl alt="Card image cap" />
     </router-link>
-    <div class="card-body d-flex flex-column align-items-start">
+    <div class="card-body d-flex flex-column align-items-start justify-content-end">
       <router-link :to="{ name: 'AboutCompany', params: {id: company._id}}" ><h4 class="card-title ">{{company.name}}</h4></router-link >
       <a class="link" v-bind:href="company.website" target="_blank" rel="noopener">{{company.website | trim-web}}</a>
       <div class="d-flex flex-row flex-wrap ">
@@ -75,6 +75,8 @@ export default {
 .roundedImg { 
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
+  height: 90%;
+  width: 90%;
 
 }
 .tagBg { 
@@ -91,5 +93,6 @@ export default {
   transition: 0.25s;
 
 }
+
 </style>
  

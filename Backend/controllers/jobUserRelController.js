@@ -91,10 +91,26 @@ const UploadCV =async(req,res)=>{
     }
 }
 
+const NumOfCandidates= async(req,res)=>{
+    try{
+        let candidates = await JobUserRel.find({jobID: req.params.id})
+        let number= {
+            num: candidates.length
+        }
+
+        res.status(200).send(number)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+
+}
+
 module.exports={
     CreateJobApplication,
     DeleteJobApplication,
     GetUsersJobAds,
     GetCandidatesForJobAd,
-    UploadCV
+    UploadCV,
+    NumOfCandidates
 }

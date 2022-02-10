@@ -18,7 +18,7 @@
           <div class="d-flex flex-column jobAd-info">
             <div class="d-flex flex-row jobAd-info-basic">
               <div class="imageDiv d-flex justify-content-center">
-                <img class="logo p-2" src="../assets/img/company-card-bg.jpg"  alt="Logo firme"/>
+                <img class="logo p-2" v-bind:src= imageUrl alt="Logo firme"/>
               </div>
               <div class=" mx-3 d-flex flex-column align-items-start mt-3 text-start" > 
                 <h4 class="mb-3">
@@ -42,7 +42,8 @@
               </div>
               <br />
                   <div>
-                      <router-link :to="{ name: 'CompanyJobAd', params: { id: jobAd._id} }" ><button @click="editPassword" class="btn btn-lg btn-primary rounded dugme editBtn" >
+                      <router-link :to="{ name: 'CompanyJobAd', params: { id: jobAd._id} }" ><button class="btn btn-lg btn-primary rounded dugme editBtn" >
+                        <!--  @click="editPassword" -->
                         <font-awesome-icon :icon="['fas', 'edit']" />
                 </button></router-link >
                       
@@ -64,6 +65,14 @@
         </div>
         <hr class="mx-5" />
 
+        <!-- <div class="row"> -->
+          <h4 class="text-muted">Job candidates</h4>
+          <CandidateInfo v-for="candidate in candidates" 
+                          :key="candidate.userID" 
+                          :candidate="candidate" />
+
+        <!-- </div> -->
+
       </div>
       <div v-else>
         <AppSpinner />
@@ -81,6 +90,7 @@ import Vue from "vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue";
+import CandidateInfo from "../components/CandidateInfo.vue"
 
 
 export default {
@@ -89,14 +99,21 @@ export default {
     AppSpinner,
     Header,
     Footer,
+    CandidateInfo
   },
   data() {
     return {
       isDataLoaded: false,
       userType: null,
       jobAd: null,      
-      user: null,      
+      user: null,   
+      imageUrl: ""   
     };
+  },
+  computed:{
+    candidates(){
+      return this.$store.getters['getCandidatesForJobAd']
+    }
   },
   methods: {    
     async getUser() {
@@ -113,7 +130,10 @@ export default {
     this.jobAd = this.$store.getters["getCurrentJobAd"];
     await this.$store.dispatch("getCompanyByID", this.jobAd.companyID);
     this.user = this.$store.getters["getCurrentCompany"];
+    await this.$store.dispatch("getCandidatesForJobAd", this.jobAd._id)
     this.isDataLoaded = true;
+    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)))
+    this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
   },
 };
 </script>

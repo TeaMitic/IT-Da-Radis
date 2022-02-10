@@ -12,6 +12,18 @@
             <h4 class="col-3 pt-3  text-start">Podaci o kompaniji:</h4>
             <button @click="edit" class="btn btn-lg btn-primary rounded dugme editBtn  "><font-awesome-icon  :icon="['fas', 'edit']" /></button>
         </div>
+        <div class="row ">
+            <div class="col-6 imgDiv align-items-start">
+                <img  class="roundedImg img" v-bind:src= imageUrl  alt="Comapny logo">
+            </div>
+            <div class="col-5 align-items-start">
+                <input type="file" class="form-control rounded mt-3"   @change="processFile($event)" id="customFile"/> 
+            </div>
+            <div class="col-2 align-items-start">
+                <button @click="upload" class="btn btn-lg btn-primary rounded dugme editBtn p-2">Upload image</button>
+            </div>
+
+        </div>
         <div class="row px-4">
             <div class="row ">
                 <!-- name -->
@@ -190,7 +202,9 @@ export default {
       editable: false,
       passwordEditable: false,
       categoriesEditable: false,
-      inputkat: ""
+      inputkat: "",
+      imageUrl: "",
+      image: null
     };
   },
   computed: {
@@ -206,6 +220,9 @@ export default {
     
     this.isDataLoaded = true
     console.log(this.user);
+    // const blob = new Blob([new Uint8Array(this.user.image.img.data.data)], {type: this.user.image.img.contentType})
+    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)));
+    this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
   },
   methods: {
       edit() { 
@@ -271,15 +288,29 @@ export default {
         newPassword: this.repeatPassword
       })
       this.editPassword()
-    }
-      ,
-      async saveCategories(){
-          await this.$store.dispatch('upadteCategoriesCompany',{
-        id: this.user._id,
-        categories: this.categories
-      })
-          
-      }
+    },
+    async saveCategories(){
+        await this.$store.dispatch('upadteCategoriesCompany',{
+            id: this.user._id,
+            categories: this.categories
+        })
+        
+    },
+    async upload(){
+        //treba id kompanije i form-data sa filename u body i image u form
+        var form = new FormData()
+        form.append('image', this.image);
+        await this.$store.dispatch('uploadImage',{
+            companyID: this.user._id,
+            img: form
+        })
+
+      
+    },
+    processFile(event) {
+        this.image = event.target.files[0];
+        console.log(this.image)
+    },
 
   },
   
@@ -317,6 +348,18 @@ export default {
 .dugme:hover { 
   background-color: hsl(177, 100%, 20%);
 
+}
+.roundedImg { 
+  border-radius: 10px  !important;
+  height: 8rem;
+  width: 10rem;
+
+}
+.imgDiv{
+    height:8rem;
+    width: 8rem;
+    margin-bottom: 2%;
+    margin-right: 4%;
 }
 
 </style>

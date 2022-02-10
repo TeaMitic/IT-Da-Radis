@@ -27,11 +27,11 @@ const UploadImage = async(req, res) => {
 
             console.log(req.files.image)
             const obj={
-                name: req.body.filename,
+                name: req.files.image.name,
                 img:{
                     data: req.files.image.data,
                     // data: fs.readFileSync(path.join(filepath + '\\' + req.files.image.name)),
-                    contentType: 'image/png'
+                    contentType: req.files.image.mimetype
                 }
             }
             result.image = obj

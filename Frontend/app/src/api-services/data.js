@@ -24,7 +24,8 @@ export default new Vuex.Store({
         allCompanies: [],
         allJobAds: [],
         allCategories: [],
-        allJobTags: []
+        allJobTags: [],
+        jobCandidates:[]
     },
     actions: { 
         async login({commit}, loginObject) { 
@@ -184,6 +185,16 @@ export default new Vuex.Store({
                 console.log(err)
             }
             
+        },
+        async getCandidatesForJobAd({commit}, jobID){
+            try{
+                await Api().get('/api/jobUserRel/getCandidates/'+jobID).then(res=>{
+                    commit('setCandidatesForJobAd', res.data)
+                })
+            }
+            catch (err) {
+                console.log(err)
+            }
         },
         async changePassword({commit},userObject) { 
             let id = userObject.id
@@ -402,6 +413,29 @@ export default new Vuex.Store({
                 console.log(error)
             }
         },
+        async uploadImage({commit}, img){
+            try{
+                let id = img.companyID
+                let form = img.img
+                let res = await Api().put(`/api/company/uploadImage/${id}`,form, { 
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                if (res.status == 200) { 
+                    Vue.toasted.show(res.data,{ 
+                        theme: "bubble", 
+                        position: "top-center", 
+                        duration : 2000
+                    })
+                }
+                commit('setNista')
+
+            }
+            catch (error) {
+                console.log(error)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -470,6 +504,9 @@ export default new Vuex.Store({
         },
         setCurrentCompanyCategories(state,categories) { 
             state.currentCompanyCategories = categories
+        },
+        setCandidatesForJobAd(state, candidates){
+            state.jobCandidates=candidates
         }
 
     },
@@ -506,6 +543,9 @@ export default new Vuex.Store({
         },
         getCurrentCompanyCategories(state) { 
             return state.currentCompanyCategories
+        },
+        getCandidatesForJobAd(state){
+            return state.jobCandidates
         }
     }
 })
