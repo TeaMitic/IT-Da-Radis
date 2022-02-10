@@ -48,20 +48,14 @@ export default new Vuex.Store({
                 Vue.$cookies.set("token", data.token, cookieTime)
                 Vue.$cookies.set("userType", data.tip, cookieTime)
                 
-                if (page == '_' ) { 
+                
+                if (data.tip == "U") { 
                     router.push('/')
                 }
-                else { 
-                    router.push(`/${page}`)
-
-                }
-                // if (data.tip == "U") { 
-                //     router.push('/')
-                // }
-                // else {
-                //     router.push('/CompanyHomepage')
+                else {
+                    router.push('/CompanyHomepage')
                     
-                // }
+                }
                
 
             }
