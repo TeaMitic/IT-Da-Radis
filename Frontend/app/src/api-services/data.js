@@ -30,7 +30,6 @@ export default new Vuex.Store({
             try { 
                 let loginInfo = loginObject.loginInfo
                 let userType = loginObject.userType
-                let page = loginObject.page
                 let res = null
                 if (userType == "user") { 
                     res = await Api().post('/api/auth/loginUser',loginInfo)
