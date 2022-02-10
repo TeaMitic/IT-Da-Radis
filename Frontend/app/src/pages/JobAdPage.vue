@@ -192,8 +192,7 @@ export default {
           duration: 2000,
         });
         console.log(this.$route.params);
-        Vue.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`,"1h")
-        router.push(`/login/_` );
+        router.push(`/login` );
       }
       if (this.user == null) {
         await this.getUser();
@@ -209,7 +208,6 @@ export default {
     this.jobAd = this.$store.getters["getCurrentJobAd"];
     await this.$store.dispatch("getCompanyByID", this.jobAd.companyID);
     this.company = this.$store.getters["getCurrentCompany"];
-    this.$cookies.set('currentPage',`AboutJobAd/${this.$route.params.id}`, "1h" )
 
     this.isDataLoaded = true;
   },
