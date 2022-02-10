@@ -114,7 +114,6 @@ export default {
     else { 
       await this.filterJobs(preload_tag)
     }
-    this.$cookies.set('currentPage',`AllJobAds/${this.$route.params.tag}`, "1h" )
 
     this.isDataLoaded = true
 

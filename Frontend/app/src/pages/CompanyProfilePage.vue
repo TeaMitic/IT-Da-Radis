@@ -203,7 +203,6 @@ export default {
     let id = this.$cookies.get('id')
     await this.$store.dispatch('getCompanyByID',id)
     this.user = this.$store.getters['getCurrentCompany']
-    this.$cookies.set('currentPage',`CompanyProfile`, "1h" )
     
     this.isDataLoaded = true
     console.log(this.user);
