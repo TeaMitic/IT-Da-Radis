@@ -47,7 +47,7 @@
               <div class="col-12 d-flex flex-column align-items-start">
                 <label for="time" class="form-check-label px-1">Tagovi:</label>
                 <div class="col-12 d-flex flex-row flex-wrap">
-                  <div v-for="tag in this.adTags" :key="tag" class="col-2 container card rounded" >
+                  <div v-for="tag in this.adTags" :key="tag" class="col-2 container boja  card rounded" >
                     <label for="tag" class="form-check-label px-1">{{tag}}</label>
                   </div>
                 </div>
@@ -172,7 +172,14 @@ export default {
           position: "top-center",
           duration: 2000,
         });
-      } else {
+      } else if (this.adTags.indexOf(this.adTag) >= 0) {
+        Vue.toasted.show("Taj tag ste vec uneli.", {
+          theme: "bubble",
+          position: "top-center",
+          duration: 2000,
+        });
+      }
+      else { 
         this.adTags.push(this.adTag);
       }
     },
@@ -195,7 +202,10 @@ export default {
   overflow-x: hidden;
   background-color: whitesmoke;
 }
+.boja { 
+  background-color: #00b1a867;
 
+}
 .dugme {
   margin: top 0.8rem;
   background-color: #00b1a8;
