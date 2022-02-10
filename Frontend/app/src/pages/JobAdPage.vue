@@ -128,6 +128,8 @@ import Footer from "../components/Footer.vue";
 import AppSpinner from "../components/AppSpinner.vue";
 import router from "../router/index";
 
+// var FormData = require('form-data');
+
 export default {
   title: "IT Da Radis - Homepage",
   components: {
@@ -150,6 +152,17 @@ export default {
   },
   methods: {
     async send() { 
+      // var form = new FormData()
+      // form.append('jobID',this.$route.params.id)
+      // form.append('userID',this.user._id)
+      // form.append('name',this.user.name)
+      // form.append('surname',this.user.surname)
+      // form.append('userEmail',this.user.email)
+      // form.append('userTel',this.user.contactTel)
+      // form.append('cv',null)
+
+
+
       await this.$store.dispatch('createJobApplication', {
         jobID: this.$route.params.id,
         userID: this.user._id,
