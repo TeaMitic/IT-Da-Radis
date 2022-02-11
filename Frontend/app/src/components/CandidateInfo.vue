@@ -9,6 +9,7 @@
       <label><b class="mx-1">Email:</b> {{candidate.userEmail}}</label>
       <label><b class="mx-1">Tel:</b> {{candidate.userTel}}</label>
       <div class="d-flex flex-row flex-wrap mt-1 mx-1 ">
+        <label><b class="mx-1">CV: </b> </label>
            <a v-bind:href=downloadCV v-bind:download=candidate.cv.name >{{candidate.cv.name}}</a>
       </div>
     </div>
