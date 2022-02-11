@@ -52,44 +52,44 @@ const GetAllJobAds = async (req, res)=>{
 }
 //1. NACIN - koristeci distinct i count
 
-// const GetAllTags = async (req, res)=>{
-//     try{
-//         let resList = []
-//         let newEl = {}
-//         let listOfTags = await JobAd.distinct("tags")
-//         for await (el of listOfTags){
-//             newEl ={}
-//             newEl.nameOfTag = el
-//             newEl.numOfAds = await JobAd.count({tags: { $elemMatch:{ $eq: el} }})
-//             resList.push(newEl)
-//         }
-//         res.status(200).send(resList)
-//     }
-//     catch(err){
-//         res.status(500).send(err.message)
-//     }
-// }
-
-
-//2. nacin - koristeci aggregate (nemam pojma kako ovo radi, provalicu ga u petak)
-//https://stackoverflow.com/questions/21509045/mongodb-group-by-array-inner-elements
-
 const GetAllTags = async (req, res)=>{
     try{
-        let resList = await JobAd.aggregate([
-            {$project: { _id: 0, tags: 1 } },
-            {$unwind: "$tags" },
-            {$group: { _id: "$tags", num: { $sum: 1 } }},
-            {$project: { _id: 0,tag: "$_id", num: 1 } },
-            {$sort: { num: -1 } }
-          ])
-
+        let resList = []
+        let newEl = {}
+        let listOfTags = await JobAd.distinct("tags")
+        for await (el of listOfTags){
+            newEl ={}
+            newEl.tag = el
+            newEl.num = await JobAd.count({tags: { $elemMatch:{ $eq: el} }})
+            resList.push(newEl)
+        }
         res.status(200).send(resList)
     }
     catch(err){
         res.status(500).send(err.message)
     }
 }
+
+
+//2. nacin - koristeci aggregate (nemam pojma kako ovo radi, provalicu ga u petak)
+//https://stackoverflow.com/questions/21509045/mongodb-group-by-array-inner-elements
+
+// const GetAllTags = async (req, res)=>{
+//     try{
+//         let resList = await JobAd.aggregate([
+//             {$project: { _id: 0, tags: 1 } },
+//             {$unwind: "$tags" },
+//             {$group: { _id: "$tags", num: { $sum: 1 } }},
+//             {$project: { _id: 0,tag: "$_id", num: 1 } },
+//             {$sort: { num: -1 } }
+//           ])
+
+//         res.status(200).send(resList)
+//     }
+//     catch(err){
+//         res.status(500).send(err.message)
+//     }
+// }
 
 
 //1. NACIN
@@ -144,6 +144,31 @@ const GetFilteredJobAds = async (req, res)=>{
         console.log(err)
     }
 }
+
+const GetFilteredJobAdsByTags = async (req, res)=>{
+    try{
+        let date = new Date(Date.now())
+        let reslist = await JobAd.aggregate([
+            {
+                "$search":{
+                    "index":"trazenjeOglasaPoTagu",
+                    "text":{
+                        "query":req.body.trazeniTag,
+                        "path":["tags"]
+                    }
+                }
+            },
+            {"$match": { expireAt: { $gte: date } } },
+            {"$sort":{ createdAt: -1}}
+        ])
+        res.status(200).send(reslist)
+    }
+    catch(err){
+        res.status(500).send(err.message)
+        console.log(err)
+    }
+}
+
 
 const GetCompaniesJobAds = async (req, res)=>{
     try{
@@ -280,5 +305,6 @@ module.exports = {
     GetCompaniesActiveJobAds,
     GetFilteredJobAds,
     GetAllTags,
-    UpdateTagsToJobAd
+    UpdateTagsToJobAd,
+    GetFilteredJobAdsByTags
 }
