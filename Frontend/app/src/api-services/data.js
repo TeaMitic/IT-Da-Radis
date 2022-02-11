@@ -21,6 +21,7 @@ export default new Vuex.Store({
         currentUsername: null,
         currentUserID: null,
         currentUserType: null,
+        numOfApplicants: null,
         allCompanies: [],
         allJobAds: [],
         allCategories: [],
@@ -193,7 +194,7 @@ export default new Vuex.Store({
                 commit('setCompanyJobAds',res.data)
                 
             } catch (error) {
-                console.log(err)
+                console.log(error)
             }
         },
         async getCandidatesForJobAd({commit}, jobID){
@@ -446,6 +447,16 @@ export default new Vuex.Store({
                 console.log(error)
             }
         },
+        async postaviNumOfApplicants({commit}, id){
+            try{
+                let res = await Api().get(`/api/jobUserRel/numOfCandidates/${id}`)
+                commit('setNumOfApplicants',res.data)
+            }
+            catch(error) {
+                console.log(error)
+            }
+
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },
@@ -517,6 +528,9 @@ export default new Vuex.Store({
         },
         setCandidatesForJobAd(state, candidates){
             state.jobCandidates=candidates
+        },
+        setNumOfApplicants(state,numberOfApplicants){
+            state.numOfApplicants = numberOfApplicants
         }
 
     },
@@ -556,6 +570,9 @@ export default new Vuex.Store({
         },
         getCandidatesForJobAd(state){
             return state.jobCandidates
+        },
+        getNumberOfApplicants(state){
+            return state.numOfApplicants
         }
     }
 })
