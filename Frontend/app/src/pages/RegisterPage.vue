@@ -54,8 +54,8 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from '@/components/Footer.vue';
-import UserForm from '@/components/registerUser.vue';
-import CompanyForm from '@/components/registerCompany.vue';
+import UserForm from '@/components/RegisterUser.vue';
+import CompanyForm from '@/components/RegisterCompany.vue';
 
 export default {
   title: 'IT Da Radis - Register',

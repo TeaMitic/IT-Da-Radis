@@ -12,7 +12,7 @@
         <div class="m-1 px-1 border  tagBg cursorNormal" v-for="tag in jobAd.tags" :key="tag"  >{{ tag }}</div>
       </div>
       <div class="d-flex flex-row flex-wrap mt-1 ">
-          <h5>Broj prijava: {{jobAd.numOfCandidates}}</h5>
+          <h5>Broj prijava: {{numOfApplicants.num}}</h5>
       </div>
     </div>
     <div class="d-flex align-items-center pictureDiv">
@@ -38,6 +38,7 @@ export default {
         isDataLoaded: false,
         company: null,
         numOfApplicants: null,
+        imageUrl: null,
 
     }
   },
@@ -49,6 +50,7 @@ export default {
     this.isDataLoaded = true
      await this.$store.dispatch('postaviNumOfApplicants',this.jobAd._id)
     this.numOfApplicants = this.$store.getters['getNumberOfApplicants']
+ 
     const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
     this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
   },

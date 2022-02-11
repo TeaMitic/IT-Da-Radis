@@ -71,6 +71,7 @@ const router = new Router({
             path:'/AllJobAds/:tag',
             name: 'AllJobAds',
             component: AllJobAdsPage,
+
         },
         {
             path: '/UserProfile',
