@@ -7,7 +7,10 @@
       <router-link :to="{ name: 'AboutCompany', params: {id: company._id}}" ><h4 class="card-title ">{{company.name}}</h4></router-link >
       <a class="link" v-bind:href="company.website" target="_blank" rel="noopener">{{company.website | trim-web}}</a>
       <div class="d-flex flex-row flex-wrap ">
-        <router-link  v-for="tag in categories" :key="tag" :to="{name: 'AllCompanies', params: { tag: tag}}"  class="m-1 px-1 border  tagBg "  >{{tag}}</router-link>
+        <button @click="reroute(tag)" v-for="tag in categories" :key="tag" class="m-1 px-1 border  tagBg ">
+          {{tag}}
+        </button>
+        <!-- <router-link  v-for="tag in categories" :key="tag" :to="{name: 'AllCompanies', params: { tag: tag}}"  class="m-1 px-1 border  tagBg "  >{{tag}}</router-link> -->
         <div class="m-1 px-1 border  tagBg cursorNormal" v-if="restCount > 0">+{{restCount}}</div>
       </div>
     </div>
@@ -44,7 +47,12 @@ export default {
     this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
     console.log(this.company.image.img.data)
     //   this.imageUrl = URL.createObjectURL( this.company.image.img.data[0] );
-  }
+  },
+  methods: {
+    reroute(tag) { 
+      this.$router.push(`/AllCompanies/${tag}`)
+    }
+  },
  
   
  

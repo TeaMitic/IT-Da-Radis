@@ -8,9 +8,10 @@
       <!-- <br><h6 class="card-subtitle">{{company.name}}</h6> -->
       <label><b class="mx-1">Email:</b> {{candidate.userEmail}}</label>
       <label><b class="mx-1">Tel:</b> {{candidate.userTel}}</label>
-      <div class="d-flex flex-row flex-wrap mt-1 mx-1 ">
+      <div class="d-flex flex-row flex-wrap mt-1 mx-1 align-items-center">
         <label><b class="mx-1">CV: </b> </label>
-           <a v-bind:href=downloadCV v-bind:download=candidate.cv.name >{{candidate.cv.name}}</a>
+        <a v-bind:href=downloadCV v-bind:download=candidate.cv.name >{{candidate.cv.name}}</a>
+        <font-awesome-icon :icon="['fas', 'file-download']" class="mx-2"/>
       </div>
     </div>
     <!-- <div class="d-flex align-items-center pictureDiv">

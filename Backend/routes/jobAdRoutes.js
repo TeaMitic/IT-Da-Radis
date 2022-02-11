@@ -29,6 +29,6 @@ router.get('/getCompaniesActiveJobAds/:companyID', GetCompaniesActiveJobAds)
 router.put('/updateTags/:id', UpdateTagsToJobAd)
 router.put('/getFilteredJobAds', GetFilteredJobAds)
 router.get('/getAllTags', GetAllTags)
-router.get('/getFilteredJobAdsByTags',GetFilteredJobAdsByTags)
+router.get('/getFilteredJobAdsByTags/:tag',GetFilteredJobAdsByTags)
 
 module.exports = router

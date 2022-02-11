@@ -198,6 +198,15 @@ export default new Vuex.Store({
                 console.log(error)
             }
         },
+        async filterJobsByTag({commit}, tag) { 
+            try {
+                let res = await Api().get(`/api/jobAd/getFilteredJobAdsByTags/${tag}`)
+                commit('setAllJobAds',res.data)
+            } catch (error) {
+                console.log(error)
+                
+            }
+        },
         async getCandidatesForJobAd({commit}, jobID){
             try{
                 await Api().get('/api/jobUserRel/getCandidates/'+jobID).then(res=>{

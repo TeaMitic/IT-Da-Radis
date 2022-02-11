@@ -104,6 +104,11 @@ export default {
     allCategories() {
       return this.$store.getters["getAllCategories"];
     },
+    // url() { 
+    //   let newTag = this.$route.params.tag
+    //   // return this.$route.params.tag
+    //   return this.searchByCategory(newTag);
+    // }
   },
   methods: {
     clearTagForm() { 
@@ -174,7 +179,7 @@ export default {
     }
     this.isDataLoaded = true;
   },
-  
+ 
     
 
 };

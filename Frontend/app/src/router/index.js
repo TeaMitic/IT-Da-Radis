@@ -66,6 +66,7 @@ const router = new Router({
             name: 'AllCompanies',
             component: AllCompaniesPage,
             
+            
         },
         {
             path:'/AllJobAds/:tag',

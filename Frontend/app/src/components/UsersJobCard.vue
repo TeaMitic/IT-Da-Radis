@@ -10,8 +10,11 @@
       <div class="d-flex flex-row flex-wrap ">
         <router-link :to="{name: 'AllJobAds', params: {tag: tag}}" class="m-1 px-1 border tagBg" v-for="tag in jobAd.tags" :key="tag" >{{tag}}</router-link>
       </div>
-      <div class="cv">
+      <div class="cv d-flex flex-row flex-wrap mt-1 mx-1 align-items-center">
+        <label><b class="mx-1">CV: </b> </label>
         <a v-bind:href=downloadCV v-bind:download=cv.name >{{cv.name}}</a>
+        <font-awesome-icon :icon="['fas', 'file-download']" class="mx-2"/>
+
       </div>
     </div>
     <div class="px-3 py-2">

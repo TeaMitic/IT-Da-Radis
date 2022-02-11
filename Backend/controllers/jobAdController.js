@@ -153,7 +153,7 @@ const GetFilteredJobAdsByTags = async (req, res)=>{
                 "$search":{
                     "index":"trazenjeOglasaPoTagu",
                     "text":{
-                        "query":req.body.trazeniTag,
+                        "query":req.params.tag,
                         "path":["tags"]
                     }
                 }

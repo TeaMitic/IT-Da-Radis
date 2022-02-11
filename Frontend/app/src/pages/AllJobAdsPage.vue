@@ -158,7 +158,7 @@ export default {
           element.classList.remove("selected-tag");
         }
       });
-      await this.filterJobs(tag)
+      await this.$store.dispatch('filterJobsByTag',tag)
       this.showCancel = true;
     },
     async noFilterJobs() {
