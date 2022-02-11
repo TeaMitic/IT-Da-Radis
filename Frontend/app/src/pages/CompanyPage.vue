@@ -112,6 +112,7 @@ export default {
   },
   computed: {
     jobAds() {
+      console.log(this.$store.getters["getCurrentCompanyJobAds"]);
       return this.$store.getters["getCurrentCompanyJobAds"];
     },
   },
