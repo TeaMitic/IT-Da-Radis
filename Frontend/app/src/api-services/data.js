@@ -25,7 +25,8 @@ export default new Vuex.Store({
         allJobAds: [],
         allCategories: [],
         allJobTags: [],
-        jobCandidates:[]
+        jobCandidates:[],
+        activeCompanyJobs:[]
     },
     actions: { 
         async login({commit}, loginObject) { 
@@ -189,11 +190,11 @@ export default new Vuex.Store({
         async getCompaniesActiveJobAds({commit},companyID){
             try {
                 // treba da se izmeni nije dobro
-                let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
-                commit('setCompanyJobAds',res.data)
+                let res = await Api().get('/api/jobAd/getCompaniesActiveJobAds/' + companyID)
+                commit('setCompanyActiveJobAds',res.data)
                 
             } catch (error) {
-                console.log(err)
+                console.log(error)
             }
         },
         async getCandidatesForJobAd({commit}, jobID){
@@ -517,6 +518,9 @@ export default new Vuex.Store({
         },
         setCandidatesForJobAd(state, candidates){
             state.jobCandidates=candidates
+        },
+        setCompanyActiveJobAds(state, activeJobs){
+            state.activeCompanyJobs = activeJobs
         }
 
     },
@@ -556,6 +560,9 @@ export default new Vuex.Store({
         },
         getCandidatesForJobAd(state){
             return state.jobCandidates
+        },
+        getCompanyActiveJobAds(state){
+            return state.activeCompanyJobs
         }
     }
 })
