@@ -148,19 +148,20 @@ const GetFilteredJobAds = async (req, res)=>{
 const GetCompaniesJobAds = async (req, res)=>{
     try{
         const companyID = req.params.companyID
-        let list = await JobAd.find({ companyID })
-        let companiesJobAds=[]
-        let candidates=[]
-        let obj={
-            jobAd: null,
-            numOfCandidates: ""
-        }
-        for await (el of list){
-            candidates = await JobUserRel.find({jobID: el._id})
-            obj.jobAd=el
-            obj.numOfCandidates=candidates.length
-            companiesJobAds.push(obj)
-        }
+        let companiesJobAds = await JobAd.find({ companyID })
+        // let list = await JobAd.find({ companyID })
+        // let companiesJobAds=[]
+        // let candidates=[]
+        // let obj={
+        //     jobAd: null,
+        //     numOfCandidates: ""
+        // }
+        // for await (el of list){
+        //     candidates = await JobUserRel.find({jobID: el._id})
+        //     obj.jobAd=el
+        //     obj.numOfCandidates=candidates.length
+        //     companiesJobAds.push(obj)
+        // }
         res.status(200).send(companiesJobAds)
     }
     catch(err){

@@ -186,6 +186,16 @@ export default new Vuex.Store({
             }
             
         },
+        async getCompaniesActiveJobAds({commit},companyID){
+            try {
+                // treba da se izmeni nije dobro
+                let res = await Api().get('/api/jobAd/getCompaniesJobAds/' + companyID)
+                commit('setCompanyJobAds',res.data)
+                
+            } catch (error) {
+                console.log(err)
+            }
+        },
         async getCandidatesForJobAd({commit}, jobID){
             try{
                 await Api().get('/api/jobUserRel/getCandidates/'+jobID).then(res=>{
