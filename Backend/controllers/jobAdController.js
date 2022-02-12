@@ -71,8 +71,7 @@ const GetAllJobAds = async (req, res)=>{
 // }
 
 
-//2. nacin - koristeci aggregate (nemam pojma kako ovo radi, provalicu ga u petak)
-//https://stackoverflow.com/questions/21509045/mongodb-group-by-array-inner-elements
+//2. nacin - koristeci aggregate
 
 const GetAllTags = async (req, res)=>{
     try{
@@ -120,7 +119,8 @@ const GetAllTags = async (req, res)=>{
 // }
 
 
-//2. NACIN - samo koristi aggregate nad modelom
+//2. NACIN 
+
 const GetFilteredJobAds = async (req, res)=>{
     try{
         let date = new Date(Date.now())
@@ -174,19 +174,6 @@ const GetCompaniesJobAds = async (req, res)=>{
     try{
         const companyID = req.params.companyID
         let companiesJobAds = await JobAd.find({ companyID })
-        // let list = await JobAd.find({ companyID })
-        // let companiesJobAds=[]
-        // let candidates=[]
-        // let obj={
-        //     jobAd: null,
-        //     numOfCandidates: ""
-        // }
-        // for await (el of list){
-        //     candidates = await JobUserRel.find({jobID: el._id})
-        //     obj.jobAd=el
-        //     obj.numOfCandidates=candidates.length
-        //     companiesJobAds.push(obj)
-        // }
         res.status(200).send(companiesJobAds)
     }
     catch(err){
