@@ -444,11 +444,9 @@ export default new Vuex.Store({
                     }
                 })
                 if (res.status == 200) { 
-                    Vue.toasted.show(res.data,{ 
-                        theme: "bubble", 
-                        position: "top-center", 
-                        duration : 2000
-                    })
+                    
+                    window.location.reload()
+
                 }
                 commit('setNista')
 

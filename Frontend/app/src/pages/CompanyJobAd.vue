@@ -124,7 +124,7 @@
 							<div class="d-flex justify-content-center">		
 								<button @click="edit" class="btn btn-lg m-4 btn-info rounded dugme editBtn  ">Cancel</button>
 								<button @click="updateAd" class="btn btn-lg m-4 btn-primary rounded dugme" >Save</button>
-								<button @click="deleteAd" class="btn btn-lg m-4 btn-warning rounded dugme" >Delete ad</button>
+								<button @click="deleteAd" class="btn btn-lg m-4 btn-danger rounded dugme2" >Delete ad</button>
 						</div>
 						</div>
 						
@@ -295,7 +295,19 @@ export default {
 .dugme:hover {
 	background-color: hsl(177, 100%, 20%);
 }
-
+.dugme2 {
+	margin: top 0.8rem;
+	margin-bottom: 0.8rem;
+	background-color: #dc3545;
+	border-color: #dc3545;
+	color: white;
+	outline: none;
+	font-weight: 600;
+}
+.dugme2:hover {
+	background-color: #bb2d3b;
+	border-color: #b02a37;
+}
 .tagBg {
 	font-weight: 550;
 	letter-spacing: 0;

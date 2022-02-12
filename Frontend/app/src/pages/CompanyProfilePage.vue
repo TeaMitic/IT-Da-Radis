@@ -309,7 +309,8 @@ export default {
         await this.$store.dispatch('uploadImage',{
             companyID: this.user._id,
             img: form
-        })
+        }) 
+       
 
       
     },
