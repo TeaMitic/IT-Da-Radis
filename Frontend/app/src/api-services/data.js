@@ -467,6 +467,36 @@ export default new Vuex.Store({
             }
 
         },
+        async deleteAd({commit},id){
+            try{
+                let res = await Api().delete(`/api/jobAd/DeleteJobAd/${id}`)
+                Vue.toasted.show(res.data, { 
+                    theme: "bubble", 
+                    position: "top-center", 
+                    duration : 2000
+               })
+                commit('setNista')
+                if(res.status == 200)
+                    router.push('/CompanyHomepage')
+            }
+            catch(error) {
+                console.log(error)
+            }
+        },
+        async updateAd({commit},adObj){
+            try{
+                let res = await Api().put(`/api/jobAd/UpdateJobAd/${adObj._id}`,adObj)
+                Vue.toasted.show(res.data, { 
+                    theme: "bubble", 
+                    position: "top-center", 
+                    duration : 2000
+               })
+                commit('setNista')
+            }
+            catch(error) {
+                console.log(error)
+            }
+        },
         postaviUserType({commit},userType) { 
             commit('setUserType',userType)
         },

@@ -223,7 +223,7 @@ const UpdateJobAd = async (req, res)=>{
         const jobAdID = req.params.jobAdID
         let jobAd = await JobAd.findOne({ _id: jobAdID })
         jobAd.name = req.body.name
-        jobAd.description = req.body.desc
+        jobAd.description = req.body.description
         jobAd.city = req.body.city
         jobAd.tags = req.body.tags
         jobAd.salary = req.body.salary

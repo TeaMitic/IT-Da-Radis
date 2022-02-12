@@ -47,12 +47,12 @@ export default {
     console.log(this.jobAd)
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
-    this.isDataLoaded = true
      await this.$store.dispatch('postaviNumOfApplicants',this.jobAd._id)
-    this.numOfApplicants = this.$store.getters['getNumberOfApplicants']
- 
+    this.numOfApplicants = this.$store.getters['getNumberOfApplicants'] 
     const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
     this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+
+    this.isDataLoaded = true
   },
  
   
