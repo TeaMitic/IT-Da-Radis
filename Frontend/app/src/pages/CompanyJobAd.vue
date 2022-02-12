@@ -84,7 +84,7 @@
 								<!-- time expires -->
 								<div class="col-4 d-flex flex-column align-items-start">
 									<label for="time" class="form-check-label px-1" >Rok za prijavu:</label>
-									<input type="date" class="form-control rounded inputPolje my-1" v-model.trim="jobAd.expireAt" name="timeExpires" autofocus="" />
+									<input type="date" format="yyyy-MM-dd" class="form-control rounded inputPolje my-1" v-model.trim="jobAd.expireAt" name="timeExpires" autofocus="" />
 								</div>
 							</div>
 							<div class="row">
@@ -213,6 +213,8 @@ export default {
 			this.jobAd.tags.pop(tag);
 		},
 		async updateAd(){
+			let adObj = this.jobAd
+			adObj.expiresAt = this.jobAd.expiresAt
 			await this.$store.dispatch(`updateAd`,this.jobAd)
 			this.editable = !this.editable
 		},

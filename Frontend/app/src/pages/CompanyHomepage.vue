@@ -158,7 +158,7 @@ export default {
     },
     async createAd() {
       if (this.validateInputs()) { 
-        await this.$store.dispatch("createAd", {
+        let ad = {
           companyID: this.user._id,
           ad: {
             name: this.adName,
@@ -168,7 +168,10 @@ export default {
             tags: this.adTags,
             expireAt: this.adExpires,
           },
-        });
+        }
+        console.log(ad);
+        await this.$store.dispatch("createAd", ad);
+
         await this.$store.dispatch("getCompanyJobAds", this.user._id);
       }
     },
