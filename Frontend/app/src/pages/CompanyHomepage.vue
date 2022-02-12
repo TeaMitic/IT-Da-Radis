@@ -163,7 +163,7 @@ export default {
             name: this.adName,
             desc: this.adDescription,
             city: this.adCity,
-            salary: 100,
+            salary: this.adSalary,
             tags: this.adTags,
             expireAt: this.adExpires,
           },
