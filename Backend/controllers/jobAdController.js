@@ -225,6 +225,7 @@ const UpdateJobAd = async (req, res)=>{
         jobAd.name = req.body.name
         jobAd.description = req.body.desc
         jobAd.city = req.body.city
+        jobAd.tags = req.body.tags
         jobAd.salary = req.body.salary
         jobAd.expireAt = new Date(req.body.expireAt)
         jobAd.save().then((result)=>{
