@@ -115,7 +115,6 @@ export default {
   },
   computed: {
     jobAds() {
-      console.log(this.$store.getters["getCurrentCompanyJobAds"]);
       return this.$store.getters["getCurrentCompanyJobAds"];
     },
   },
@@ -129,7 +128,10 @@ export default {
 
     this.isDataLoaded = true;
     if(this.company.image !=null){
-      const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+      const url = btoa(new Uint8Array(this.company.image.img.data.data).reduce(function(data,byte) { 
+        return data + String.fromCharCode(byte);
+      }, ''))
+      // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
       this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
     }
   },

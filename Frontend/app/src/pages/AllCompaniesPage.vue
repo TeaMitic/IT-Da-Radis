@@ -121,12 +121,7 @@ export default {
     clearSearchForm() { 
       this.searchName = ""
     },
-    // enterFunc(event) { 
-    //   console.log(event);
-    //   if (event.keyCode == 13) { 
-
-    //   }
-    // },
+  
     async checkInput(event) { 
       let value = event.target._value
       if (value == "") { 

@@ -52,11 +52,13 @@ export default {
     }
   },
   created(){
-    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
     // this.company.image.img.data.data.toString('base64')
     if(this.company.image != null){
+      const url = btoa(new Uint8Array(this.company.image.img.data.data).reduce(function(data,byte) { 
+        return data + String.fromCharCode(byte);
+      }, ''))
+      // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
       this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
-      console.log(this.company.image.img.data)
     }
     //   this.imageUrl = URL.createObjectURL( this.company.image.img.data[0] );
   },
@@ -96,7 +98,7 @@ export default {
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
   height: 90%;
-  width: 90%;
+  width: 100%;
 
 }
 .tagBg { 

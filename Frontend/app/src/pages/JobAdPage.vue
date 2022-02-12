@@ -190,7 +190,6 @@ export default {
     },
     processFile(event) {
       this.cv = event.target.files[0];
-      console.log(this.cv)
     },
     async getUser() {
       let id = Vue.$cookies.get("id");
@@ -207,7 +206,6 @@ export default {
           position: "top-center",
           duration: 2000,
         });
-        console.log(this.$route.params);
         router.push(`/login` );
       }
       if (this.user == null) {
@@ -227,7 +225,10 @@ export default {
 
     this.isDataLoaded = true;
     if(this.company.image != null){
-      const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+      const url = btoa(new Uint8Array(this.company.image.img.data.data).reduce(function(data,byte) { 
+        return data + String.fromCharCode(byte);
+      }, ''))
+      // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
       this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
     }
   },

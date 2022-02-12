@@ -222,10 +222,12 @@ export default {
     this.user = this.$store.getters['getCurrentCompany']
     
     this.isDataLoaded = true
-    console.log(this.user);
     // const blob = new Blob([new Uint8Array(this.user.image.img.data.data)], {type: this.user.image.img.contentType})
     if(this.user.image != null){
-        const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)));
+        // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)));
+        const url = btoa(new Uint8Array(this.user.image.img.data.data).reduce(function(data,byte) { 
+            return data + String.fromCharCode(byte);
+        }, ''))
         this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
     }
   },
@@ -234,7 +236,6 @@ export default {
         this.editable = !this.editable
         let inputs = document.querySelectorAll('.inputPolje')
         let ta = document.querySelector("textarea")
-        console.log(ta);
         if (ta.disabled) {
                 ta.disabled = false
         }
@@ -270,7 +271,6 @@ export default {
           this.$store.dispatch('postaviCurrentCompanyCategories',this.categories)
       },
       enableCategory(id) { 
-          console.log("ID:",id)
           let inputPolje = document.getElementById(id)
           inputPolje.disabled = !inputPolje.disabled
       },
@@ -314,7 +314,6 @@ export default {
     },
     processFile(event) {
         this.image = event.target.files[0];
-        console.log(this.image)
     },
 
   },

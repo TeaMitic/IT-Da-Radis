@@ -48,13 +48,15 @@ export default {
   },
   
   async created() {
-    console.log(this.jobAd)
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
      await this.$store.dispatch('postaviNumOfApplicants',this.jobAd._id)
     this.numOfApplicants = this.$store.getters['getNumberOfApplicants'] 
     if(this.company.image != null){
-      const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+      const url = btoa(new Uint8Array(this.company.image.img.data.data).reduce(function(data,byte) { 
+        return data + String.fromCharCode(byte);
+      }, ''))
+      // const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
       this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
     }
     this.isDataLoaded = true

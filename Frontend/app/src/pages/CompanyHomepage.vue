@@ -130,7 +130,6 @@ export default {
     this.userType = this.$cookies.get("userType");
     let id = await this.$cookies.get("id");
     this.isDataLoaded = false;
-    console.log(id);
     await this.$store.dispatch("getCompanyByID", id);
     await this.$store.dispatch("getCompanyJobAds", id);
     this.user = this.$store.getters["getCurrentCompany"];

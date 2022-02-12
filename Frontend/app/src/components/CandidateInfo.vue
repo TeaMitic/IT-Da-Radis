@@ -42,7 +42,6 @@ export default {
     }
   }, 
   async created(){
-      console.log(this.candidate.cv)
       if(this.candidate.cv.data != null){
         const blob = new Blob([new Uint8Array(this.candidate.cv.data.data)], {type: this.candidate.cv.contentType })
         this.downloadCV = window.URL.createObjectURL(blob)
