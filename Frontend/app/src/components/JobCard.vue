@@ -12,12 +12,17 @@
 
       </div>
     </div>
-    <div class="d-flex align-items-center pictureDiv">
+
+    <div v-if="company.image" class="d-flex align-items-center pictureDiv">
         <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd._id}}">
-            <img class=" roundedImg img" v-bind:src= imageUrl alt="Comapny logo" />
+            <img  class=" roundedImg img" :src= imageUrl alt="Comapny logo" />
         </router-link>
     </div>
-    
+    <div v-else class="d-flex align-items-center pictureDiv">
+        <router-link  :to="{name: 'AboutJobAd', params: {id:jobAd._id}}">
+            <img  class=" roundedImg img" src= "../assets/img/company-card-bg.jpg" alt="Comapny logo" />
+        </router-link>
+    </div>
   </div>
 </template>
 
@@ -34,7 +39,7 @@ export default {
     return {
         isDataLoaded: false,
         company: null,
-        imageUrl: ""
+        imageUrl:"../assets/img/company-card-bg.jpg"
 
     }
   },
@@ -43,9 +48,11 @@ export default {
     console.log(this.jobAd);
     await this.$store.dispatch('getCompanyByID',this.jobAd.companyID)
     this.company = this.$store.getters['getCurrentCompany']
-    this.isDataLoaded = true
-    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
-    this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+    if(this.company.image != null){
+      const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+      this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+    }
+      this.isDataLoaded = true
   },
  
   

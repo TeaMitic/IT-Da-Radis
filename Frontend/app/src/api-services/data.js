@@ -99,7 +99,7 @@ export default new Vuex.Store({
                 Vue.$cookies.set("userType", data.tip, cookieTime)
                 
                 if (data.tip == "U") { 
-                    router.push('/Homepage')
+                    router.push('/')
                 }
                 else {
                     router.push('/CompanyHomepage')
