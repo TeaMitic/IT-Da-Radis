@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const {Company} = require('../models/companyModel');
+const {JobAd} = require('../models/jobAdModel');
+const {JobUserRel} = require('../models/jobUserRelModel');
 const jwt = require('../token')
 const bcrypt = require('bcrypt')
 const multer = require('multer')  
@@ -284,7 +286,24 @@ const DeleteCategory = async (req, res)=>{
     }
 }
 
-
+const DeleteCompany = async (req, res)=>{
+    try{
+        const companyID = req.params.id
+        let jobAds = await JobAd.find({companyID})
+        for await (let ad of jobAds){
+            await JobUserRel.deleteMany({jobID:ad._id})
+        }
+        await JobAd.deleteMany({companyID})
+        await Company.deleteOne({_id:companyID}).then(()=>{
+            res.status(200).send('Uspesno izbrisano')
+        }).catch((err)=>{
+            res.status(404).send('Kompanija nije pronadjena')
+        })
+    }
+    catch(err){
+        res.status(500).send(err.message)
+    }
+}
 
 
 module.exports = {
@@ -300,7 +319,8 @@ module.exports = {
     UpdateCategories,
     GetCompaniesByIndex,
     GetAllCategories,
-    UploadImage
+    UploadImage,
+    DeleteCompany
 }
 
 //1. opcija

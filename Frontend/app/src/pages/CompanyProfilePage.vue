@@ -110,8 +110,9 @@
                 </div>                     
             </div>            
         </div>
-        <div v-if="editable" class="col-12 d-flex flex-column align-items-justify ">            
-            <button @click="update" class="btn btn-lg btn-primary rounded dugme">Update profile</button>
+        <div v-if="editable" class="col-12 d-flex flex-row align-items-justify ">            
+            <button @click="update" class="btn col-6 btn-lg btn-primary rounded dugme">Update profile</button>
+             <button @click="deleteProfile" class="btn col-6 btn-lg btn-danger rounded dugme2">Delete profile</button>
         </div>        
         
         <div class="d-flex justify-content-between align-items-center mt-3">
@@ -315,6 +316,9 @@ export default {
     processFile(event) {
         this.image = event.target.files[0];
     },
+    async deleteProfile(){
+        await this.$store.dispatch("deleteCompany",this.user._id)
+    }
 
   },
   
@@ -345,6 +349,12 @@ export default {
 .dugme {
   margin: 0.8rem;
   background-color: #00b1a8;
+  color: white;
+  outline: none;
+  font-weight: 600;
+}
+.dugme2{
+    margin: 0.8rem;
   color: white;
   outline: none;
   font-weight: 600;

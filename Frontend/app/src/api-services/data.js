@@ -486,11 +486,31 @@ export default new Vuex.Store({
         async updateAd({commit},adObj){
             try{
                 let res = await Api().put(`/api/jobAd/UpdateJobAd/${adObj._id}`,adObj)
-                Vue.toasted.show(res.data, { 
+                if(res.status == 200){
+                Vue.toasted.show("Uspešno ažurirano", { 
                     theme: "bubble", 
                     position: "top-center", 
                     duration : 2000
                })
+            }
+                commit('setNista')
+            }
+            catch(error) {
+                console.log(error)
+            }
+        },
+        async deleteCompany({commit},id){
+            try{
+                let res = await Api().delete(`/api/company/deleteCompany/${id}`)
+                
+               if(res.status == 200){
+                    Vue.toasted.show("Uspešno obrisano", { 
+                    theme: "bubble", 
+                    position: "top-center", 
+                    duration : 2000
+               })
+                   router.push('/')
+               }
                 commit('setNista')
             }
             catch(error) {

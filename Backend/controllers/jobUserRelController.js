@@ -7,14 +7,12 @@ const CreateJobApplication= async (req,res)=>{
         const jobApplication= await JobUserRel.create({
             jobID: req.body.jobID,
             userID: req.body.userID,
-            // cv: req.body.cv,
             name:req.body.name,
             surname:req.body.surname,
             userEmail: req.body.userEmail,
             userTel: req.body.userTel
         })
         res.status(200).send({jobRelID: jobApplication._id})
-        // console.log(jobApplication)
     }
     catch(err){
         res.status(500).send(err.message)

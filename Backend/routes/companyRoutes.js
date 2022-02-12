@@ -1,5 +1,4 @@
 const express = require('express');
-//const companyController = require('../controllers/companyController');
 
 const router = express.Router();
 
@@ -14,7 +13,8 @@ const{
     UpdateCategories,
     GetCompaniesByIndex,
     GetAllCategories,
-    UploadImage
+    UploadImage,
+    DeleteCompany
 } = require('../controllers/companyController');
 
 router.get('/getAllCompanies/:limit', GetAllCompanies)
@@ -28,6 +28,7 @@ router.put('/updateCategories/:id', UpdateCategories)
 router.put('/getCompaniesByIndex', GetCompaniesByIndex)
 router.get('/getAllCategories', GetAllCategories)
 router.put('/uploadImage/:id', UploadImage)
+router.delete('/deleteCompany/:id', DeleteCompany)
 
 
 module.exports = router
