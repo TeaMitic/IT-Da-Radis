@@ -1,8 +1,18 @@
 <template>
   <div class="card col-lg-3  mx-2 my-3 px-0 rounded shadow  " v-bind:id="company._id">
-    <router-link :to="{name: 'AboutCompany', params: {id: company._id}}">
+    <!-- <router-link :to="{name: 'AboutCompany', params: {id: company._id}}">
       <img class="card-img-top roundedImg img" v-bind:src= imageUrl alt="Card image cap" />
-    </router-link>
+    </router-link> -->
+    <div v-if="company.image">
+        <router-link  :to="{name: 'AboutCompany', params: {id: company._id}}">
+            <img  class=" roundedImg img" :src= imageUrl alt="Comapny logo" />
+        </router-link>
+    </div>
+    <div v-else>
+        <router-link :to="{name: 'AboutCompany', params: {id: company._id}}">
+            <img  class=" roundedImg img" src= "../assets/img/company-card-bg.jpg" alt="Comapny logo" />
+        </router-link>
+    </div>
     <div class="card-body d-flex flex-column align-items-start justify-content-end">
       <router-link :to="{ name: 'AboutCompany', params: {id: company._id}}" ><h4 class="card-title ">{{company.name}}</h4></router-link >
       <a class="link" v-bind:href="company.website" target="_blank" rel="noopener">{{company.website | trim-web}}</a>
@@ -44,8 +54,10 @@ export default {
   created(){
     const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
     // this.company.image.img.data.data.toString('base64')
-    this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
-    console.log(this.company.image.img.data)
+    if(this.company.image != null){
+      this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+      console.log(this.company.image.img.data)
+    }
     //   this.imageUrl = URL.createObjectURL( this.company.image.img.data[0] );
   },
   methods: {

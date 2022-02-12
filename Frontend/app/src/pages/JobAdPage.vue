@@ -17,8 +17,11 @@
         <div class="card rounded jobAd my-3 mx-5 p-5">
           <div class="d-flex flex-column jobAd-info">
             <div class="d-flex flex-row jobAd-info-basic">
-              <div class="imageDiv d-flex justify-content-center">
+              <div v-if="this.company.image" class="imageDiv d-flex justify-content-center">
                 <img class="logo p-2" v-bind:src=imageUrl  alt="Logo firme"/>
+              </div>
+              <div v-else class="imageDiv d-flex justify-content-center">
+                <img class="logo p-2" src= "../assets/img/company-card-bg.jpg"  alt="Logo firme"/>
               </div>
               <div class=" mx-3 d-flex flex-column align-items-start mt-3 text-start" > 
                 <h4 class="mb-3">
@@ -223,9 +226,10 @@ export default {
     this.company = this.$store.getters["getCurrentCompany"];
 
     this.isDataLoaded = true;
-
-    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
-    this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+    if(this.company.image != null){
+      const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.company.image.img.data.data)));
+      this.imageUrl = `data:${this.company.image.img.contentType};base64,${url}`
+    }
   },
 };
 </script>

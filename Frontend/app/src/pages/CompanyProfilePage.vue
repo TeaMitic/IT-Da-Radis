@@ -13,8 +13,11 @@
             <button @click="edit" class="btn btn-lg btn-primary rounded dugme editBtn  "><font-awesome-icon  :icon="['fas', 'edit']" /></button>
         </div>
         <div class="row ">
-            <div class="col-6 imgDiv align-items-start">
+            <div v-if="user.image" class="col-6 imgDiv align-items-start">
                 <img  class="roundedImg img" v-bind:src= imageUrl  alt="Comapny logo">
+            </div>
+            <div v-else class="col-6 imgDiv align-items-start">
+                <img  class="roundedImg img" src= "../assets/img/company-card-bg.jpg"  alt="Comapny logo">
             </div>
             <div class="col-5 align-items-start">
                 <input type="file" class="form-control rounded mt-3"   @change="processFile($event)" id="customFile"/> 
@@ -221,8 +224,10 @@ export default {
     this.isDataLoaded = true
     console.log(this.user);
     // const blob = new Blob([new Uint8Array(this.user.image.img.data.data)], {type: this.user.image.img.contentType})
-    const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)));
-    this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
+    if(this.user.image != null){
+        const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)));
+        this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
+    }
   },
   methods: {
       edit() { 

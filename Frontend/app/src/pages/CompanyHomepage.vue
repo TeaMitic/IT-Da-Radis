@@ -6,7 +6,7 @@
     <div class="container-xxl px-0">
       <!-- company cards -->
       <div v-if="isDataLoaded" class="container">
-        <button  @click="showForm" class="btn btn-lg btn-primary rounded dugme mt-1" >Novi oglas</button>
+        <button  @click="showForm" class="btn col 12 m-3 btn-lg btn-block btn-primary rounded dugme mt-1" >Novi oglas</button>
         <div v-if="isShowFrom"> 
           <div class="container card mt-3 p-4 pt-2 rounded infoDiv shadow-large">
             <div class="d-flex">
@@ -49,8 +49,9 @@
                 <div class="col-12 d-flex flex-column align-items-start">
                   <label for="time" class="form-check-label px-1">Tagovi:</label>
                   <div class="col-12 d-flex flex-row flex-wrap">
-                    <div v-for="tag in this.adTags" :key="tag" class="col-2 container boja  card rounded" >
+                    <div v-for="tag in this.adTags" :key="tag" class="col-2 container boja  card rounded d-flex flex-row p-2  align-items-start justify-content-between" >
                       <label for="tag" class="form-check-label px-1">{{tag}}</label>
+                      <button @click="deleteTag(tag)" class="btn btn-sm btn-danger rounded">X</button>
                     </div>
                   </div>
                 </div>
@@ -191,7 +192,10 @@ export default {
     },
     showForm(){
       this.isShowFrom=!this.isShowFrom
-    }
+    },
+    deleteTag(tag){
+			this.adTags.pop(tag);
+		},
     // this.userType = Vue.$cookies.get('userType')
     // this.isDataLoaded = false
     // await this.$store.dispatch('getAllCompanies', 2)
