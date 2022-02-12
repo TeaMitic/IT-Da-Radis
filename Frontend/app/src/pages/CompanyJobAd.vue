@@ -234,7 +234,7 @@ export default {
 		this.isDataLoaded = true;
 		if(this.user.image != null){
 			// const url = btoa(String.fromCharCode.apply(null, new Uint8Array(this.user.image.img.data.data)))
-			const url = btoa(new Uint8Array(this.company.image.img.data.data).reduce(function(data,byte) { 
+			const url = btoa(new Uint8Array(this.user.image.img.data.data).reduce(function(data,byte) { 
 				return data + String.fromCharCode(byte);
 			}, ''))
 			this.imageUrl = `data:${this.user.image.img.contentType};base64,${url}`
