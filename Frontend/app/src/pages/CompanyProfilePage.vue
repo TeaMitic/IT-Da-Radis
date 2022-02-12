@@ -110,9 +110,9 @@
                 </div>                     
             </div>            
         </div>
-        <div v-if="editable" class="col-12 d-flex flex-row align-items-justify ">            
-            <button @click="update" class="btn col-6 btn-lg btn-primary rounded dugme">Update profile</button>
-             <button @click="deleteProfile" class="btn col-6 btn-lg btn-danger rounded dugme2">Delete profile</button>
+        <div v-if="editable" class="col-12 d-flex flex-row align-items-justify justify-content-between ">            
+            <button @click="update" class="btn col-5 btn-lg btn-primary rounded dugme">Update profile</button>
+             <button @click="deleteProfile" class="btn col-5 btn-lg btn-danger rounded dugme2">Delete profile</button>
         </div>        
         
         <div class="d-flex justify-content-between align-items-center mt-3">
