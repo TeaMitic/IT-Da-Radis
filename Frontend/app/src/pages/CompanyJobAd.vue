@@ -210,7 +210,7 @@ export default {
       }
     },
 		deleteTag(tag){
-			this.jobAd.tags.pop(tag);
+			this.jobAd.tags = this.jobAd.tags.filter(tech => tech != tag );
 		},
 		async updateAd(){
 			let adObj = this.jobAd
